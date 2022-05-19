@@ -3,6 +3,7 @@ package com.acorn.basemodule.network
 import androidx.lifecycle.ViewModel
 import com.acorn.basemodule.network.BaseNetUIState
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import java.lang.ref.WeakReference
 
 /**
  * Created by acorn on 2020/6/8.
@@ -10,15 +11,22 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 open class BaseNetViewModel : ViewModel() {
     protected val disposable = CompositeDisposable()
 
-    /**
-     * 通用的网络监听
-     * 注：当有多个网络请求，并可能引起冲突时，建议单独创建一个BaseNetUIState
-     */
-    val commonState: BaseNetUIState by lazy { BaseNetUIState() }
+    private var mUiRef: WeakReference<INetworkUI>? = null
 
     override fun onCleared() {
         super.onCleared()
         if (!disposable.isDisposed)
             disposable.dispose()
     }
+
+    fun attachUI(ui: INetworkUI) {
+        mUiRef = WeakReference(ui)
+    }
+
+    fun detachUI() {
+        mUiRef?.clear()
+        mUiRef = null
+    }
+
+    protected fun getUI(): INetworkUI? = mUiRef?.get()
 }

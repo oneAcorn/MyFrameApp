@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.acorn.basemodule.R
 import com.acorn.basemodule.dialog.ProgressDialog
 import com.acorn.basemodule.extendfun.singleClick
+import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
 import kotlinx.android.synthetic.main.base_fragment_layout.*
 import kotlinx.android.synthetic.main.base_fragment_layout.view.*
@@ -16,7 +18,7 @@ import kotlinx.android.synthetic.main.base_fragment_layout.view.*
 /**
  * Created by acorn on 2022/5/18.
  */
-abstract class BaseFragment : Fragment(), INetworkUI {
+abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
     private var mIsFirstVisible = true
     private var isProgressShowing = false
     private var isPausing = false
@@ -25,6 +27,7 @@ abstract class BaseFragment : Fragment(), INetworkUI {
             isProgressShowing = false
         }
     }
+    protected var viewModel: T? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +42,12 @@ abstract class BaseFragment : Fragment(), INetworkUI {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initParameters()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = createViewModel()
+        viewModel?.attachUI(this)
     }
 
     override fun onResume() {
@@ -57,6 +66,11 @@ abstract class BaseFragment : Fragment(), INetworkUI {
         isPausing = true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel?.detachUI()
+    }
+
     abstract fun getLayoutId(): Int
 
     open fun initParameters() {}
@@ -64,6 +78,9 @@ abstract class BaseFragment : Fragment(), INetworkUI {
     open fun initView() {}
 
     open fun initData() {}
+
+
+    abstract fun createViewModel(): T?
 
     /**
      * 网络错误布局

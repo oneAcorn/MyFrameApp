@@ -1,9 +1,7 @@
 package com.acorn.myframeapp.network.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.acorn.basemodule.extendfun.appContext
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.BaseObserver
 import com.acorn.basemodule.network.MyException
@@ -27,7 +25,7 @@ class NormalViewModel : BaseNetViewModel() {
                 disposable.add(it)
             }
             .subscribe(object :
-                BaseObserver<BaseResponse<Int>>(commonState, ERROR_MODEL.LAYOUT) {
+                BaseObserver<BaseResponse<Int>>(getUI(), ERROR_MODEL.LAYOUT) {
                 override fun success(t: BaseResponse<Int>) {
                     super.success(t)
                     netLiveData.value = t

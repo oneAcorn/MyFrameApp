@@ -3,12 +3,13 @@ package com.acorn.myframeapp.test
 import android.os.Bundle
 import com.acorn.basemodule.base.BaseFragment
 import com.acorn.basemodule.extendfun.logI
+import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
 
 /**
  * Created by acorn on 2022/5/18.
  */
-class TestFragment : BaseFragment() {
+class TestFragment : BaseFragment<BaseNetViewModel>() {
 
     companion object {
         fun newInstance(): TestFragment {
@@ -33,4 +34,5 @@ class TestFragment : BaseFragment() {
         logI("TestFragment setUserVisibleHint:$isVisibleToUser")
     }
 
+    override fun createViewModel(): BaseNetViewModel? = null
 }

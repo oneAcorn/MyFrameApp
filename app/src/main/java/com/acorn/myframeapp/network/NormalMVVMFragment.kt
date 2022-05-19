@@ -9,19 +9,13 @@ import kotlinx.android.synthetic.main.fragment_normal_mvvm.*
 /**
  * Created by acorn on 2022/5/19.
  */
-class NormalMVVMFragment : BaseFragment() {
-    private val viewModel: NormalViewModel by lazy {
-        createViewModel(
-            NormalViewModel::class.java
-        )
-    }
+class NormalMVVMFragment : BaseFragment<NormalViewModel>() {
 
     override fun getLayoutId(): Int = R.layout.fragment_normal_mvvm
 
     override fun initData() {
         super.initData()
-        viewModel.commonState.observe(this, this)
-        viewModel.getNetLiveData().observe(this) {
+        viewModel?.getNetLiveData()?.observe(this) {
             netSuccessTv.text = "Request Success! ${it.data}"
         }
 
@@ -30,6 +24,8 @@ class NormalMVVMFragment : BaseFragment() {
 
     override fun refreshNet() {
         super.refreshNet()
-        viewModel.requestNet()
+        viewModel?.requestNet()
     }
+
+    override fun createViewModel(): NormalViewModel = createViewModel(NormalViewModel::class.java)
 }
