@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".network.NetworkActivity" />
+        <activity android:name=".network.NormalMVVMFragmentActivity" />
     </application>
 
 </manifest>

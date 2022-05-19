@@ -3,7 +3,7 @@ package com.acorn.myframeapp.home
 import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
-import com.acorn.myframeapp.network.NetworkActivity
+import com.acorn.myframeapp.network.NormalMVVMFragmentActivity
 
 /**
  * Created by acorn on 2022/5/18.
@@ -22,7 +22,16 @@ class HomeFragment : BaseDemoFragment() {
 
     override fun getItems(): Array<Demo> {
         return arrayOf(
-            Demo("Network", activity = NetworkActivity::class.java)
+            Demo(
+                "Network",
+                subItems = arrayListOf(
+                    Demo(
+                        "Normal MVVM Use",
+                        description = "Error Layout(retryBtn),Empty Layout,LoadingDialog",
+                        activity = NormalMVVMFragmentActivity::class.java
+                    )
+                )
+            )
         )
     }
 

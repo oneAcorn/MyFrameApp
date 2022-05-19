@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.acorn.basemodule.R
+import com.acorn.basemodule.dialog.ProgressDialog
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.INetworkUI
 import kotlinx.android.synthetic.main.base_fragment_layout.*
@@ -16,6 +18,13 @@ import kotlinx.android.synthetic.main.base_fragment_layout.view.*
  */
 abstract class BaseFragment : Fragment(), INetworkUI {
     private var mIsFirstVisible = true
+    private var isProgressShowing = false
+    private var isPausing = false
+    private val progressDialog: ProgressDialog by lazy {
+        ProgressDialog.newInstance {
+            isProgressShowing = false
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +43,18 @@ abstract class BaseFragment : Fragment(), INetworkUI {
 
     override fun onResume() {
         super.onResume()
+        isPausing = false
         //懒加载,如果在ViewPager中使用,需要用BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         if (mIsFirstVisible) {
             mIsFirstVisible = false
             initView()
             initData()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isPausing = true
     }
 
     abstract fun getLayoutId(): Int
@@ -65,9 +80,26 @@ abstract class BaseFragment : Fragment(), INetworkUI {
     }
 
     override fun showProgressDialog() {
+        if (!isHidden && progressDialog.dialog?.isShowing != true && !isPausing && !isProgressShowing) {
+            progressDialog.show(childFragmentManager, "progressDialog", initDialogMsg())
+            isProgressShowing = true
+        }
     }
 
     override fun dismissProgressDialog() {
+        //不能使用progressDialog.dialog?.isShowing，因为在刚刚show之后的瞬间调用此方法,
+        // Fragment还没有初始化完成导致getDialog()为空
+        if (isProgressShowing) {
+            progressDialog.dismiss()
+            isProgressShowing = false
+        }
+    }
+
+    /**
+     *  progressDialog 提示信息
+     */
+    open fun initDialogMsg(): String {
+        return getString(R.string.loading_wait)
     }
 
     override fun showErrorLayout() {
@@ -96,5 +128,6 @@ abstract class BaseFragment : Fragment(), INetworkUI {
     }
 
     override fun showToast(string: String) {
+        Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
     }
 }
