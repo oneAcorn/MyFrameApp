@@ -2,6 +2,12 @@
 <resources>
     <color name="navigation_check_color">#262726</color>
     <color name="navigation_default_color">#656565</color>
+    <color name="subItemColor">#F4EAAC</color>
+    <color name="subItemColorPress">#D6C86F</color>
+    <color name="itemColorLight">#F8F7F1</color>
+    <color name="itemColorLightPress">#CFCFCC</color>
+    <color name="itemColorDark">#B3B2AF</color>
+    <color name="itemColorDarkPress">#91918F</color>
 
 
     <color name="purple_200">#FFBB86FC</color>

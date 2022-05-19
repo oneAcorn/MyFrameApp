@@ -1,15 +1,14 @@
 package com.acorn.myframeapp.home
 
 import android.os.Bundle
-import android.view.View
-import com.acorn.basemodule.BaseFragment
-import com.acorn.basemodule.extendfun.logI
-import com.acorn.myframeapp.R
+import com.acorn.myframeapp.demo.BaseDemoFragment
+import com.acorn.myframeapp.demo.Demo
+import com.acorn.myframeapp.network.NetworkActivity
 
 /**
  * Created by acorn on 2022/5/18.
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseDemoFragment() {
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -21,21 +20,13 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_home
+    override fun getItems(): Array<Demo> {
+        return arrayOf(
+            Demo("Network", activity = NetworkActivity::class.java)
+        )
     }
 
-    override fun initData() {
-        logI("HomeFragment:initData")
+    override fun onItemClick(data: Demo, idOrPosition: Int) {
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        logI("HomeFragment setUserVisibleHint:$isVisibleToUser")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        logI("HomeFragment onResume")
-    }
 }

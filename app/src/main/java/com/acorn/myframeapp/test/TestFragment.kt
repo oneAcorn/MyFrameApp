@@ -1,8 +1,7 @@
 package com.acorn.myframeapp.test
 
 import android.os.Bundle
-import android.view.View
-import com.acorn.basemodule.BaseFragment
+import com.acorn.basemodule.base.BaseFragment
 import com.acorn.basemodule.extendfun.logI
 import com.acorn.myframeapp.R
 
