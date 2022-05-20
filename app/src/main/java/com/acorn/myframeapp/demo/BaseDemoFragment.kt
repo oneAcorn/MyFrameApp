@@ -41,5 +41,5 @@ abstract class BaseDemoFragment : BaseFragment<BaseNetViewModel>() {
 
     abstract fun onItemClick(data: Demo, idOrPosition: Int)
 
-    override fun createViewModel(): BaseNetViewModel? = null
+    override fun getViewModel(): BaseNetViewModel? = null
 }

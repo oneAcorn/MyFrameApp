@@ -1,17 +1,21 @@
 package com.acorn.myframeapp.network
 
-import com.acorn.basemodule.base.BaseFragment
+import android.os.Bundle
+import com.acorn.basemodule.base.BaseActivity
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.network.viewmodel.NormalViewModel
 import kotlinx.android.synthetic.main.fragment_normal_mvvm.*
 
 /**
- * Created by acorn on 2022/5/19.
+ * Created by acorn on 2022/5/20.
  */
-class NormalMVVMFragment : BaseFragment<NormalViewModel>() {
+class NormalMVVMActivity : BaseActivity<NormalViewModel>() {
 
-    override fun getLayoutId(): Int = R.layout.fragment_normal_mvvm
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_normal_mvvm)
+    }
 
     override fun initData() {
         super.initData()
@@ -22,12 +26,14 @@ class NormalMVVMFragment : BaseFragment<NormalViewModel>() {
         refreshNet()
     }
 
+    override fun getViewModel(): NormalViewModel = createViewModel(NormalViewModel::class.java)
+
+    override fun isEmbedInBaseLayout(): Boolean {
+        return true
+    }
+
     override fun refreshNet() {
         super.refreshNet()
         mViewModel?.requestNet()
     }
-
-    override fun getViewModel(): NormalViewModel = createViewModel(NormalViewModel::class.java)
-
-    override fun isEmbedInBaseLayout(): Boolean = true
 }

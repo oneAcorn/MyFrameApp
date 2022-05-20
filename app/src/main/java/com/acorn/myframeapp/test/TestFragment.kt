@@ -34,5 +34,5 @@ class TestFragment : BaseFragment<BaseNetViewModel>() {
         logI("TestFragment setUserVisibleHint:$isVisibleToUser")
     }
 
-    override fun createViewModel(): BaseNetViewModel? = null
+    override fun getViewModel(): BaseNetViewModel? = null
 }

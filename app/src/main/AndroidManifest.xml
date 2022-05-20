@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".network.NormalMVVMFragmentActivity" />
+        <activity android:name=".network.NormalMVVMActivity" />
     </application>
 
 </manifest>

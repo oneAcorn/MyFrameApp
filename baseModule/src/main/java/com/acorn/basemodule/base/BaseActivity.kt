@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.acorn.basemodule.R
 import com.acorn.basemodule.dialog.ProgressDialog
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
-import kotlinx.android.synthetic.main.base_fragment_layout.*
-import kotlinx.android.synthetic.main.base_fragment_layout.view.*
+import kotlinx.android.synthetic.main.base_activity_layout.*
 
 /**
- * Created by acorn on 2022/5/18.
+ * Created by acorn on 2022/5/19.
  */
-abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
-    private var mIsFirstVisible = true
+abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetworkUI {
     private var isProgressShowing = false
     private var isPausing = false
     private val progressDialog: ProgressDialog by lazy {
@@ -28,40 +26,48 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
     }
     protected var mViewModel: T? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return if (isEmbedInBaseLayout()) {
-            val rootView = inflater.inflate(R.layout.base_fragment_layout, container, false)
-            inflater.inflate(getLayoutId(), rootView.baseContentLayout)
-            rootView
-        } else {
-            inflater.inflate(getLayoutId(), container, false)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initParameters()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         mViewModel = getViewModel()
         mViewModel?.attachUI(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        isPausing = false
-        //懒加载,如果在ViewPager中使用,需要用BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        if (mIsFirstVisible) {
-            mIsFirstVisible = false
-            initView()
-            initData()
+    override fun setContentView(layoutResID: Int) {
+        if (isEmbedInBaseLayout()) {
+            setContentView(LayoutInflater.from(this).inflate(layoutResID, null))
+        } else {
+            super.setContentView(layoutResID)
         }
+        init()
+    }
+
+    override fun setContentView(view: View?) {
+        if (isEmbedInBaseLayout()) {
+            super.setContentView(R.layout.base_activity_layout)
+            baseContentLayout.removeAllViews()
+            baseContentLayout.addView(view)
+        } else {
+            super.setContentView(view)
+        }
+        init()
+    }
+
+    override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
+        super.setContentView(view, params)
+        if (isEmbedInBaseLayout()) {
+            super.setContentView(R.layout.base_activity_layout)
+            baseContentLayout.removeAllViews()
+            baseContentLayout.addView(view, params)
+        } else {
+            super.setContentView(view, params)
+        }
+        init()
+    }
+
+    private fun init() {
+        initParameters()
+        initView()
+        initData()
     }
 
     override fun onPause() {
@@ -73,8 +79,6 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
         super.onDestroy()
         mViewModel?.detachUI()
     }
-
-    abstract fun getLayoutId(): Int
 
     open fun initParameters() {}
 
@@ -104,8 +108,8 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
     }
 
     override fun showProgressDialog() {
-        if (!isHidden && progressDialog.dialog?.isShowing != true && !isPausing && !isProgressShowing) {
-            progressDialog.show(childFragmentManager, "progressDialog", initDialogMsg())
+        if (progressDialog.dialog?.isShowing != true && !isPausing && !isProgressShowing) {
+            progressDialog.show(supportFragmentManager, "progressDialog", initDialogMsg())
             isProgressShowing = true
         }
     }
@@ -132,7 +136,7 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
         baseContentLayout.visibility = View.GONE
         baseErrorLayout.visibility = View.VISIBLE
         baseErrorLayout.removeAllViews()
-        LayoutInflater.from(requireContext()).inflate(errorLayoutResId(), baseErrorLayout)
+        LayoutInflater.from(this).inflate(errorLayoutResId(), baseErrorLayout)
         baseErrorLayout.findViewById<View>(R.id.refreshNetBtn)?.singleClick {
             refreshNet()
         }
@@ -154,10 +158,10 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
         baseContentLayout.visibility = View.GONE
         baseErrorLayout.visibility = View.VISIBLE
         baseErrorLayout.removeAllViews()
-        LayoutInflater.from(context).inflate(nullLayoutResId(), baseErrorLayout)
+        LayoutInflater.from(this).inflate(nullLayoutResId(), baseErrorLayout)
     }
 
     override fun showToast(string: String) {
-        Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 }

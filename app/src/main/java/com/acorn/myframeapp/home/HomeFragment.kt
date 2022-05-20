@@ -3,6 +3,7 @@ package com.acorn.myframeapp.home
 import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
+import com.acorn.myframeapp.network.NormalMVVMActivity
 import com.acorn.myframeapp.network.NormalMVVMFragmentActivity
 
 /**
@@ -26,9 +27,14 @@ class HomeFragment : BaseDemoFragment() {
                 "Network",
                 subItems = arrayListOf(
                     Demo(
-                        "Normal MVVM Use",
+                        "Normal MVVM Use In Fragment",
                         description = "Error Layout(retryBtn),Empty Layout,LoadingDialog",
                         activity = NormalMVVMFragmentActivity::class.java
+                    ),
+                    Demo(
+                        "Normal MVVM Use In Activity",
+                        description = "Error Layout(retryBtn),Empty Layout,LoadingDialog",
+                        activity = NormalMVVMActivity::class.java
                     )
                 )
             )

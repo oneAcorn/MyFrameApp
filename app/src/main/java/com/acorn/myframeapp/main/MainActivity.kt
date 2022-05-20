@@ -3,21 +3,23 @@ package com.acorn.myframeapp.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentPagerAdapter
+import com.acorn.basemodule.base.BaseActivity
 import com.acorn.basemodule.extendfun.getColorCompat
+import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
 import kotlinx.android.synthetic.main.activity_main.*
 import me.majiajie.pagerbottomtabstrip.NavigationController
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<BaseNetViewModel>() {
     private lateinit var navigationController: NavigationController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initView()
     }
 
-    private fun initView() {
+    override fun initView() {
+        super.initView()
         initNavigationBar()
         val pagerAdapter = MainPagerAdapter(
             supportFragmentManager,
@@ -46,4 +48,6 @@ class MainActivity : AppCompatActivity() {
         navigationController.setHasMessage(0, true)
         navigationController.setMessageNumber(1, 3)
     }
+
+    override fun getViewModel(): BaseNetViewModel? = null
 }
