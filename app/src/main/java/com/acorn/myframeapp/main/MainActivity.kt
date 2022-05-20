@@ -7,10 +7,11 @@ import com.acorn.basemodule.base.BaseActivity
 import com.acorn.basemodule.extendfun.getColorCompat
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
+import com.acorn.myframeapp.base.AppBaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import me.majiajie.pagerbottomtabstrip.NavigationController
 
-class MainActivity : BaseActivity<BaseNetViewModel>() {
+class MainActivity : AppBaseActivity<BaseNetViewModel>() {
     private lateinit var navigationController: NavigationController
 
     override fun onCreate(savedInstanceState: Bundle?) {

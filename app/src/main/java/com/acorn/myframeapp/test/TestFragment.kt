@@ -5,11 +5,12 @@ import com.acorn.basemodule.base.BaseFragment
 import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
+import com.acorn.myframeapp.base.AppBaseFragment
 
 /**
  * Created by acorn on 2022/5/18.
  */
-class TestFragment : BaseFragment<BaseNetViewModel>() {
+class TestFragment : AppBaseFragment<BaseNetViewModel>() {
 
     companion object {
         fun newInstance(): TestFragment {

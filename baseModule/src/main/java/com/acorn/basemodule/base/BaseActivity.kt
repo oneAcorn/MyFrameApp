@@ -33,6 +33,7 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         super.onCreate(savedInstanceState)
         mViewModel = getViewModel()
         mViewModel?.attachUI(this)
+//        QMUIStatusBarHelper.translucent(this)
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -68,6 +69,10 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
     }
 
     private fun init() {
+//        ImmersionBar.with(this)
+//            .statusBarColor(R.color.colorPrimary)
+//            .init()
+//        ImmersionBar.setTitleBarMarginTop(this, topView)
         initParameters()
         initView()
         initData()
@@ -117,9 +122,13 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
      * @param rightTextColor 右上角文字颜色
      * @param rightTextClickListener 右边按钮点击事件
      */
-    protected fun showTitleLayout(title: String, isShowBackIcon: Boolean = true
-                                  , rightText: String? = null, rightTextColor: Int? = null,
-                                  rightTextClickListener: (() -> Unit)? = null) {
+    protected fun showTitleLayout(
+        title: String,
+        isShowBackIcon: Boolean = true,
+        rightText: String? = null,
+        rightTextColor: Int? = null,
+        rightTextClickListener: (() -> Unit)? = null
+    ) {
         val viewStub: View? = findViewById(R.id.titleViewStub)
         (viewStub as? ViewStub)?.inflate()
         findViewById<View>(R.id.baseBackIv)
@@ -130,6 +139,9 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 
         baseBackIv.visibility = if (isShowBackIcon) View.VISIBLE else View.GONE
         rightTv.visibility = if (rightText == null) View.GONE else View.VISIBLE
+
+//        val titleLayout = findViewById<View>(R.id.baseTitleLayout)
+//        ImmersionBar.with(this).titleBar(viewStub).init()
 
         rightText?.let {
             rightTv.visibility = View.VISIBLE

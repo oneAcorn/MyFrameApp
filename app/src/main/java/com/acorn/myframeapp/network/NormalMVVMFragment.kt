@@ -3,13 +3,14 @@ package com.acorn.myframeapp.network
 import com.acorn.basemodule.base.BaseFragment
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.R
+import com.acorn.myframeapp.base.AppBaseFragment
 import com.acorn.myframeapp.network.viewmodel.NormalViewModel
 import kotlinx.android.synthetic.main.fragment_normal_mvvm.*
 
 /**
  * Created by acorn on 2022/5/19.
  */
-class NormalMVVMFragment : BaseFragment<NormalViewModel>() {
+class NormalMVVMFragment : AppBaseFragment<NormalViewModel>() {
 
     override fun getLayoutId(): Int = R.layout.fragment_normal_mvvm
 

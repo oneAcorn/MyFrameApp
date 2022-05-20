@@ -43,5 +43,4 @@ class HomeFragment : BaseDemoFragment() {
 
     override fun onItemClick(data: Demo, idOrPosition: Int) {
     }
-
 }

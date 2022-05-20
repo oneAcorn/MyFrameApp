@@ -5,12 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.basemodule.base.BaseFragment
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
+import com.acorn.myframeapp.base.AppBaseFragment
 import kotlinx.android.synthetic.main.layout_demo.*
 
 /**
  * Created by acorn on 2022/5/19.
  */
-abstract class BaseDemoFragment : BaseFragment<BaseNetViewModel>() {
+abstract class BaseDemoFragment : AppBaseFragment<BaseNetViewModel>() {
     private val onItemClickListener: (data: Demo, position: Int) -> Unit =
         { data, position ->
             if (data.activity != null) {

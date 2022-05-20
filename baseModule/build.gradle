@@ -51,4 +51,12 @@ dependencies {
     api('com.github.tbruyelle:rxpermissions:0.12') {
         exclude group: "com.android.support"
     }
+
+    //腾讯QMUI https://github.com/Tencent/QMUI_Android
+    api 'com.qmuiteam:qmui:2.0.0-alpha10'
+
+//    //沉浸式状态栏
+//    // 基础依赖包，必须要依赖
+//    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+//    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
 }
