@@ -33,7 +33,7 @@ class HomeFragment : BaseDemoFragment() {
                     ),
                     Demo(
                         "Normal MVVM Use In Activity",
-                        description = "Error Layout(retryBtn),Empty Layout,LoadingDialog",
+                        description = "Error Layout(retryBtn),Empty Layout,LoadingDialog,TitleBar",
                         activity = NormalMVVMActivity::class.java
                     )
                 )

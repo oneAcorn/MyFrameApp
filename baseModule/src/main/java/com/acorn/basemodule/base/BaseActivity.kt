@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewStub
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.acorn.basemodule.R
@@ -12,6 +14,7 @@ import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
 import kotlinx.android.synthetic.main.base_activity_layout.*
+import kotlinx.android.synthetic.main.base_layout_title.*
 
 /**
  * Created by acorn on 2022/5/19.
@@ -105,6 +108,39 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
      */
     open fun refreshNet() {
 
+    }
+
+    /**
+     * @param title 标题
+     * @param isShowBackIcon 是否显示返回按钮
+     * @param rightText 右边按钮文字
+     * @param rightTextColor 右上角文字颜色
+     * @param rightTextClickListener 右边按钮点击事件
+     */
+    protected fun showTitleLayout(title: String, isShowBackIcon: Boolean = true
+                                  , rightText: String? = null, rightTextColor: Int? = null,
+                                  rightTextClickListener: (() -> Unit)? = null) {
+        val viewStub: View? = findViewById(R.id.titleViewStub)
+        (viewStub as? ViewStub)?.inflate()
+        findViewById<View>(R.id.baseBackIv)
+            .singleClick {
+                onBackPressed()
+            }
+        findViewById<TextView>(R.id.baseTitleTv).text = title
+
+        baseBackIv.visibility = if (isShowBackIcon) View.VISIBLE else View.GONE
+        rightTv.visibility = if (rightText == null) View.GONE else View.VISIBLE
+
+        rightText?.let {
+            rightTv.visibility = View.VISIBLE
+            rightTv.text = it
+            rightTextColor?.let { color ->
+                rightTv.setTextColor(color)
+            }
+            rightTv.singleClick {
+                rightTextClickListener?.invoke()
+            }
+        }
     }
 
     override fun showProgressDialog() {

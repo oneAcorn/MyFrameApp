@@ -2,6 +2,7 @@ package com.acorn.myframeapp.network
 
 import android.os.Bundle
 import com.acorn.basemodule.base.BaseActivity
+import com.acorn.basemodule.extendfun.getColorCompat
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.network.viewmodel.NormalViewModel
@@ -15,6 +16,7 @@ class NormalMVVMActivity : BaseActivity<NormalViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_normal_mvvm)
+        showTitleLayout("标题栏", true, "右侧红色", getColorCompat(android.R.color.holo_red_light))
     }
 
     override fun initData() {
