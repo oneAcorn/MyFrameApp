@@ -1,12 +1,10 @@
 package com.acorn.myframeapp.recyclerview
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.acorn.basemodule.base.BaseActivity
 import com.acorn.basemodule.base.BaseRecyclerAdapter
 import com.acorn.basemodule.network.BaseNetViewModel
@@ -29,11 +27,21 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
 
     override fun initView() {
         super.initView()
-        setSupportActionBar(toolbar)
-        toolbar.title = "标题"
+        showToolbar("标题")
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mAdapter = ConventionalRecyclerAdapter(this, null)
         rv.adapter = mAdapter
+        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
+                showTip(
+                    "position:$position,itemViewType:$itemViewType,data:${
+                        mAdapter?.getItem(
+                            position
+                        )
+                    }}"
+                )
+            }
+        })
     }
 
     private fun randomData() {
@@ -104,4 +112,6 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
     }
 
     override fun getViewModel(): BaseNetViewModel? = null
+
+    override fun isEmbedInBaseLayout(): Boolean = true
 }

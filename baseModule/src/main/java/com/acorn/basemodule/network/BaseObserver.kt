@@ -69,11 +69,11 @@ open class BaseObserver<T : IResponse>(
                     it.showErrorLayout()
                 }
                 ERROR_MODEL.TOAST -> {
-                    it.showToast(getFailMessage(t, e))
+                    it.showTip(getFailMessage(t, e))
                 }
                 ERROR_MODEL.LAYOUT_TOAST -> {
                     it.showErrorLayout()
-                    it.showToast(getFailMessage(t, e))
+                    it.showTip(getFailMessage(t, e))
                 }
                 else -> {}
             }

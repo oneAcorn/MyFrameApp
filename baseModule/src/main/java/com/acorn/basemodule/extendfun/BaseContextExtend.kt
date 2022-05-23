@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.view.Display
+import android.view.Gravity
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -29,6 +31,14 @@ fun Context.getDisplayCompat(): Display? {
     } else {
         getDisplayApiL(this)
     }
+}
+
+fun showToast(str: String) {
+    Toast.makeText(appContext, null, Toast.LENGTH_SHORT).apply {
+        //在这里setText，防止MIUI toast时带上app名称
+        setText(str)
+        setGravity(Gravity.CENTER, 0, 0)
+    }.show()
 }
 
 private fun getDisplayApiL(context: Context): Display? {

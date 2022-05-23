@@ -36,7 +36,7 @@ class BaseNetUIState : INetworkUI {
         })
         getErrorToastState().observe(owner, Observer {
             it ?: return@Observer
-            trueNetworkUI.showToast(it)
+            trueNetworkUI.showTip(it)
         })
         getErrorLayoutState().observe(owner, Observer {
             it ?: return@Observer
@@ -64,7 +64,7 @@ class BaseNetUIState : INetworkUI {
         errorLayoutState.value = true
     }
 
-    override fun showToast(string: String) {
+    override fun showTip(string: String) {
         errorToastState.value = string
     }
 

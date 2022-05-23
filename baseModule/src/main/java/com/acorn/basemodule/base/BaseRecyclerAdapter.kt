@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.acorn.basemodule.R
 
 /**
- * 参考
- * QMUI项目->BaseRecyclerAdapter
  *
  * Created by acorn on 2022/5/23.
  */
@@ -29,7 +27,9 @@ abstract class BaseRecyclerAdapter<D>(
     }
 
     companion object {
-        private const val ITEM_TYPE_EMPTY = 9999
+        private const val ITEM_TYPE_EMPTY = 9000
+        private const val ITEM_TYPE_HEADER = 9001
+        private const val ITEM_TYPE_FOOTER = 9002
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -97,7 +97,7 @@ abstract class BaseRecyclerAdapter<D>(
         }
         mData.add(position, item)
         notifyItemInserted(position)
-        Log.i("FDSA","fdsa")
+        Log.i("FDSA", "fdsa")
     }
 
     fun prepend(list: List<D>) {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/MyToolBarTheme"
+    app:navigationIcon="@drawable/ic_baseline_arrow_white_ios_24"
+    app:popupTheme="@style/Theme.BasicApp.PopupOverlay"
+    app:titleMarginStart="3dp"
+    app:titleTextColor="@color/white">
+    <!--居中标题的实现方式-->
+    <TextView
+        android:id="@+id/centerTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="标题" />
+</androidx.appcompat.widget.Toolbar>

@@ -1,6 +1,7 @@
 package com.acorn.basemodule.base
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.acorn.basemodule.R
 import com.acorn.basemodule.dialog.ProgressDialog
+import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
@@ -157,7 +159,7 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
         LayoutInflater.from(context).inflate(nullLayoutResId(), baseErrorLayout)
     }
 
-    override fun showToast(string: String) {
-        Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
+    override fun showTip(string: String) {
+        showToast(string)
     }
 }

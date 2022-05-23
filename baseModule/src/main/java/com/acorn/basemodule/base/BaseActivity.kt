@@ -1,20 +1,21 @@
 package com.acorn.basemodule.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.ViewStub
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.acorn.basemodule.R
 import com.acorn.basemodule.dialog.ProgressDialog
+import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
+import com.acorn.basemodule.network.MyException
 import kotlinx.android.synthetic.main.base_activity_layout.*
 import kotlinx.android.synthetic.main.base_layout_title.*
+import kotlinx.android.synthetic.main.common_layout_title.*
 
 /**
  * Created by acorn on 2022/5/19.
@@ -28,6 +29,8 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         }
     }
     protected var mViewModel: T? = null
+    private var toolbar: Toolbar? = null
+    private lateinit var centerTitleTv: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,9 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 
     override fun setContentView(layoutResID: Int) {
         if (isEmbedInBaseLayout()) {
-            setContentView(LayoutInflater.from(this).inflate(layoutResID, null))
+            super.setContentView(R.layout.base_activity_layout)
+            baseContentLayout.removeAllViews()
+            baseContentLayout.addView(LayoutInflater.from(this).inflate(layoutResID, null))
         } else {
             super.setContentView(layoutResID)
         }
@@ -115,45 +120,73 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 
     }
 
-    /**
-     * @param title 标题
-     * @param isShowBackIcon 是否显示返回按钮
-     * @param rightText 右边按钮文字
-     * @param rightTextColor 右上角文字颜色
-     * @param rightTextClickListener 右边按钮点击事件
-     */
-    protected fun showTitleLayout(
-        title: String,
-        isShowBackIcon: Boolean = true,
-        rightText: String? = null,
-        rightTextColor: Int? = null,
-        rightTextClickListener: (() -> Unit)? = null
+    protected fun showToolbar(
+        centerTitle: String? = null,
+        callback: ((Toolbar) -> Unit)? = null
     ) {
+        if (!isEmbedInBaseLayout()) {
+            throw MyException("Need embed in baseLayout")
+        }
         val viewStub: View? = findViewById(R.id.titleViewStub)
         (viewStub as? ViewStub)?.inflate()
-        findViewById<View>(R.id.baseBackIv)
-            .singleClick {
-                onBackPressed()
-            }
-        findViewById<TextView>(R.id.baseTitleTv).text = title
-
-        baseBackIv.visibility = if (isShowBackIcon) View.VISIBLE else View.GONE
-        rightTv.visibility = if (rightText == null) View.GONE else View.VISIBLE
-
-//        val titleLayout = findViewById<View>(R.id.baseTitleLayout)
-//        ImmersionBar.with(this).titleBar(viewStub).init()
-
-        rightText?.let {
-            rightTv.visibility = View.VISIBLE
-            rightTv.text = it
-            rightTextColor?.let { color ->
-                rightTv.setTextColor(color)
-            }
-            rightTv.singleClick {
-                rightTextClickListener?.invoke()
-            }
+        if (toolbar == null) {
+            toolbar = findViewById<Toolbar>(R.id.toolbar)
+            centerTitleTv = findViewById(R.id.centerTitleTv)
+        }
+        callback?.invoke(toolbar!!)
+        setSupportActionBar(toolbar)
+        if (centerTitle != null) {
+            //隐藏默认标题
+            supportActionBar?.title = null
+            centerTitleTv.visibility = View.VISIBLE
+            centerTitleTv.text = centerTitle
+        } else {
+            centerTitleTv.visibility = View.GONE
+        }
+        toolbar?.setNavigationOnClickListener {
+            onBackPressed()
         }
     }
+
+//    /**
+//     * @param title 标题
+//     * @param isShowBackIcon 是否显示返回按钮
+//     * @param rightText 右边按钮文字
+//     * @param rightTextColor 右上角文字颜色
+//     * @param rightTextClickListener 右边按钮点击事件
+//     */
+//    protected fun showTitleLayout(
+//        title: String,
+//        isShowBackIcon: Boolean = true,
+//        rightText: String? = null,
+//        rightTextColor: Int? = null,
+//        rightTextClickListener: (() -> Unit)? = null
+//    ) {
+//        val viewStub: View? = findViewById(R.id.titleViewStub)
+//        (viewStub as? ViewStub)?.inflate()
+//        findViewById<View>(R.id.baseBackIv)
+//            .singleClick {
+//                onBackPressed()
+//            }
+//        findViewById<TextView>(R.id.baseTitleTv).text = title
+//
+//        baseBackIv.visibility = if (isShowBackIcon) View.VISIBLE else View.GONE
+//        rightTv.visibility = if (rightText == null) View.GONE else View.VISIBLE
+//
+////        val titleLayout = findViewById<View>(R.id.baseTitleLayout)
+////        ImmersionBar.with(this).titleBar(viewStub).init()
+//
+//        rightText?.let {
+//            rightTv.visibility = View.VISIBLE
+//            rightTv.text = it
+//            rightTextColor?.let { color ->
+//                rightTv.setTextColor(color)
+//            }
+//            rightTv.singleClick {
+//                rightTextClickListener?.invoke()
+//            }
+//        }
+//    }
 
     override fun showProgressDialog() {
         if (progressDialog.dialog?.isShowing != true && !isPausing && !isProgressShowing) {
@@ -209,7 +242,7 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         LayoutInflater.from(this).inflate(nullLayoutResId(), baseErrorLayout)
     }
 
-    override fun showToast(string: String) {
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
+    override fun showTip(string: String) {
+        showToast(string)
     }
 }

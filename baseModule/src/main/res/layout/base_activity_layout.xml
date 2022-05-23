@@ -9,8 +9,8 @@
         android:id="@+id/titleViewStub"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:inflatedId="@+id/titleViewStub"
-        android:layout="@layout/base_layout_title" />
+        android:inflatedId="@+id/toolbar"
+        android:layout="@layout/common_layout_title" />
 
     <FrameLayout
         android:id="@+id/baseContentLayout"

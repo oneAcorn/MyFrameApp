@@ -14,10 +14,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyToolBarTheme" parent="ThemeOverlay.AppCompat.Light" >
-        <!--右上角更多图标的颜色-->
-        <item name="colorControlNormal">@color/white</item>
-    </style>
-
-    <style name="Theme.BasicApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

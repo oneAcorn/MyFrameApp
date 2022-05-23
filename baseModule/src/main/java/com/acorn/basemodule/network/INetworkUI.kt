@@ -30,7 +30,7 @@ interface INetworkUI {
     fun showNullLayout()
 
     /**
-     * 显示toast
+     * 显示提示
      */
-    fun showToast(string: String)
+    fun showTip(string: String)
 }
