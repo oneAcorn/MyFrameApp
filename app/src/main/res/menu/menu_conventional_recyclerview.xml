@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.acorn.myframeapp.recyclerview.ConventionalRecyclerViewActivity">
+
+    <item
+        android:id="@+id/action_random_data"
+        android:title="Random data"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_data"
+        android:title="Add data"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_prepend_data"
+        android:title="Prepend data"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_append_data"
+        android:title="Append data"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_remove_data"
+        android:title="Remove data"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_clear_data"
+        android:title="Clear data"
+        app:showAsAction="never" />
+</menu>

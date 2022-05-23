@@ -5,6 +5,7 @@ import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.network.NormalMVVMActivity
 import com.acorn.myframeapp.network.NormalMVVMFragmentActivity
+import com.acorn.myframeapp.recyclerview.ConventionalRecyclerViewActivity
 
 /**
  * Created by acorn on 2022/5/18.
@@ -36,6 +37,15 @@ class HomeFragment : BaseDemoFragment() {
                         description = "Error Layout(retryBtn),Empty Layout,LoadingDialog,TitleBar",
                         activity = NormalMVVMActivity::class.java
                     )
+                )
+            ),
+            Demo(
+                "RecyclerView",
+                subItems = arrayListOf(
+                    Demo(
+                        "Conventional use of RecyclerView",
+                        activity = ConventionalRecyclerViewActivity::class.java
+                    ),
                 )
             )
         )
