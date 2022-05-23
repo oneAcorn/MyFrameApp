@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.acorn.myframeapp.recyclerview.ConventionalRecyclerViewActivity">
+
+    <item
+        android:id="@+id/action_add_header"
+        android:title="Add header"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_footer"
+        android:title="Add footer"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_remove_header"
+        android:title="Remove header"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_remove_footer"
+        android:title="Remove footer"
+        app:showAsAction="never" />
+</menu>

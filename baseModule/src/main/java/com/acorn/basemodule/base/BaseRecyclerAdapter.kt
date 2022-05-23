@@ -2,24 +2,43 @@ package com.acorn.basemodule.base
 
 import android.content.Context
 import android.util.Log
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.acorn.basemodule.R
 
 /**
  *
+ * 参考:QMUI BaseRecyclerAdapter,https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  * Created by acorn on 2022/5/23.
  */
-abstract class BaseRecyclerAdapter<D>(
+abstract class BaseRecyclerAdapter<T>(
     protected val context: Context,
-    list: List<D>? = null
+    list: List<T>? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val mData: MutableList<D> = mutableListOf()
+    private val mData: MutableList<T> = mutableListOf()
     protected val mInflater: LayoutInflater
-    protected var mClickListener: OnItemClickListener? = null
-    protected var mLongClickListener: OnItemLongClickListener? = null
+    private var mClickListener: OnItemClickListener? = null
+    private var mLongClickListener: OnItemLongClickListener? = null
+
+    private lateinit var mHeaderLayout: LinearLayout
+    private lateinit var mFooterLayout: LinearLayout
+
+    /**
+     * 当显示空布局时，是否显示 Header
+     */
+    var headerWithEmptyEnable = false
+
+    /** 当显示空布局时，是否显示 Foot */
+    var footerWithEmptyEnable = false
+
+    /** 是否使用空布局 */
+    var isUseEmpty = true
+
 
     init {
         list?.let { mData.addAll(it) }
@@ -35,27 +54,33 @@ abstract class BaseRecyclerAdapter<D>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_TYPE_EMPTY -> {
-                BaseViewHolder(
-                    context,
-                    mInflater.inflate(R.layout.layout_empty_data, parent, false)
-                )
+                BaseViewHolder(mInflater.inflate(R.layout.layout_empty_data, parent, false))
+            }
+            ITEM_TYPE_HEADER -> {
+                val headerLayoutVp: ViewParent? = mHeaderLayout.parent
+                if (headerLayoutVp is ViewGroup) {
+                    headerLayoutVp.removeView(mHeaderLayout)
+                }
+                BaseViewHolder(mHeaderLayout)
             }
             else -> {
                 val holder = onCreateChildViewHolder(parent, viewType)
                 mClickListener?.let { itemClickListener ->
                     holder.itemView.setOnClickListener {
+                        val adjPos = holder.layoutPosition - headerLayoutCount
                         itemClickListener.onItemClick(
                             it,
-                            holder.layoutPosition,
+                            adjPos,
                             getItemViewType(holder.layoutPosition)
                         )
                     }
                 }
                 mLongClickListener?.let { itemClickListener ->
                     holder.itemView.setOnClickListener {
+                        val adjPos = holder.layoutPosition - headerLayoutCount
                         itemClickListener.onItemLongClick(
                             it,
-                            holder.layoutPosition,
+                            adjPos,
                             getItemViewType(holder.layoutPosition)
                         )
                     }
@@ -66,32 +91,125 @@ abstract class BaseRecyclerAdapter<D>(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (getItemViewType(position) != ITEM_TYPE_EMPTY)
-            bindData(holder, position, mData[position])
+        when (holder.itemViewType) {
+            ITEM_TYPE_EMPTY, ITEM_TYPE_HEADER, ITEM_TYPE_FOOTER -> return
+            else -> {
+                val adjPos = position - headerLayoutCount
+                bindData(holder, adjPos, mData[adjPos])
+            }
+        }
     }
 
-    override fun getItemCount(): Int = if (mData.size == 0) 1 else mData.size
+    /**
+     * Don't override this method. If need, please override [getDefItemCount]
+     * 不要重写此方法，如果有需要，请重写[getDefItemCount]
+     * @return Int
+     */
+    override fun getItemCount(): Int {
+        return if (hasEmptyView()) {
+            var count = 1
+            if (headerWithEmptyEnable && hasHeaderLayout()) {
+                count++
+            }
+            if (footerWithEmptyEnable && hasFooterLayout()) {
+                count++
+            }
+            count
+        } else {
+            headerLayoutCount + getDefItemCount() + footerLayoutCount
+        }
+    }
 
     abstract fun onCreateChildViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 
-    abstract fun bindData(holder: RecyclerView.ViewHolder, position: Int, item: D)
+    abstract fun bindData(holder: RecyclerView.ViewHolder, position: Int, item: T)
 
+    /**
+     * Don't override this method. If need, please override [getDefItemViewType]
+     * 不要重写此方法，如果有需要，请重写[getDefItemViewType]
+     *
+     * @param position Int
+     * @return Int
+     */
     override fun getItemViewType(position: Int): Int {
-        if (mData.size == 0) {
-            return ITEM_TYPE_EMPTY
+        if (hasEmptyView()) {
+            val header = headerWithEmptyEnable && hasHeaderLayout()
+            return when (position) {
+                0 -> if (header) {
+                    ITEM_TYPE_HEADER
+                } else {
+                    ITEM_TYPE_EMPTY
+                }
+                1 -> if (header) {
+                    ITEM_TYPE_EMPTY
+                } else {
+                    ITEM_TYPE_FOOTER
+                }
+                2 -> ITEM_TYPE_FOOTER
+                else -> ITEM_TYPE_EMPTY
+            }
         }
+        val hasHeader = hasHeaderLayout()
+        if (hasHeader && position == 0) {
+            return ITEM_TYPE_HEADER
+        } else {
+            val adjPosition = if (hasHeader) {
+                position - 1
+            } else {
+                position
+            }
+            val dataSize = mData.size
+            return if (adjPosition < dataSize) {
+                getDefItemViewType(adjPosition)
+            } else {
+                ITEM_TYPE_FOOTER
+                //TODO 确定要不要LOAD_MORE_VIEW,不要就删掉下面的
+//                adjPosition -= dataSize
+//                val numFooters = if (hasFooterLayout()) {
+//                    1
+//                } else {
+//                    0
+//                }
+//                if (adjPosition < numFooters) {
+//                    ITEM_TYPE_FOOTER
+//                } else {
+//                    LOAD_MORE_VIEW
+//                }
+            }
+        }
+
+//        if (mData.size == 0) {
+//            return ITEM_TYPE_EMPTY
+//        }
+//        return super.getItemViewType(position)
+    }
+
+    /**
+     * Override this method and return your ViewType.
+     * 重写此方法，返回你的ViewType。
+     */
+    protected open fun getDefItemViewType(position: Int): Int {
         return super.getItemViewType(position)
     }
 
-    fun getItem(position: Int): D = mData[position]
+    /**
+     * Override this method and return your data size.
+     * 重写此方法，返回你的数据数量。
+     */
+    protected open fun getDefItemCount(): Int {
+        return mData.size
+    }
 
-    fun setData(list: List<D>?) {
+    fun getItem(position: Int): T = mData[position]
+
+    //region 数据操作
+    fun setData(list: List<T>?) {
         mData.clear()
         list?.let { mData.addAll(it) }
         notifyDataSetChanged()
     }
 
-    fun add(position: Int, item: D) {
+    fun add(position: Int, item: T) {
         if (position >= mData.size) {
             return
         }
@@ -100,12 +218,12 @@ abstract class BaseRecyclerAdapter<D>(
         Log.i("FDSA", "fdsa")
     }
 
-    fun prepend(list: List<D>) {
+    fun prepend(list: List<T>) {
         mData.addAll(0, list)
         notifyDataSetChanged()
     }
 
-    fun append(list: List<D>) {
+    fun append(list: List<T>) {
         mData.addAll(list)
         notifyDataSetChanged()
     }
@@ -116,6 +234,121 @@ abstract class BaseRecyclerAdapter<D>(
         mData.removeAt(position)
         notifyItemRemoved(position)
     }
+    //endregion
+
+
+    //region Header,Footer.
+    @JvmOverloads
+    fun addHeaderView(view: View, index: Int = -1, orientation: Int = LinearLayout.VERTICAL): Int {
+        if (!this::mHeaderLayout.isInitialized) {
+            mHeaderLayout = LinearLayout(view.context)
+            mHeaderLayout.orientation = orientation
+            mHeaderLayout.layoutParams = if (orientation == LinearLayout.VERTICAL) {
+                RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            } else {
+                RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+        }
+
+        val childCount = mHeaderLayout.childCount
+        var mIndex = index
+        if (index < 0 || index > childCount) {
+            mIndex = childCount
+        }
+        mHeaderLayout.addView(view, mIndex)
+        if (mHeaderLayout.childCount == 1) {
+            val position = headerViewPosition
+            if (position != -1) {
+                notifyItemInserted(position)
+            }
+        }
+        return mIndex
+    }
+
+    val headerViewPosition: Int
+        get() {
+            if (hasEmptyView()) {
+                if (headerWithEmptyEnable) {
+                    return 0
+                }
+            } else {
+                return 0
+            }
+            return -1
+        }
+
+    /**
+     * if addHeaderView will be return 1, if not will be return 0
+     */
+    val headerLayoutCount: Int
+        get() {
+            return if (hasHeaderLayout()) {
+                1
+            } else {
+                0
+            }
+        }
+
+    /**
+     * 获取头布局
+     */
+    val headerLayout: LinearLayout?
+        get() {
+            return if (this::mHeaderLayout.isInitialized) {
+                mHeaderLayout
+            } else {
+                null
+            }
+        }
+
+    /**
+     * if addHeaderView will be return 1, if not will be return 0
+     */
+    val footerLayoutCount: Int
+        get() {
+            return if (hasFooterLayout()) {
+                1
+            } else {
+                0
+            }
+        }
+
+    /**
+     * 是否有 HeaderLayout
+     * @return Boolean
+     */
+    fun hasHeaderLayout(): Boolean {
+        if (this::mHeaderLayout.isInitialized && mHeaderLayout.childCount > 0) {
+            return true
+        }
+        return false
+    }
+
+    fun hasFooterLayout(): Boolean {
+        if (this::mFooterLayout.isInitialized && mFooterLayout.childCount > 0) {
+            return true
+        }
+        return false
+    }
+
+    fun hasEmptyView(): Boolean {
+//        if (!this::mEmptyLayout.isInitialized || mEmptyLayout.childCount == 0) {
+//            return false
+//        }
+//        if (!isUseEmpty) {
+//            return false
+//        }
+//        return data.isEmpty()
+        //TODO 待完成
+        return false
+    }
+    //endregion
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
         this.mClickListener = itemClickListener

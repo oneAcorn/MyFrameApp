@@ -6,6 +6,8 @@ import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.network.NormalMVVMActivity
 import com.acorn.myframeapp.network.NormalMVVMFragmentActivity
 import com.acorn.myframeapp.recyclerview.ConventionalRecyclerViewActivity
+import com.acorn.myframeapp.recyclerview.HeaderFooterRecyclerViewActivity
+import com.acorn.myframeapp.recyclerview.adapter.HeaderFooterAdapter
 
 /**
  * Created by acorn on 2022/5/18.
@@ -46,6 +48,10 @@ class HomeFragment : BaseDemoFragment() {
                         "Conventional use of RecyclerView",
                         activity = ConventionalRecyclerViewActivity::class.java
                     ),
+                    Demo(
+                        "With Header & Footer",
+                        activity = HeaderFooterRecyclerViewActivity::class.java
+                    )
                 )
             )
         )

@@ -27,7 +27,7 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
 
     override fun initView() {
         super.initView()
-        showToolbar("标题")
+        showToolbar("ConventionalRecyclerViewActivity")
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mAdapter = ConventionalRecyclerAdapter(this, null)
         rv.adapter = mAdapter
