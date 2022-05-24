@@ -7,11 +7,11 @@ import kotlin.random.Random
  */
 
 /**
- * @param randomCountUntil 随机数量的最大值
+ * @param count 随机数量的最大值
  */
-fun getRandomList(randomCountUntil: Int = 100): List<String> {
+fun getRandomList(count: Int = 100): List<String> {
     val list = mutableListOf<String>()
-    for (i in 0..Random.nextInt(randomCountUntil)) {
+    for (i in 0..count) {
         list.add(randomItemString())
     }
     return list

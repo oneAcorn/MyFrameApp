@@ -199,9 +199,11 @@ abstract class BaseRecyclerAdapter<T>(
                     if (type == ITEM_TYPE_FOOTER && footerViewAsFlow) {
                         return 1
                     }
-                    return if (isFixedViewType(type)) manager.spanCount else defSpanSizeLookup.getSpanSize(
-                        position
-                    )
+                    val spanSize =
+                        if (isFixedViewType(type)) manager.spanCount else defSpanSizeLookup.getSpanSize(
+                            position
+                        )
+                    return spanSize
                 }
 
             }

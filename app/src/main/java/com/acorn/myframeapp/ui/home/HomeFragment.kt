@@ -5,10 +5,7 @@ import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
-import com.acorn.myframeapp.ui.recyclerview.AnimationRecyclerViewActivity
-import com.acorn.myframeapp.ui.recyclerview.ConventionalRecyclerViewActivity
-import com.acorn.myframeapp.ui.recyclerview.EmptyRecyclerViewActivity
-import com.acorn.myframeapp.ui.recyclerview.HeaderFooterRecyclerViewActivity
+import com.acorn.myframeapp.ui.recyclerview.*
 
 /**
  * Created by acorn on 2022/5/18.
@@ -58,7 +55,12 @@ class HomeFragment : BaseDemoFragment() {
                         description = "Include EmptyData,LoadingData,Error View",
                         activity = EmptyRecyclerViewActivity::class.java
                     ),
-                    Demo("Animation", activity = AnimationRecyclerViewActivity::class.java)
+                    Demo("Animation", activity = AnimationRecyclerViewActivity::class.java),
+                    Demo(
+                        "GridLayout",
+                        description = "Multiple ItemType,SpanSize",
+                        activity = GridRecyclerViewActivity::class.java
+                    )
                 )
             )
         )
