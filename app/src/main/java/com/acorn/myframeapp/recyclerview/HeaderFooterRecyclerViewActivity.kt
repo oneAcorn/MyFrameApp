@@ -70,12 +70,28 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         mAdapter?.removeHeaderView(0)
     }
 
+    private fun addFooter() {
+        mAdapter?.addFooterView(getFooterView())
+    }
+
+    private fun removeFooter() {
+        mAdapter?.removeFooterView(0)
+    }
+
     private fun getHeaderView(): View {
         val view = layoutInflater.inflate(R.layout.view_header, rv, false)
         view.setOnClickListener {
             showTip("Header click")
         }
         return view
+    }
+
+    private fun getFooterView(): View {
+        return layoutInflater.inflate(R.layout.view_footer, rv, false).apply {
+            setOnClickListener {
+                showTip("Footer click")
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -96,11 +112,13 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
                 clearData()
             }
             R.id.action_add_footer -> {
+                addFooter()
             }
             R.id.action_remove_header -> {
                 removeHeader()
             }
             R.id.action_remove_footer -> {
+                removeFooter()
             }
             else -> {
                 isConsume = false

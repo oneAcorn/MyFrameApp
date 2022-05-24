@@ -68,6 +68,13 @@ abstract class BaseRecyclerAdapter<T>(
                 }
                 BaseViewHolder(mHeaderLayout)
             }
+            ITEM_TYPE_FOOTER -> {
+                val footerLayoutVp: ViewParent? = mFooterLayout.parent
+                if (footerLayoutVp is ViewGroup) {
+                    footerLayoutVp.removeView(mFooterLayout)
+                }
+                BaseViewHolder(mFooterLayout)
+            }
             else -> {
                 val holder = onCreateDefViewHolder(parent, viewType)
                 mClickListener?.let { itemClickListener ->
@@ -182,11 +189,6 @@ abstract class BaseRecyclerAdapter<T>(
 //                }
             }
         }
-
-//        if (mData.size == 0) {
-//            return ITEM_TYPE_EMPTY
-//        }
-//        return super.getItemViewType(position)
     }
 
     /**
@@ -360,6 +362,110 @@ abstract class BaseRecyclerAdapter<T>(
             } else {
                 null
             }
+        }
+
+    val footerLayout: LinearLayout?
+        get() {
+            return if (this::mFooterLayout.isInitialized) {
+                mFooterLayout
+            } else {
+                null
+            }
+        }
+
+    @JvmOverloads
+    fun addFooterView(view: View, index: Int = -1, orientation: Int = LinearLayout.VERTICAL): Int {
+        if (!this::mFooterLayout.isInitialized) {
+            mFooterLayout = LinearLayout(view.context)
+            mFooterLayout.orientation = orientation
+            mFooterLayout.layoutParams = if (orientation == LinearLayout.VERTICAL) {
+                RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            } else {
+                RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+        }
+
+        val childCount = mFooterLayout.childCount
+        var mIndex = index
+        if (index < 0 || index > childCount) {
+            mIndex = childCount
+        }
+        mFooterLayout.addView(view, mIndex)
+        if (mFooterLayout.childCount == 1) {
+            val position = footerViewPosition
+            if (position != -1) {
+                notifyItemInserted(position)
+            }
+        }
+        return mIndex
+    }
+
+    @JvmOverloads
+    fun setFooterView(view: View, index: Int = 0, orientation: Int = LinearLayout.VERTICAL): Int {
+        return if (!this::mFooterLayout.isInitialized || mFooterLayout.childCount <= index) {
+            addFooterView(view, index, orientation)
+        } else {
+            mFooterLayout.removeViewAt(index)
+            mFooterLayout.addView(view, index)
+            index
+        }
+    }
+
+    fun removeFooterView(index: Int) {
+        if (!hasFooterLayout()) return
+        if (index < 0 || index >= mFooterLayout.childCount) return
+
+        mFooterLayout.removeViewAt(index)
+        if (mFooterLayout.childCount == 0) {
+            val position = footerViewPosition
+            if (position != -1) {
+                notifyItemRemoved(position)
+            }
+        }
+    }
+
+    fun removeFooterView(footer: View) {
+        if (!hasFooterLayout()) return
+
+        mFooterLayout.removeView(footer)
+        if (mFooterLayout.childCount == 0) {
+            val position = footerViewPosition
+            if (position != -1) {
+                notifyItemRemoved(position)
+            }
+        }
+    }
+
+    fun removeAllFooterView() {
+        if (!hasFooterLayout()) return
+
+        mFooterLayout.removeAllViews()
+        val position = footerViewPosition
+        if (position != -1) {
+            notifyItemRemoved(position)
+        }
+    }
+
+    val footerViewPosition: Int
+        get() {
+            if (hasEmptyView()) {
+                var position = 1
+                if (headerWithEmptyEnable && hasHeaderLayout()) {
+                    position++
+                }
+                if (footerWithEmptyEnable) {
+                    return position
+                }
+            } else {
+                return headerLayoutCount + mData.size
+            }
+            return -1
         }
 
     /**
