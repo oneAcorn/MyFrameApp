@@ -2,7 +2,6 @@ package com.acorn.basemodule.base.recyclerAdapter
 
 import android.animation.Animator
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +13,23 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.acorn.basemodule.base.BaseViewHolder
 import com.acorn.basemodule.base.recyclerAdapter.animation.*
+import java.lang.reflect.Constructor
+import java.lang.reflect.InvocationTargetException
+import java.lang.reflect.Modifier
+import java.lang.reflect.ParameterizedType
 
 /**
  *
  * 参考:QMUI BaseRecyclerAdapter,https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  * Created by acorn on 2022/5/23.
  */
-abstract class BaseRecyclerAdapter<T>(
+abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
     protected val context: Context,
     list: List<T>? = null
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val mData: MutableList<T> = mutableListOf()
+) : RecyclerView.Adapter<VH>() {
+    var data: MutableList<T> = mutableListOf()
+        internal set
+
     protected val mInflater: LayoutInflater
     private var mClickListener: OnItemClickListener? = null
     private var mLongClickListener: OnItemLongClickListener? = null
@@ -76,7 +81,7 @@ abstract class BaseRecyclerAdapter<T>(
         }
 
     init {
-        list?.let { mData.addAll(it) }
+        list?.let { data.addAll(it) }
         mInflater = LayoutInflater.from(context)
     }
 
@@ -87,28 +92,28 @@ abstract class BaseRecyclerAdapter<T>(
     }
 
     //region Implement fun
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return when (viewType) {
             ITEM_TYPE_EMPTY -> {
                 val emptyLayoutVp: ViewParent? = mEmptyLayout.parent
                 if (emptyLayoutVp is ViewGroup) {
                     emptyLayoutVp.removeView(mEmptyLayout)
                 }
-                BaseViewHolder(mEmptyLayout)
+                createBaseViewHolder(mEmptyLayout)
             }
             ITEM_TYPE_HEADER -> {
                 val headerLayoutVp: ViewParent? = mHeaderLayout.parent
                 if (headerLayoutVp is ViewGroup) {
                     headerLayoutVp.removeView(mHeaderLayout)
                 }
-                BaseViewHolder(mHeaderLayout)
+                createBaseViewHolder(mHeaderLayout)
             }
             ITEM_TYPE_FOOTER -> {
                 val footerLayoutVp: ViewParent? = mFooterLayout.parent
                 if (footerLayoutVp is ViewGroup) {
                     footerLayoutVp.removeView(mFooterLayout)
                 }
-                BaseViewHolder(mFooterLayout)
+                createBaseViewHolder(mFooterLayout)
             }
             else -> {
                 val holder = onCreateDefViewHolder(parent, viewType)
@@ -137,12 +142,30 @@ abstract class BaseRecyclerAdapter<T>(
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VH, position: Int) {
         when (holder.itemViewType) {
             ITEM_TYPE_EMPTY, ITEM_TYPE_HEADER, ITEM_TYPE_FOOTER -> return
             else -> {
                 val adjPos = position - headerLayoutCount
-                bindData(holder, adjPos, mData[adjPos])
+                bindData(holder, adjPos, data[adjPos])
+            }
+        }
+    }
+
+    override fun onBindViewHolder(
+        holder: VH,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+            return
+        }
+        when (holder.itemViewType) {
+            ITEM_TYPE_EMPTY, ITEM_TYPE_HEADER, ITEM_TYPE_FOOTER -> return
+            else -> {
+                val adjPos = position - headerLayoutCount
+                bindData(holder, adjPos, data[adjPos], payloads)
             }
         }
     }
@@ -174,7 +197,7 @@ abstract class BaseRecyclerAdapter<T>(
      *
      * @param holder
      */
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+    override fun onViewAttachedToWindow(holder: VH) {
         super.onViewAttachedToWindow(holder)
         val type = holder.itemViewType
         if (isFixedViewType(type)) {
@@ -212,6 +235,100 @@ abstract class BaseRecyclerAdapter<T>(
 
     //endregion
 
+    /**
+     * 创建 ViewHolder。可以重写
+     *
+     * @param view View
+     * @return VH
+     */
+    @Suppress("UNCHECKED_CAST")
+    protected open fun createBaseViewHolder(view: View): VH {
+        var temp: Class<*>? = javaClass
+        var z: Class<*>? = null
+        while (z == null && null != temp) {
+            z = getInstancedGenericKClass(temp)
+            temp = temp.superclass
+        }
+        // 泛型擦除会导致z为null
+        val vh: VH? = if (z == null) {
+            BaseViewHolder(view) as VH
+        } else {
+            createBaseGenericKInstance(z, view)
+        }
+        return vh ?: BaseViewHolder(view) as VH
+    }
+
+    /**
+     * try to create Generic VH instance
+     *
+     * @param z
+     * @param view
+     * @return
+     */
+    @Suppress("UNCHECKED_CAST")
+    private fun createBaseGenericKInstance(z: Class<*>, view: View): VH? {
+        try {
+            val constructor: Constructor<*>
+            // inner and unstatic class
+            return if (z.isMemberClass && !Modifier.isStatic(z.modifiers)) {
+                constructor = z.getDeclaredConstructor(javaClass, View::class.java)
+                constructor.isAccessible = true
+                constructor.newInstance(this, view) as VH
+            } else {
+                constructor = z.getDeclaredConstructor(View::class.java)
+                constructor.isAccessible = true
+                constructor.newInstance(view) as VH
+            }
+        } catch (e: NoSuchMethodException) {
+            e.printStackTrace()
+        } catch (e: IllegalAccessException) {
+            e.printStackTrace()
+        } catch (e: InstantiationException) {
+            e.printStackTrace()
+        } catch (e: InvocationTargetException) {
+            e.printStackTrace()
+        }
+
+        return null
+    }
+
+    /**
+     * get generic parameter VH
+     *
+     * @param z
+     * @return
+     */
+    private fun getInstancedGenericKClass(z: Class<*>): Class<*>? {
+        try {
+            val type = z.genericSuperclass
+            if (type is ParameterizedType) {
+                val types = type.actualTypeArguments
+                for (temp in types) {
+                    if (temp is Class<*>) {
+                        if (BaseViewHolder::class.java.isAssignableFrom(temp)) {
+                            return temp
+                        }
+                    } else if (temp is ParameterizedType) {
+                        val rawType = temp.rawType
+                        if (rawType is Class<*> && BaseViewHolder::class.java.isAssignableFrom(
+                                rawType
+                            )
+                        ) {
+                            return rawType
+                        }
+                    }
+                }
+            }
+        } catch (e: java.lang.reflect.GenericSignatureFormatError) {
+            e.printStackTrace()
+        } catch (e: TypeNotPresentException) {
+            e.printStackTrace()
+        } catch (e: java.lang.reflect.MalformedParameterizedTypeException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
     protected open fun isFixedViewType(type: Int): Boolean {
         return type == ITEM_TYPE_EMPTY || type == ITEM_TYPE_HEADER || type == ITEM_TYPE_FOOTER
     }
@@ -231,9 +348,20 @@ abstract class BaseRecyclerAdapter<T>(
         }
     }
 
-    abstract fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+    abstract fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): VH
 
     abstract fun bindData(holder: RecyclerView.ViewHolder, position: Int, item: T)
+
+    /**
+     * 局部刷新
+     */
+    open fun bindData(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        item: T,
+        payloads: List<Any>
+    ) {
+    }
 
     /**
      * Don't override this method. If need, please override [getDefItemViewType]
@@ -269,7 +397,7 @@ abstract class BaseRecyclerAdapter<T>(
             } else {
                 position
             }
-            val dataSize = mData.size
+            val dataSize = data.size
             return if (adjPosition < dataSize) {
                 getDefItemViewType(adjPosition)
             } else {
@@ -303,15 +431,16 @@ abstract class BaseRecyclerAdapter<T>(
      * 重写此方法，返回你的数据数量。
      */
     protected open fun getDefItemCount(): Int {
-        return mData.size
+        return data.size
     }
 
-    fun getItem(position: Int): T = mData[position]
+    fun getItem(position: Int): T = data[position]
 
     //region 数据操作
+
     fun setData(list: List<T>?) {
-        mData.clear()
-        list?.let { mData.addAll(it) }
+        data.clear()
+        list?.let { data.addAll(it) }
         mLastAnimatedPosition = -1
         notifyDataSetChanged()
     }
@@ -321,27 +450,27 @@ abstract class BaseRecyclerAdapter<T>(
     }
 
     fun add(position: Int, item: T) {
-        if (position >= mData.size) {
+        if (position >= data.size) {
             return
         }
-        mData.add(position, item)
+        data.add(position, item)
         notifyItemInserted(position)
     }
 
     fun prepend(list: List<T>) {
-        mData.addAll(0, list)
+        data.addAll(0, list)
         notifyDataSetChanged()
     }
 
     fun append(list: List<T>) {
-        mData.addAll(list)
+        data.addAll(list)
         notifyDataSetChanged()
     }
 
     fun remove(position: Int) {
-        if (position >= mData.size)
+        if (position >= data.size)
             return
-        mData.removeAt(position)
+        data.removeAt(position)
         notifyItemRemoved(position)
     }
     //endregion
@@ -562,7 +691,7 @@ abstract class BaseRecyclerAdapter<T>(
                     return position
                 }
             } else {
-                return headerLayoutCount + mData.size
+                return headerLayoutCount + data.size
             }
             return -1
         }
@@ -649,7 +778,7 @@ abstract class BaseRecyclerAdapter<T>(
         if (!isUseEmpty) {
             return false
         }
-        return mData.isEmpty()
+        return data.isEmpty()
     }
 
     val emptyLayout: FrameLayout?

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_700">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:tint="@color/teal_200"
+            app:srcCompat="@drawable/ic_baseline_architecture_24" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:tint="@color/subItemColor"
+            app:srcCompat="@drawable/ic_baseline_refresh_white_24" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:tint="@color/color_fcfcfc"
+            app:srcCompat="@drawable/ic_baseline_anchor_24" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="@color/subItemColor"
+        android:textSize="12sp"
+        tools:text="使用Payloads可以在ViewHolder有很多View的情况下,只刷新指定的某个View" />
+    <TextView
+        android:id="@+id/updateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我是要刷新的view"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/updateTv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我是要刷新的view2"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@color/subItemColorPress"
+        />
+</LinearLayout>

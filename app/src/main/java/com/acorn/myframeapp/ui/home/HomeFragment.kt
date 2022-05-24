@@ -60,6 +60,11 @@ class HomeFragment : BaseDemoFragment() {
                         "GridLayout",
                         description = "Multiple ItemType,SpanSize",
                         activity = GridRecyclerViewActivity::class.java
+                    ),
+                    Demo(
+                        "Paloads",
+                        description = "Refresh Single View In Item ViewHolder",
+                        activity = PayloadsRecyclerViewActivity::class.java
                     )
                 )
             )

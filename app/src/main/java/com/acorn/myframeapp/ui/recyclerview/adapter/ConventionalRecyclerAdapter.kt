@@ -11,7 +11,7 @@ import com.acorn.basemodule.base.BaseViewHolder
  * Created by acorn on 2022/5/23.
  */
 class ConventionalRecyclerAdapter(context: Context, datas: List<String>? = null) :
-    BaseRecyclerAdapter<String>(context, datas) {
+    BaseRecyclerAdapter<String,RecyclerView.ViewHolder>(context, datas) {
     override fun onCreateDefViewHolder(
         parent: ViewGroup,
         viewType: Int

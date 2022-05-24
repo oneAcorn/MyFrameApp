@@ -12,7 +12,7 @@ import com.acorn.myframeapp.R
  * Created by acorn on 2022/5/24.
  */
 class GridRecyclerAdapter(context: Context, datas: List<String>? = null) :
-    BaseRecyclerAdapter<String>(context, datas) {
+    BaseRecyclerAdapter<String,RecyclerView.ViewHolder>(context, datas) {
 
     companion object {
         const val ITEM_TYPE_1 = 1
