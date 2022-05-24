@@ -13,7 +13,7 @@ import com.acorn.basemodule.base.BaseViewHolder
  */
 class HeaderFooterAdapter(context: Context, datas: List<String>? = null) :
     BaseRecyclerAdapter<String>(context, datas) {
-    override fun onCreateChildViewHolder(
+    override fun onCreateDefViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {

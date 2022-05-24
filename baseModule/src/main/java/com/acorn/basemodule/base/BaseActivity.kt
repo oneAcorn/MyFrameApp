@@ -102,7 +102,7 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
     /**
      * 是否把布局嵌入到基础布局中
      */
-    open fun isEmbedInBaseLayout(): Boolean = false
+    open fun isEmbedInBaseLayout(): Boolean = true
 
     abstract fun getViewModel(): T?
 

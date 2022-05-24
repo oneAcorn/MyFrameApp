@@ -51,4 +51,6 @@ class MainActivity : AppBaseActivity<BaseNetViewModel>() {
     }
 
     override fun getViewModel(): BaseNetViewModel? = null
+
+    override fun isEmbedInBaseLayout(): Boolean = false
 }

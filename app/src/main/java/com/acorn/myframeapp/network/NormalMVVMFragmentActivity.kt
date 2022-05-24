@@ -15,6 +15,9 @@ class NormalMVVMFragmentActivity : AppBaseActivity<BaseNetViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_normal_mvvm_fragment)
+        showToolbar {
+            it.title = "NormalMVVM"
+        }
     }
 
     override fun getViewModel(): BaseNetViewModel? = null

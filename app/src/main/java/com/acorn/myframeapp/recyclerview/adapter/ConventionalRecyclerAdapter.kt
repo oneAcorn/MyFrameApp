@@ -12,7 +12,7 @@ import com.acorn.basemodule.base.BaseViewHolder
  */
 class ConventionalRecyclerAdapter(context: Context, datas: List<String>? = null) :
     BaseRecyclerAdapter<String>(context, datas) {
-    override fun onCreateChildViewHolder(
+    override fun onCreateDefViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {

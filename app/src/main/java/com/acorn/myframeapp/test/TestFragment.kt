@@ -6,11 +6,13 @@ import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.AppBaseFragment
+import com.acorn.myframeapp.demo.BaseDemoFragment
+import com.acorn.myframeapp.demo.Demo
 
 /**
  * Created by acorn on 2022/5/18.
  */
-class TestFragment : AppBaseFragment<BaseNetViewModel>() {
+class TestFragment : BaseDemoFragment() {
 
     companion object {
         fun newInstance(): TestFragment {
@@ -22,18 +24,11 @@ class TestFragment : AppBaseFragment<BaseNetViewModel>() {
         }
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_test
+    override fun getItems(): Array<Demo> {
+        return arrayOf(Demo("Nothing right now"))
     }
 
-    override fun initData() {
-        logI("TestFragment:initData")
+    override fun onItemClick(data: Demo, idOrPosition: Int) {
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        logI("TestFragment setUserVisibleHint:$isVisibleToUser")
-    }
-
-    override fun getViewModel(): BaseNetViewModel? = null
 }

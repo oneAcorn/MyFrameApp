@@ -45,6 +45,7 @@
         <activity android:name=".network.NormalMVVMActivity" />
         <activity android:name=".recyclerview.ConventionalRecyclerViewActivity" />
         <activity android:name=".recyclerview.HeaderFooterRecyclerViewActivity" />
+        <activity android:name=".recyclerview.EmptyRecyclerViewActivity" />
     </application>
 
 </manifest>

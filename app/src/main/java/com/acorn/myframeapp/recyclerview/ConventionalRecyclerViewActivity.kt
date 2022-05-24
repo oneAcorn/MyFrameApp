@@ -44,6 +44,11 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         })
     }
 
+    override fun initData() {
+        super.initData()
+        randomData()
+    }
+
     private fun randomData() {
         mAdapter?.setData(getRandomList())
     }

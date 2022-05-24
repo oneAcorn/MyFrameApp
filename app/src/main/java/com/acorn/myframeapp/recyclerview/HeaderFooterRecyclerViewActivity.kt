@@ -25,7 +25,6 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_header_footer_recyclerview)
-
     }
 
     override fun initView() {
@@ -34,7 +33,7 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
             it.title = "HeaderFooterRecyclerView"
         }
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mAdapter = HeaderFooterAdapter(this, getRandomList())
+        mAdapter = HeaderFooterAdapter(this, null)
         rv.adapter = mAdapter
         mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
@@ -49,8 +48,26 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         })
     }
 
+    override fun initData() {
+        super.initData()
+        addHeader()
+        randomData()
+    }
+
+    private fun randomData() {
+        mAdapter?.setData(getRandomList())
+    }
+
+    private fun clearData() {
+        mAdapter?.setData(null)
+    }
+
     private fun addHeader() {
         mAdapter?.addHeaderView(getHeaderView())
+    }
+
+    private fun removeHeader() {
+        mAdapter?.removeHeaderView(0)
     }
 
     private fun getHeaderView(): View {
@@ -69,12 +86,19 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var isConsume = true
         when (item.itemId) {
+            R.id.action_add_data -> {
+                randomData()
+            }
             R.id.action_add_header -> {
                 addHeader()
+            }
+            R.id.action_clear_data -> {
+                clearData()
             }
             R.id.action_add_footer -> {
             }
             R.id.action_remove_header -> {
+                removeHeader()
             }
             R.id.action_remove_footer -> {
             }
