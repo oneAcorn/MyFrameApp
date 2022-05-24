@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.recyclerview.ConventionalRecyclerViewActivity">
+
+    <item
+        android:id="@+id/action_alpha_in"
+        android:title="Alpha In"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_scale_in"
+        android:title="Scale In"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_slide_in_bottom"
+        android:title="Slide In Bottom"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_slide_in_left"
+        android:title="Slide In Left"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_slide_in_right"
+        android:title="Slide In Right"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_custom1"
+        android:title="Custom1"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_custom2"
+        android:title="Custom2"
+        app:showAsAction="never" />
+</menu>

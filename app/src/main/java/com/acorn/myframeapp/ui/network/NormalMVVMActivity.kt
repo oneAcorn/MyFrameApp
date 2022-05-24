@@ -1,10 +1,10 @@
-package com.acorn.myframeapp.network
+package com.acorn.myframeapp.ui.network
 
 import android.os.Bundle
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.AppBaseActivity
-import com.acorn.myframeapp.network.viewmodel.NormalViewModel
+import com.acorn.myframeapp.ui.network.viewmodel.NormalViewModel
 import kotlinx.android.synthetic.main.fragment_normal_mvvm.*
 
 /**

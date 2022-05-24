@@ -1,5 +1,6 @@
-package com.acorn.basemodule.base
+package com.acorn.basemodule.base.recyclerAdapter
 
+import android.animation.Animator
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,8 +9,11 @@ import android.view.ViewGroup
 import android.view.ViewParent
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.acorn.basemodule.R
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.acorn.basemodule.base.BaseViewHolder
+import com.acorn.basemodule.base.recyclerAdapter.animation.*
 
 /**
  *
@@ -40,6 +44,36 @@ abstract class BaseRecyclerAdapter<T>(
     /** 是否使用空布局 */
     var isUseEmpty = true
 
+    /**
+     * if asFlow is true, footer/header will arrange like normal item view.
+     * only works when use [GridLayoutManager],and it will ignore span size.
+     */
+    var headerViewAsFlow: Boolean = false
+    var footerViewAsFlow: Boolean = false
+
+    /**
+     * 是否打开动画
+     */
+    var animationEnable: Boolean = false
+
+    /**
+     * 动画是否仅第一次执行
+     */
+    var isAnimationFirstOnly = true
+
+    /**
+     * 上次执行动画的位置
+     */
+    private var mLastAnimatedPosition = -1
+
+    /**
+     * 设置自定义动画
+     */
+    var adapterAnimation: BaseAnimation? = null
+        set(value) {
+            animationEnable = true
+            field = value
+        }
 
     init {
         list?.let { mData.addAll(it) }
@@ -52,6 +86,7 @@ abstract class BaseRecyclerAdapter<T>(
         private const val ITEM_TYPE_FOOTER = 9002
     }
 
+    //region Implement fun
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_TYPE_EMPTY -> {
@@ -129,6 +164,68 @@ abstract class BaseRecyclerAdapter<T>(
             count
         } else {
             headerLayoutCount + getDefItemCount() + footerLayoutCount
+        }
+    }
+
+    /**
+     * Called when a view created by this holder has been attached to a window.
+     * simple to solve item will layout using all
+     * [setFullSpan]
+     *
+     * @param holder
+     */
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        val type = holder.itemViewType
+        if (isFixedViewType(type)) {
+            setFullSpan(holder)
+        } else {
+            addAnimation(holder)
+        }
+    }
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+
+        val manager = recyclerView.layoutManager
+        if (manager is GridLayoutManager) {
+            val defSpanSizeLookup = manager.spanSizeLookup
+            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    val type = getItemViewType(position)
+                    if (type == ITEM_TYPE_HEADER && headerViewAsFlow) {
+                        return 1
+                    }
+                    if (type == ITEM_TYPE_FOOTER && footerViewAsFlow) {
+                        return 1
+                    }
+                    return if (isFixedViewType(type)) manager.spanCount else defSpanSizeLookup.getSpanSize(
+                        position
+                    )
+                }
+
+            }
+        }
+    }
+
+    //endregion
+
+    protected open fun isFixedViewType(type: Int): Boolean {
+        return type == ITEM_TYPE_EMPTY || type == ITEM_TYPE_HEADER || type == ITEM_TYPE_FOOTER
+    }
+
+    /**
+     * When set to true, the item will layout using all span area. That means, if orientation
+     * is vertical, the view will have full width; if orientation is horizontal, the view will
+     * have full height.
+     * if the hold view use StaggeredGridLayoutManager they should using all span area
+     *
+     * @param holder True if this item should traverse all spans.
+     */
+    protected open fun setFullSpan(holder: RecyclerView.ViewHolder) {
+        val layoutParams = holder.itemView.layoutParams
+        if (layoutParams is StaggeredGridLayoutManager.LayoutParams) {
+            layoutParams.isFullSpan = true
         }
     }
 
@@ -213,6 +310,7 @@ abstract class BaseRecyclerAdapter<T>(
     fun setData(list: List<T>?) {
         mData.clear()
         list?.let { mData.addAll(it) }
+        mLastAnimatedPosition = -1
         notifyDataSetChanged()
     }
 
@@ -226,7 +324,6 @@ abstract class BaseRecyclerAdapter<T>(
         }
         mData.add(position, item)
         notifyItemInserted(position)
-        Log.i("FDSA", "fdsa")
     }
 
     fun prepend(list: List<T>) {
@@ -563,6 +660,53 @@ abstract class BaseRecyclerAdapter<T>(
         }
 
     //endregion
+
+    //region Item Animation
+    private fun addAnimation(holder: RecyclerView.ViewHolder) {
+        if (animationEnable) {
+            if (!isAnimationFirstOnly || holder.layoutPosition > mLastAnimatedPosition) {
+                val animation: BaseAnimation = adapterAnimation ?: AlphaInAnimation()
+                animation.animators(holder.itemView).forEach {
+                    startAnim(it, holder.layoutPosition)
+                }
+                mLastAnimatedPosition = holder.layoutPosition
+            }
+        }
+    }
+
+    /**
+     * 开始执行动画方法
+     * 可以重写此方法，实行更多行为
+     *
+     * @param anim
+     * @param index
+     */
+    protected open fun startAnim(anim: Animator, index: Int) {
+        anim.start()
+    }
+
+    /**
+     * 内置默认动画类型
+     */
+    enum class AnimationType {
+        AlphaIn, ScaleIn, SlideInBottom, SlideInLeft, SlideInRight
+    }
+
+    /**
+     * 使用内置默认动画设置
+     * @param animationType AnimationType
+     */
+    fun setAnimationWithDefault(animationType: AnimationType) {
+        adapterAnimation = when (animationType) {
+            AnimationType.AlphaIn -> AlphaInAnimation()
+            AnimationType.ScaleIn -> ScaleInAnimation()
+            AnimationType.SlideInBottom -> SlideInBottomAnimation()
+            AnimationType.SlideInLeft -> SlideInLeftAnimation()
+            AnimationType.SlideInRight -> SlideInRightAnimation()
+        }
+    }
+    //endregion
+
 
     fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
         this.mClickListener = itemClickListener

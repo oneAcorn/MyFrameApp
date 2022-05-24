@@ -1,9 +1,7 @@
-package com.acorn.myframeapp.main
+package com.acorn.myframeapp.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentPagerAdapter
-import com.acorn.basemodule.base.BaseActivity
 import com.acorn.basemodule.extendfun.getColorCompat
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R

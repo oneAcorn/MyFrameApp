@@ -33,7 +33,7 @@
         <!--全面/刘海屏适配 end-->
 
         <activity
-            android:name=".main.MainActivity"
+            android:name="com.acorn.myframeapp.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,11 +41,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".network.NormalMVVMFragmentActivity" />
-        <activity android:name=".network.NormalMVVMActivity" />
-        <activity android:name=".recyclerview.ConventionalRecyclerViewActivity" />
-        <activity android:name=".recyclerview.HeaderFooterRecyclerViewActivity" />
-        <activity android:name=".recyclerview.EmptyRecyclerViewActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.network.NormalMVVMActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.recyclerview.ConventionalRecyclerViewActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.recyclerview.HeaderFooterRecyclerViewActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.recyclerview.EmptyRecyclerViewActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.recyclerview.AnimationRecyclerViewActivity" />
     </application>
 
 </manifest>

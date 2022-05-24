@@ -1,4 +1,4 @@
-package com.acorn.myframeapp.network.viewmodel
+package com.acorn.myframeapp.ui.network.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

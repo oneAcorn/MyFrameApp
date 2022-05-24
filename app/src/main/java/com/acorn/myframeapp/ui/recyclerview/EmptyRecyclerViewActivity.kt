@@ -1,17 +1,15 @@
-package com.acorn.myframeapp.recyclerview
+package com.acorn.myframeapp.ui.recyclerview
 
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.BaseNoViewModelActivity
-import com.acorn.myframeapp.recyclerview.adapter.ConventionalRecyclerAdapter
-import kotlinx.android.synthetic.main.activity_conventional_recyclerview.*
+import com.acorn.myframeapp.extendfun.getRandomList
+import com.acorn.myframeapp.ui.recyclerview.adapter.ConventionalRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_conventional_recyclerview.rv
 import kotlinx.android.synthetic.main.activity_empty_recyclerview.*
-import kotlin.random.Random
 
 /**
  * Created by acorn on 2022/5/24.
@@ -84,14 +82,4 @@ class EmptyRecyclerViewActivity : BaseNoViewModelActivity() {
             }
         }, 2000)
     }
-
-    private fun getRandomList(): List<String> {
-        val list = mutableListOf<String>()
-        for (i in 0..Random.nextInt(100)) {
-            list.add(randomString())
-        }
-        return list
-    }
-
-    private fun randomString(): String = "RandomItem:${Random.nextInt(200)}"
 }

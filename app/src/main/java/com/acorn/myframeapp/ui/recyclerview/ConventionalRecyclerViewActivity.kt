@@ -1,4 +1,4 @@
-package com.acorn.myframeapp.recyclerview
+package com.acorn.myframeapp.ui.recyclerview
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,10 +6,12 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.basemodule.base.BaseActivity
-import com.acorn.basemodule.base.BaseRecyclerAdapter
+import com.acorn.basemodule.base.recyclerAdapter.BaseRecyclerAdapter
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
-import com.acorn.myframeapp.recyclerview.adapter.ConventionalRecyclerAdapter
+import com.acorn.myframeapp.extendfun.getRandomList
+import com.acorn.myframeapp.extendfun.randomItemString
+import com.acorn.myframeapp.ui.recyclerview.adapter.ConventionalRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_conventional_recyclerview.*
 import kotlin.random.Random
 
@@ -50,19 +52,19 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
     }
 
     private fun randomData() {
-        mAdapter?.setData(getRandomList())
+        mAdapter?.setData(getRandomList(10))
     }
 
     private fun addData() {
-        mAdapter?.add(Random.nextInt(mAdapter?.itemCount ?: 0), randomString())
+        mAdapter?.add(Random.nextInt(mAdapter?.itemCount ?: 0), randomItemString())
     }
 
     private fun prependData() {
-        mAdapter?.prepend(getRandomList())
+        mAdapter?.prepend(getRandomList(10))
     }
 
     private fun appendData() {
-        mAdapter?.append(getRandomList())
+        mAdapter?.append(getRandomList(10))
     }
 
     private fun removeData() {
@@ -72,16 +74,6 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
     private fun clearData() {
         mAdapter?.setData(null)
     }
-
-    private fun getRandomList(): List<String> {
-        val list = mutableListOf<String>()
-        for (i in 0..Random.nextInt(10)) {
-            list.add(randomString())
-        }
-        return list
-    }
-
-    private fun randomString(): String = "RandomItem:${Random.nextInt(200)}"
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_conventional_recyclerview, menu)

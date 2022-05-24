@@ -1,18 +1,17 @@
-package com.acorn.myframeapp.recyclerview
+package com.acorn.myframeapp.ui.recyclerview
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.basemodule.base.BaseActivity
-import com.acorn.basemodule.base.BaseRecyclerAdapter
+import com.acorn.basemodule.base.recyclerAdapter.BaseRecyclerAdapter
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
-import com.acorn.myframeapp.recyclerview.adapter.HeaderFooterAdapter
+import com.acorn.myframeapp.extendfun.getRandomList
+import com.acorn.myframeapp.ui.recyclerview.adapter.HeaderFooterAdapter
 import kotlinx.android.synthetic.main.activity_conventional_recyclerview.*
-import kotlin.random.Random
 
 /**
  * Created by acorn on 2022/5/23.
@@ -126,16 +125,6 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         }
         return if (isConsume) true else super.onOptionsItemSelected(item)
     }
-
-    private fun getRandomList(): List<String> {
-        val list = mutableListOf<String>()
-        for (i in 0..Random.nextInt(100)) {
-            list.add(randomString())
-        }
-        return list
-    }
-
-    private fun randomString(): String = "RandomItem:${Random.nextInt(200)}"
 
     override fun isEmbedInBaseLayout(): Boolean = true
 }

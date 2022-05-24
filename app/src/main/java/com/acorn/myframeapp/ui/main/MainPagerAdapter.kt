@@ -1,11 +1,11 @@
-package com.acorn.myframeapp.main
+package com.acorn.myframeapp.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.acorn.basemodule.extendfun.logI
-import com.acorn.myframeapp.home.HomeFragment
-import com.acorn.myframeapp.test.TestFragment
+import com.acorn.myframeapp.ui.home.HomeFragment
+import com.acorn.myframeapp.ui.test.TestFragment
 
 /**
  * Created by acorn on 2022/5/18.

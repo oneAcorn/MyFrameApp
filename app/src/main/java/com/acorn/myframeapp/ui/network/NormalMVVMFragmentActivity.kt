@@ -1,8 +1,6 @@
-package com.acorn.myframeapp.network
+package com.acorn.myframeapp.ui.network
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.acorn.basemodule.base.BaseActivity
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.AppBaseActivity

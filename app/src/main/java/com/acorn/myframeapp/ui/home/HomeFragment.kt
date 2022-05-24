@@ -1,14 +1,14 @@
-package com.acorn.myframeapp.home
+package com.acorn.myframeapp.ui.home
 
 import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
-import com.acorn.myframeapp.network.NormalMVVMActivity
-import com.acorn.myframeapp.network.NormalMVVMFragmentActivity
-import com.acorn.myframeapp.recyclerview.ConventionalRecyclerViewActivity
-import com.acorn.myframeapp.recyclerview.EmptyRecyclerViewActivity
-import com.acorn.myframeapp.recyclerview.HeaderFooterRecyclerViewActivity
-import com.acorn.myframeapp.recyclerview.adapter.HeaderFooterAdapter
+import com.acorn.myframeapp.ui.network.NormalMVVMActivity
+import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
+import com.acorn.myframeapp.ui.recyclerview.AnimationRecyclerViewActivity
+import com.acorn.myframeapp.ui.recyclerview.ConventionalRecyclerViewActivity
+import com.acorn.myframeapp.ui.recyclerview.EmptyRecyclerViewActivity
+import com.acorn.myframeapp.ui.recyclerview.HeaderFooterRecyclerViewActivity
 
 /**
  * Created by acorn on 2022/5/18.
@@ -57,7 +57,8 @@ class HomeFragment : BaseDemoFragment() {
                         "Empty View",
                         description = "Include EmptyData,LoadingData,Error View",
                         activity = EmptyRecyclerViewActivity::class.java
-                    )
+                    ),
+                    Demo("Animation", activity = AnimationRecyclerViewActivity::class.java)
                 )
             )
         )
