@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.recyclerview.ConventionalRecyclerViewActivity">
+
+    <item
+        android:id="@+id/action_scroll_to_bottom"
+        android:title="scrollToBottom"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_scroll_to_top"
+        android:title="scrollToTop"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_scroll_bottomview_to_top"
+        android:title="scrollBottomViewToTop"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_scrollby_40"
+        android:title="scrollBy 40dp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_scrollby_minus_40"
+        android:title="scrollBy -40dp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_scrollby_100dp_per_second"
+        android:title="smoothScrollBy 100dp/1s"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_scrollby_minus_100dp_per_second"
+        android:title="smoothScrollBy -100dp/1s"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_save_current_scroll_info"
+        android:title="save current scroll info"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_restore_scroll_info"
+        android:title="restore scroll info"
+        app:showAsAction="never" />
+</menu>

@@ -54,6 +54,7 @@
         <activity android:name=".ui.recyclerview.SwipeSingleActionRecyclerActivity" />
         <activity android:name=".ui.recyclerview.StickySectionRecyclerViewActivity"/>
         <activity android:name=".ui.recyclerview.DragRecyclerViewActivity"/>
+        <activity android:name=".ui.nestedscroll.WebviewRecyclerNestedActivity"/>
     </application>
 
 </manifest>

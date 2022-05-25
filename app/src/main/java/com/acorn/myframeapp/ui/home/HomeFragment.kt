@@ -3,6 +3,7 @@ package com.acorn.myframeapp.ui.home
 import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
+import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
 import com.acorn.myframeapp.ui.recyclerview.*
@@ -84,6 +85,16 @@ class HomeFragment : BaseDemoFragment() {
                         activity = StickySectionRecyclerViewActivity::class.java
                     ),
                     Demo("Draggable", activity = DragRecyclerViewActivity::class.java)
+                )
+            ),
+            Demo(
+                "NestedScroll",
+                description = "all kinds of nested scroll",
+                subItems = arrayListOf(
+                    Demo(
+                        "Webview+RecyclerView",
+                        activity = WebviewRecyclerNestedActivity::class.java
+                    )
                 )
             )
         )
