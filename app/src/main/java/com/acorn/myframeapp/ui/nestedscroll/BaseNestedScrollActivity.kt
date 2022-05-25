@@ -68,10 +68,10 @@ abstract class BaseNestedScrollActivity : BaseNoViewModelActivity() {
             R.id.action_scrollby_minus_40 -> {
                 coordinatorLayout.scrollBy((-40).dp)
             }
-            R.id.action_scrollby_100dp_per_second -> {
+            R.id.action_scrollby_100dp_in_1second -> {
                 coordinatorLayout.smoothScrollBy(100.dp, 1000)
             }
-            R.id.action_scrollby_minus_100dp_per_second -> {
+            R.id.action_scrollby_minus_100dp_in_1second -> {
                 coordinatorLayout.smoothScrollBy((-100).dp, 1000)
             }
             R.id.action_save_current_scroll_info -> {

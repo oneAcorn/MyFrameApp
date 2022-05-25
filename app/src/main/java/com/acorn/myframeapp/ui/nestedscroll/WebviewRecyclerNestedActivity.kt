@@ -54,6 +54,11 @@ class WebviewRecyclerNestedActivity : BaseNestedScrollActivity() {
         })
     }
 
+    override fun initView() {
+        super.initView()
+        showToolbar { it.title="Webview+RecyclerView" }
+    }
+
     override fun initData() {
         super.initData()
         mAdapter.setData(getRandomList())

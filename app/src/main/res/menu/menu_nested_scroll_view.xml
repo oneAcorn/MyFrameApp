@@ -25,12 +25,12 @@
         android:title="scrollBy -40dp"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_scrollby_100dp_per_second"
+        android:id="@+id/action_scrollby_100dp_in_1second"
         android:title="smoothScrollBy 100dp/1s"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_scrollby_minus_100dp_per_second"
+        android:id="@+id/action_scrollby_minus_100dp_in_1second"
         android:title="smoothScrollBy -100dp/1s"
         app:showAsAction="never" />
     <item
