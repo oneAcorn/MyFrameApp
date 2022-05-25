@@ -50,6 +50,8 @@
         <activity android:name=".ui.recyclerview.GridRecyclerViewActivity" />
         <activity android:name=".ui.recyclerview.PayloadsRecyclerViewActivity" />
         <activity android:name=".ui.recyclerview.ItemDecorationRecyclerViewActivity" />
+        <activity android:name=".ui.recyclerview.SwipeActionRecyclerActivity" />
+        <activity android:name=".ui.recyclerview.SwipeSingleActionRecyclerActivity" />
     </application>
 
 </manifest>

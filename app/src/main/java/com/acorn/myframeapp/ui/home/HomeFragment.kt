@@ -69,6 +69,15 @@ class HomeFragment : BaseDemoFragment() {
                     Demo(
                         "ItemDecoration",
                         activity = ItemDecorationRecyclerViewActivity::class.java
+                    ),
+                    Demo(
+                        "SwipeAction",
+                        description = "swipe item to show more operation",
+                        activity = SwipeActionRecyclerActivity::class.java
+                    ),Demo(
+                        "SwipeAction With One Action",
+                        description = "swipe delete when only one action",
+                        activity = SwipeSingleActionRecyclerActivity::class.java
                     )
                 )
             )
