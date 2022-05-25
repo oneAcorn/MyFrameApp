@@ -65,6 +65,10 @@ class HomeFragment : BaseDemoFragment() {
                         "Paloads",
                         description = "Refresh Single View In Item ViewHolder",
                         activity = PayloadsRecyclerViewActivity::class.java
+                    ),
+                    Demo(
+                        "ItemDecoration",
+                        activity = ItemDecorationRecyclerViewActivity::class.java
                     )
                 )
             )

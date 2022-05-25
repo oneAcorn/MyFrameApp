@@ -49,6 +49,7 @@
         <activity android:name="com.acorn.myframeapp.ui.recyclerview.AnimationRecyclerViewActivity" />
         <activity android:name=".ui.recyclerview.GridRecyclerViewActivity" />
         <activity android:name=".ui.recyclerview.PayloadsRecyclerViewActivity" />
+        <activity android:name=".ui.recyclerview.ItemDecorationRecyclerViewActivity" />
     </application>
 
 </manifest>

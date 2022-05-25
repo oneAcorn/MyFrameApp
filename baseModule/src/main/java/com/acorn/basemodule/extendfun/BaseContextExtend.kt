@@ -1,13 +1,14 @@
 package com.acorn.basemodule.extendfun
 
-import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.Display
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.acorn.basemodule.base.BaseApplication
@@ -20,6 +21,10 @@ val appContext get() = BaseApplication.appContext
 
 fun Context.getColorCompat(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
+}
+
+fun Context.getDrawableCompat(@DrawableRes resId: Int): Drawable? {
+    return ContextCompat.getDrawable(this, resId)
 }
 
 /**

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_linearlayout"
+        android:title="LinearLayout divider with shape"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_gridlayout_color"
+        android:title="GridLayout divider with color"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_gridlayout_img"
+        android:title="GridLayout divider with img"
+        app:showAsAction="never" />
+</menu>
