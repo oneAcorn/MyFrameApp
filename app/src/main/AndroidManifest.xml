@@ -52,6 +52,7 @@
         <activity android:name=".ui.recyclerview.ItemDecorationRecyclerViewActivity" />
         <activity android:name=".ui.recyclerview.SwipeActionRecyclerActivity" />
         <activity android:name=".ui.recyclerview.SwipeSingleActionRecyclerActivity" />
+        <activity android:name=".ui.recyclerview.StickySectionRecyclerViewActivity"/>
     </application>
 
 </manifest>
