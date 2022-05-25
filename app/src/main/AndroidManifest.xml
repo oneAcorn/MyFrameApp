@@ -53,6 +53,7 @@
         <activity android:name=".ui.recyclerview.SwipeActionRecyclerActivity" />
         <activity android:name=".ui.recyclerview.SwipeSingleActionRecyclerActivity" />
         <activity android:name=".ui.recyclerview.StickySectionRecyclerViewActivity"/>
+        <activity android:name=".ui.recyclerview.DragRecyclerViewActivity"/>
     </application>
 
 </manifest>

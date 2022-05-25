@@ -79,7 +79,11 @@ class HomeFragment : BaseDemoFragment() {
                         description = "swipe delete when only one action",
                         activity = SwipeSingleActionRecyclerActivity::class.java
                     ),
-                    Demo("Sticky Section", activity = StickySectionRecyclerViewActivity::class.java)
+                    Demo(
+                        "Sticky Section",
+                        activity = StickySectionRecyclerViewActivity::class.java
+                    ),
+                    Demo("Draggable", activity = DragRecyclerViewActivity::class.java)
                 )
             )
         )

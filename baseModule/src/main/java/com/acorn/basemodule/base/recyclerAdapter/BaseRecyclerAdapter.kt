@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.acorn.basemodule.base.BaseViewHolder
 import com.acorn.basemodule.base.recyclerAdapter.animation.*
+import com.acorn.basemodule.base.recyclerAdapter.drag.BaseDraggableModule
+import com.acorn.basemodule.base.recyclerAdapter.drag.DraggableModule
 import java.lang.reflect.Constructor
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Modifier
@@ -80,15 +82,39 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
             field = value
         }
 
+    private var mDraggableModule: BaseDraggableModule? = null
+
+    /**
+     * 拖拽模块
+     */
+    val draggableModule: BaseDraggableModule
+        get() {
+            checkNotNull(mDraggableModule) { "Please first implements DraggableModule" }
+            return mDraggableModule!!
+        }
+
+    companion object {
+        const val ITEM_TYPE_EMPTY = 9000
+        const val ITEM_TYPE_HEADER = 9001
+        const val ITEM_TYPE_FOOTER = 9002
+
+        fun isFixedViewType(type: Int): Boolean =
+            type == ITEM_TYPE_HEADER || type == ITEM_TYPE_FOOTER || type == ITEM_TYPE_EMPTY
+    }
+
     init {
+        checkModule()
         list?.let { data.addAll(it) }
         mInflater = LayoutInflater.from(context)
     }
 
-    companion object {
-        private const val ITEM_TYPE_EMPTY = 9000
-        private const val ITEM_TYPE_HEADER = 9001
-        private const val ITEM_TYPE_FOOTER = 9002
+    /**
+     * 检查模块
+     */
+    private fun checkModule() {
+        if (this is DraggableModule) {
+            mDraggableModule = this.addDraggableModule(this)
+        }
     }
 
     //region Implement fun
@@ -137,6 +163,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
                         )
                     }
                 }
+                mDraggableModule?.initView(holder)
                 holder
             }
         }
@@ -209,6 +236,8 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
+
+        mDraggableModule?.attachToRecyclerView(recyclerView)
 
         val manager = recyclerView.layoutManager
         if (manager is GridLayoutManager) {
