@@ -14,4 +14,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="MyQMUITheme" parent="QMUI.Compat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+    </style>
 </resources>

@@ -30,7 +30,6 @@ class RecyclerviewViewPagerNestedActivity : BaseNestedScrollActivity() {
     override fun initCoordinatorLayout() {
         mTopDelegateLayout = QMUIContinuousNestedTopDelegateLayout(this)
         mTopDelegateLayout.setBackgroundColor(Color.LTGRAY)
-//        QMUIContinuousNestedTopRecyclerView(this)
 
         val headerView: AppCompatTextView = object : AppCompatTextView(this) {
             override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

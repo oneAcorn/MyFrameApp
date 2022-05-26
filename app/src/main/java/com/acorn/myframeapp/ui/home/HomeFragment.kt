@@ -8,6 +8,7 @@ import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
+import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
 
 /**
@@ -87,6 +88,17 @@ class HomeFragment : BaseDemoFragment() {
                         activity = StickySectionRecyclerViewActivity::class.java
                     ),
                     Demo("Draggable", activity = DragRecyclerViewActivity::class.java)
+                )
+            ),
+            Demo(
+                "PullLayout",
+                description = "Pull to refresh,drag down to load more",
+                subItems = arrayListOf(
+                    Demo(
+                        "QMUI PullLayout",
+                        description = "For more demo,pls see QMUI_Android->QDPullFragment",
+                        activity = QMUIPullLayoutActivity::class.java
+                    )
                 )
             ),
             Demo(

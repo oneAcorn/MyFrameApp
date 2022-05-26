@@ -57,6 +57,7 @@
         <activity android:name=".ui.nestedscroll.WebviewRecyclerNestedActivity" />
         <activity android:name=".ui.nestedscroll.TwoRecyclerViewNestedActivity" />
         <activity android:name=".ui.nestedscroll.RecyclerviewViewPagerNestedActivity" />
+        <activity android:name=".ui.pulllayout.QMUIPullLayoutActivity" android:theme="@style/MyQMUITheme"/>
     </application>
 
 </manifest>
