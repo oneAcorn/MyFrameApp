@@ -52,9 +52,11 @@
         <activity android:name=".ui.recyclerview.ItemDecorationRecyclerViewActivity" />
         <activity android:name=".ui.recyclerview.SwipeActionRecyclerActivity" />
         <activity android:name=".ui.recyclerview.SwipeSingleActionRecyclerActivity" />
-        <activity android:name=".ui.recyclerview.StickySectionRecyclerViewActivity"/>
-        <activity android:name=".ui.recyclerview.DragRecyclerViewActivity"/>
-        <activity android:name=".ui.nestedscroll.WebviewRecyclerNestedActivity"/>
+        <activity android:name=".ui.recyclerview.StickySectionRecyclerViewActivity" />
+        <activity android:name=".ui.recyclerview.DragRecyclerViewActivity" />
+        <activity android:name=".ui.nestedscroll.WebviewRecyclerNestedActivity" />
+        <activity android:name=".ui.nestedscroll.TwoRecyclerViewNestedActivity" />
+        <activity android:name=".ui.nestedscroll.RecyclerviewViewPagerNestedActivity" />
     </application>
 
 </manifest>

@@ -3,6 +3,8 @@ package com.acorn.myframeapp.ui.home
 import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
+import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
+import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
@@ -89,11 +91,19 @@ class HomeFragment : BaseDemoFragment() {
             ),
             Demo(
                 "NestedScroll",
-                description = "all kinds of nested scroll",
+                description = "all kinds of nested scroll,For more combinations,pls see QMUI_Android->QDContinuousNestedScrollFragment",
                 subItems = arrayListOf(
                     Demo(
                         "Webview+RecyclerView",
                         activity = WebviewRecyclerNestedActivity::class.java
+                    ),
+                    Demo(
+                        "(Header+RecyclerView+Footer)+RecyclerView",
+                        activity = TwoRecyclerViewNestedActivity::class.java
+                    ),
+                    Demo(
+                        "(header + recyclerView + bottom) + (part sticky header + viewpager)",
+                        activity = RecyclerviewViewPagerNestedActivity::class.java
                     )
                 )
             )
