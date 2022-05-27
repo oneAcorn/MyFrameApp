@@ -2,6 +2,7 @@ package com.acorn.myframeapp.ui.dialog
 
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.acorn.basemodule.extendfun.showToast
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoActivity
 import com.acorn.myframeapp.demo.Demo
@@ -20,6 +21,7 @@ class DialogActivity : BaseDemoActivity() {
         private const val CLICK_MY_BOTTOM_SHEET = 2
         private const val CLICK_MY_BOTTOM_SHEET2 = 3
         private const val CLICK_MY_BOTTOM_SHEET3 = 4
+        private const val CLICK_CONFIRM_DIALOG = 5
     }
 
     override fun getItems(): Array<Demo> {
@@ -48,6 +50,11 @@ class DialogActivity : BaseDemoActivity() {
                 "MyBottomSheet3",
                 CLICK_MY_BOTTOM_SHEET3,
                 "This Dialog extends Google BottomSheetDialogFragment"
+            ),
+            Demo(
+                "ConfirmDialog",
+                CLICK_CONFIRM_DIALOG,
+                "This Dialog extends AppCompatDialogFragment"
             )
         )
     }
@@ -68,6 +75,16 @@ class DialogActivity : BaseDemoActivity() {
             }
             CLICK_MY_BOTTOM_SHEET3 -> {
                 BottomSheetDialog3.newInstance().show(supportFragmentManager, "BottomSheetDialog3")
+            }
+            CLICK_CONFIRM_DIALOG -> {
+                ConfirmDialog.newInstance("Title", "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+                    {
+                        it.dismiss()
+                        showToast("Confirm click")
+                    },
+                    {
+                        showToast("Cancel click")
+                    }).show(supportFragmentManager, "ConfirmDialog")
             }
             else -> {}
         }

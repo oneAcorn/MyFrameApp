@@ -85,6 +85,7 @@ abstract class BaseBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     //region 重写区
+
     protected open fun isBackgroundDimEnable(): Boolean = true
 
     protected open fun initView(rootView: View) {}
