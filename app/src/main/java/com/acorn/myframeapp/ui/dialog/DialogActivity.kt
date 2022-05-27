@@ -3,6 +3,7 @@ package com.acorn.myframeapp.ui.dialog
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.acorn.basemodule.extendfun.showToast
+import com.acorn.basemodule.utils.download.ApkDownloadUtil
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoActivity
 import com.acorn.myframeapp.demo.Demo
@@ -22,6 +23,7 @@ class DialogActivity : BaseDemoActivity() {
         private const val CLICK_MY_BOTTOM_SHEET2 = 3
         private const val CLICK_MY_BOTTOM_SHEET3 = 4
         private const val CLICK_CONFIRM_DIALOG = 5
+        private const val CLICK_UPDATE_DIALOG = 6
     }
 
     override fun getItems(): Array<Demo> {
@@ -55,6 +57,11 @@ class DialogActivity : BaseDemoActivity() {
                 "ConfirmDialog",
                 CLICK_CONFIRM_DIALOG,
                 "This Dialog extends AppCompatDialogFragment"
+            ),
+            Demo(
+                "UpdateDialog",
+                CLICK_UPDATE_DIALOG,
+                "Download app new version then install it."
             )
         )
     }
@@ -85,6 +92,9 @@ class DialogActivity : BaseDemoActivity() {
                     {
                         showToast("Cancel click")
                     }).show(supportFragmentManager, "ConfirmDialog")
+            }
+            CLICK_UPDATE_DIALOG -> {
+                showUpdateDialog()
             }
             else -> {}
         }
@@ -181,5 +191,27 @@ class DialogActivity : BaseDemoActivity() {
                         .show()
                 }
             }.build().show()
+    }
+
+    private fun showUpdateDialog() {
+        val dialog = UpdateDialog.newInstance(
+            "下载新版本",
+            "新版本1.0.1",
+            true,
+            object : UpdateDialog.OnUpdateDialogClickListener {
+                override fun onOkClick(dialog: UpdateDialog) { //点击下载
+                    ApkDownloadUtil(this@DialogActivity).download("没有url") {
+                        dialog.updateDownloadingState(it)
+                    }
+                }
+
+                override fun onCancelClick(dialog: UpdateDialog) {
+
+                }
+
+            })
+
+        showToast("No apk to download,Pls see source code instead")
+//        dialog.show(supportFragmentManager,"UpdateDialog")
     }
 }

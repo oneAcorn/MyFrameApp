@@ -64,6 +64,18 @@
         <activity
             android:name=".ui.dialog.DialogActivity"
             android:theme="@style/MyQMUITheme" />
+
+        <!-- Android 7.0 文件共享配置，必须配置 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.imcore.metaverse.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource" />
+        </provider>
     </application>
 
 </manifest>
