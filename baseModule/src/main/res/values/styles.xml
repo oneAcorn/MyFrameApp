@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--加上Acorn.防止重名-->
     <style name="ProgressDialogStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -8,10 +9,10 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="MyToolBarTheme" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="MyToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
         <!--右上角更多图标的颜色-->
         <item name="colorControlNormal">@color/white</item>
-        <item name="toolbarNavigationButtonStyle">@style/myToolbarNavigationButtonStyle</item>
+        <item name="toolbarNavigationButtonStyle">@style/ToolbarNavigationButtonStyle</item>
     </style>
 
 
@@ -19,9 +20,38 @@
 
 
     <!--可以在此修改Toolbar的NavigationIcon样式-->
-    <style name="myToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+    <style name="ToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
         <!--<item name="android:minWidth">30dp</item>-->
         <!--<item name="android:padding">0dp</item>-->
         <!--<item name="android:scaleType">centerInside</item>-->
+    </style>
+
+
+    <style name="MyBottomSheet" parent="Theme.AppCompat.Dialog">
+        <item name="android:buttonStyle">@style/Acorn.ButtonBase.Compat</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="DefBottomSheetRootLayout">
+        <item name="qmui_skin_support_bottom_sheet_bg">@color/white</item>
+        <item name="qmui_bottom_sheet_height_percent">0.75</item>
+        <item name="qmui_bottom_sheet_max_width">500dp</item>
+        <item name="qmui_bottom_sheet_use_percent_min_height">640dp</item>
+    </style>
+
+    <style name="Acorn.ButtonBase.Compat" parent="@style/Widget.AppCompat.Button">
+        <!-- 取消 Button 字符默认大写的功能（会导致 Spannable 失效），默认值只影响 5.0 以上版本，但使用Compat包后，4.x 版本也会受到影响 -->
+        <!-- http://stackoverflow.com/questions/29007746/button-settext-with-spannable-dosent-work-for-android-5-0-lollipop -->
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="TransBottomSheetDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>

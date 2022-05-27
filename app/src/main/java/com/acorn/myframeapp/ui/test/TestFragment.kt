@@ -20,7 +20,7 @@ class TestFragment : BaseDemoFragment() {
     }
 
     override fun getItems(): Array<Demo> {
-        return arrayOf(Demo("Nothing right now"))
+        return arrayOf(Demo("TestView", activity = TestViewActivity::class.java))
     }
 
     override fun onItemClick(data: Demo, idOrPosition: Int) {

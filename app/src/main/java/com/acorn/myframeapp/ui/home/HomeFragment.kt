@@ -1,8 +1,12 @@
 package com.acorn.myframeapp.ui.home
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
+import com.acorn.myframeapp.ui.dialog.DialogActivity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -10,6 +14,8 @@ import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
 import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
+import com.qmuiteam.qmui.skin.QMUISkinManager
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 
 /**
  * Created by acorn on 2022/5/18.
@@ -17,6 +23,7 @@ import com.acorn.myframeapp.ui.recyclerview.*
 class HomeFragment : BaseDemoFragment() {
 
     companion object {
+
         fun newInstance(): HomeFragment {
             val args = Bundle()
 
@@ -118,10 +125,12 @@ class HomeFragment : BaseDemoFragment() {
                         activity = RecyclerviewViewPagerNestedActivity::class.java
                     )
                 )
-            )
+            ),
+            Demo("Dialog", activity = DialogActivity::class.java)
         )
     }
 
     override fun onItemClick(data: Demo, idOrPosition: Int) {
+
     }
 }
