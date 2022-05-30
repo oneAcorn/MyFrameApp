@@ -93,7 +93,7 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_header_footer_recyclerview, menu)
         return true
     }

@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.myframeapp.R
+import com.acorn.myframeapp.base.BaseNoViewModelActivity
 import kotlinx.android.synthetic.main.layout_demo.*
 
 /**
  * Created by acorn on 2022/5/19.
  */
-abstract class BaseDemoActivity : AppCompatActivity() {
+abstract class BaseDemoActivity : BaseNoViewModelActivity() {
     private val onItemClickListener: (data: Demo, position: Int) -> Unit =
         { data, position ->
             if (data.activity != null) {

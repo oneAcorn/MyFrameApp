@@ -75,7 +75,7 @@ class ConventionalRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         mAdapter?.setData(null)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_conventional_recyclerview, menu)
         return true
     }

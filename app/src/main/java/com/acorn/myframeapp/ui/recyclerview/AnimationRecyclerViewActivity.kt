@@ -57,7 +57,7 @@ class AnimationRecyclerViewActivity : BaseNoViewModelActivity() {
         mAdapter?.setData(getRandomList(600))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_animation_recyclerview, menu)
         return true
     }

@@ -1,5 +1,6 @@
 package com.acorn.myframeapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -12,8 +13,11 @@ import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
+import com.acorn.myframeapp.ui.photo.TakePhotoOrVideoActivity
 import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
+import com.acorn.myframeapp.ui.webview.X5WebviewActivity
+import com.acorn.myframeapp.ui.webview.X5WebviewFragment
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 
@@ -23,6 +27,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 class HomeFragment : BaseDemoFragment() {
 
     companion object {
+        private const val CLICK_X5_WEBVIEW_ACTIVITY = 0
 
         fun newInstance(): HomeFragment {
             val args = Bundle()
@@ -126,11 +131,27 @@ class HomeFragment : BaseDemoFragment() {
                     )
                 )
             ),
-            Demo("Dialog", activity = DialogActivity::class.java)
+            Demo("Dialog", activity = DialogActivity::class.java),
+            Demo("Take photo or video", activity = TakePhotoOrVideoActivity::class.java),
+            Demo(
+                "Webview", subItems = arrayListOf(
+                    Demo("X5Webview", CLICK_X5_WEBVIEW_ACTIVITY)
+                )
+            )
         )
     }
 
     override fun onItemClick(data: Demo, idOrPosition: Int) {
-
+        when (idOrPosition) {
+            CLICK_X5_WEBVIEW_ACTIVITY -> {
+                X5WebviewActivity.open(
+                    requireActivity(),
+                    "http://jandan.net/p/110765",
+                    "这是标题",
+                    false
+                )
+            }
+            else -> {}
+        }
     }
 }

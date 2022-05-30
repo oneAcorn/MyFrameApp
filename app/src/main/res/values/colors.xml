@@ -9,6 +9,7 @@
     <color name="itemColorDark">#B3B2AF</color>
     <color name="itemColorDarkPress">#91918F</color>
 <!--    <color name="red">#FFFF0000</color>-->
+    <color name="progress_bar_color">#304FFE</color>
 
 
     <color name="purple_200">#FFBB86FC</color>

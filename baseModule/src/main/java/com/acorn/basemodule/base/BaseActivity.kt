@@ -129,12 +129,19 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         }
         val viewStub: View? = findViewById(R.id.titleViewStub)
         (viewStub as? ViewStub)?.inflate()
+        var isFirstInit = false
         if (toolbar == null) {
             toolbar = findViewById<Toolbar>(R.id.toolbar)
             centerTitleTv = findViewById(R.id.centerTitleTv)
+            isFirstInit = true
         }
         callback?.invoke(toolbar!!)
-        setSupportActionBar(toolbar)
+        if (isFirstInit) {
+            setSupportActionBar(toolbar)
+            toolbar?.setNavigationOnClickListener {
+                onBackPressed()
+            }
+        }
         if (centerTitle != null) {
             //隐藏默认标题
             supportActionBar?.title = null
@@ -142,9 +149,6 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
             centerTitleTv.text = centerTitle
         } else {
             centerTitleTv.visibility = View.GONE
-        }
-        toolbar?.setNavigationOnClickListener {
-            onBackPressed()
         }
     }
 

@@ -64,6 +64,9 @@
         <activity
             android:name=".ui.dialog.DialogActivity"
             android:theme="@style/MyQMUITheme" />
+        <activity android:name=".ui.photo.TakePhotoOrVideoActivity" />
+        <activity android:name=".ui.webview.X5WebviewActivity" />
+
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
         <provider
