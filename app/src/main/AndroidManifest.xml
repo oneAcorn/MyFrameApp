@@ -66,6 +66,7 @@
             android:theme="@style/MyQMUITheme" />
         <activity android:name=".ui.photo.TakePhotoOrVideoActivity" />
         <activity android:name=".ui.webview.X5WebviewActivity" />
+        <activity android:name=".ui.popup.PopupActivity" />
 
 
         <!-- Android 7.0 文件共享配置，必须配置 -->

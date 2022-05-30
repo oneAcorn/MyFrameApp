@@ -14,6 +14,7 @@ import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
 import com.acorn.myframeapp.ui.photo.TakePhotoOrVideoActivity
+import com.acorn.myframeapp.ui.popup.PopupActivity
 import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
@@ -137,7 +138,8 @@ class HomeFragment : BaseDemoFragment() {
                 "Webview", subItems = arrayListOf(
                     Demo("X5Webview", CLICK_X5_WEBVIEW_ACTIVITY)
                 )
-            )
+            ),
+            Demo("Popup",activity = PopupActivity::class.java)
         )
     }
 
