@@ -2,7 +2,7 @@ package com.acorn.myframeapp.ui.popup
 
 import android.content.Context
 import android.view.View
-import com.acorn.basemodule.base.FullScreenPopup
+import com.acorn.basemodule.base.popup.FullScreenPopup
 import com.acorn.basemodule.extendfun.showToast
 import com.acorn.myframeapp.R
 import kotlinx.android.synthetic.main.popup_my_full_screen1.view.*
