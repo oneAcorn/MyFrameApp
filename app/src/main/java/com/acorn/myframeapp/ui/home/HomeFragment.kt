@@ -1,13 +1,11 @@
 package com.acorn.myframeapp.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.dialog.DialogActivity
+import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivity
+import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -18,7 +16,6 @@ import com.acorn.myframeapp.ui.popup.PopupActivity
 import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
-import com.acorn.myframeapp.ui.webview.X5WebviewFragment
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 
@@ -139,7 +136,21 @@ class HomeFragment : BaseDemoFragment() {
                     Demo("X5Webview", CLICK_X5_WEBVIEW_ACTIVITY)
                 )
             ),
-            Demo("Popup",activity = PopupActivity::class.java)
+            Demo("Popup", activity = PopupActivity::class.java),
+            Demo(
+                "LazyFragment", subItems = arrayListOf(
+                    Demo(
+                        "OldLazyFragment",
+                        description = "Lazy loading fragment in viewpager before AndroidX",
+                        activity = OldLazyFragmentActivity::class.java
+                    ),
+                    Demo(
+                        "LazyFragment",
+                        description = "Google recommonds lazy loading after androidx.fragment 1.1.0",
+                        activity = AndroidXLazyFragmentActivity::class.java
+                    )
+                )
+            )
         )
     }
 

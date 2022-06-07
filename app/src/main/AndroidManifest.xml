@@ -67,6 +67,8 @@
         <activity android:name=".ui.photo.TakePhotoOrVideoActivity" />
         <activity android:name=".ui.webview.X5WebviewActivity" />
         <activity android:name=".ui.popup.PopupActivity" />
+        <activity android:name=".ui.lazyfragment.old.OldLazyFragmentActivity"/>
+        <activity android:name=".ui.lazyfragment.androidx.AndroidXLazyFragmentActivity"/>
 
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
