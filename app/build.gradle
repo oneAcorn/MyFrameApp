@@ -55,4 +55,13 @@ dependencies {
 //    implementation  'io.github.scwang90:refresh-header-falsify:2.0.5'     //虚拟刷新头
 //    implementation  'io.github.scwang90:refresh-header-two-level:2.0.5'   //二级刷新头
 //    implementation  'io.github.scwang90:refresh-header-phoenix:2.0.5'    //经典刷新头
+
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+    //排除某个jar包
+    implementation fileTree(include: ['*.jar'], dir: 'libs',excludes: ['pinyin4j-2.5.0.jar'])
+//    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    //独立声明此jar包的引用方式.
+    compileOnly files("libs/pinyin4j-2.5.0.jar")
 }

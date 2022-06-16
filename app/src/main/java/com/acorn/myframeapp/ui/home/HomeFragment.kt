@@ -3,6 +3,7 @@ package com.acorn.myframeapp.ui.home
 import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
+import com.acorn.myframeapp.ui.annotation.AnnotationActivity
 import com.acorn.myframeapp.ui.dialog.DialogActivity
 import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivity
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
@@ -150,7 +151,8 @@ class HomeFragment : BaseDemoFragment() {
                         activity = AndroidXLazyFragmentActivity::class.java
                     )
                 )
-            )
+            ),
+            Demo("Annotation", activity = AnnotationActivity::class.java)
         )
     }
 
