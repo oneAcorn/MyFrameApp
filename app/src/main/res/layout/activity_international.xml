@@ -9,7 +9,7 @@
         android:id="@+id/internationalBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="中文" />
+        android:text="@string/internationalization_btn" />
 
     <TextView
         android:id="@+id/wordTv"

@@ -1,4 +1,4 @@
-package com.acorn.myframeapp.utils
+package com.acorn.basemodule.utils
 
 import com.acorn.basemodule.extendfun.string
 import com.tencent.mmkv.MMKV

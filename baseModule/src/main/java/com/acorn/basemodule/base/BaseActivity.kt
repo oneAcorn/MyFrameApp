@@ -1,9 +1,12 @@
 package com.acorn.basemodule.base
 
+import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.acorn.basemodule.R
@@ -13,9 +16,10 @@ import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
 import com.acorn.basemodule.network.MyException
+import com.acorn.basemodule.utils.Caches
+import com.acorn.basemodule.utils.MyContextWrapper
 import kotlinx.android.synthetic.main.base_activity_layout.*
-import kotlinx.android.synthetic.main.base_layout_title.*
-import kotlinx.android.synthetic.main.common_layout_title.*
+
 
 /**
  * Created by acorn on 2022/5/19.
@@ -37,6 +41,24 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         mViewModel = getViewModel()
         mViewModel?.attachUI(this)
 //        QMUIStatusBarHelper.translucent(this)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        //see https://stackoverflow.com/questions/40221711/android-context-getresources-updateconfiguration-deprecated
+        super.attachBaseContext(MyContextWrapper.wrap(newBase, Caches.currentLanguage ?: ""))
+
+        /**
+         *  After android Material library implementation of ContextThemeWrapper to
+         *  support dark mode, the language setting would break and language setting is lost.
+         *  After months of head scratching, problem was resolved by adding the following code
+         *  to Activity and Fragment onCreate method
+         */
+//        var context: Context? =
+//            MyContextWrapper.wrap(this /*in fragment use getContext() instead of this*/, "fr")
+//        resources.updateConfiguration(
+//            context!!.resources.configuration,
+//            context!!.resources.displayMetrics
+//        )
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -249,4 +271,5 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
     override fun showTip(string: String) {
         showToast(string)
     }
+
 }

@@ -4,14 +4,15 @@ import android.os.Bundle
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.BaseNoViewModelActivity
+import com.acorn.basemodule.utils.Caches
 import kotlinx.android.synthetic.main.activity_international.*
 
 /**
  * 国际化
+ * 使用MyContextWrapper在BaseActivity中实现.
  * Created by acorn on 2022/6/27.
  */
 class InternationalActivity : BaseNoViewModelActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,12 @@ class InternationalActivity : BaseNoViewModelActivity() {
         super.initView()
         showToolbar { it.title = getString(R.string.internationalization_title) }
         internationalBtn.singleClick {
+            if (currentLanguage() == "en") {
+                Caches.currentLanguage = "zh"
+            } else {
+                Caches.currentLanguage = "en"
+            }
+            finish()
         }
     }
 }

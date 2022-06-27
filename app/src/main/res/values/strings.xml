@@ -6,4 +6,5 @@
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <string name="internationalization_title">国际化</string>
+    <string name="internationalization_btn">中文</string>
 </resources>
