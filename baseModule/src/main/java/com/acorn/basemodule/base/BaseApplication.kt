@@ -2,6 +2,8 @@ package com.acorn.basemodule.base
 
 import android.content.Context
 import androidx.multidex.MultiDexApplication
+import com.acorn.basemodule.extendfun.logI
+import com.tencent.mmkv.MMKV
 import com.tencent.smtt.sdk.QbSdk
 
 /**
@@ -17,6 +19,7 @@ open class BaseApplication : MultiDexApplication() {
         super.onCreate()
         appContext = applicationContext
         initTencentX5()
+        initMMKV()
     }
 
     private fun initTencentX5() {
@@ -36,5 +39,10 @@ open class BaseApplication : MultiDexApplication() {
         })
         //（可选）为了提高内核占比，在初始化前可配置允许移动网络下载内核（大小 40-50 MB）。默认移动网络不下载
         QbSdk.setDownloadWithoutWifi(true);
+    }
+
+    private fun initMMKV() {
+        val rootDir = MMKV.initialize(this);
+        logI("MMKV root dir->$rootDir")
     }
 }

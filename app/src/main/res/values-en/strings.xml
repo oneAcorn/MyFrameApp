@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyFrameApp</string>
+    <string name="loading">loading…</string>
+    <string name="load_error">Load failed,Click to refresh</string>
+    <string name="empty_data">Empty data,Click to refresh</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="internationalization_title">Internationalization</string>
+</resources>
