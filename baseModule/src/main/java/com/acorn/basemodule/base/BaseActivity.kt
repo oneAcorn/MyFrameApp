@@ -105,6 +105,11 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         initData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        isPausing = false
+    }
+
     override fun onPause() {
         super.onPause()
         isPausing = true
