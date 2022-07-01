@@ -59,6 +59,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
+    //google new IO(For ByteBufferTest)
+    implementation 'io.netty:netty-all:4.1.32.Final'
+
     //排除某个jar包
     implementation fileTree(include: ['*.jar'], dir: 'libs',excludes: ['pinyin4j-2.5.0.jar'])
 //    implementation fileTree(include: ['*.aar'], dir: 'libs')
