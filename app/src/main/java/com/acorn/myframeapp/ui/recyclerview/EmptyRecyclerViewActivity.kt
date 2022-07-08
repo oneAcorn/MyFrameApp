@@ -44,8 +44,9 @@ class EmptyRecyclerViewActivity : BaseNoViewModelActivity() {
         refreshNet()
     }
 
+    private val loaddingView by lazy { layoutInflater.inflate(R.layout.view_loading, rv, false) }
     private fun getLoadingView(): View {
-        return layoutInflater.inflate(R.layout.view_loading, rv, false)
+        return loaddingView
     }
 
     private fun getErrorView(): View {

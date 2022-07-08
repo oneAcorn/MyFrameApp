@@ -67,4 +67,7 @@ dependencies {
 //    implementation fileTree(include: ['*.aar'], dir: 'libs')
     //独立声明此jar包的引用方式.
     compileOnly files("libs/pinyin4j-2.5.0.jar")
+
+    //https://github.com/PhilJay/MPAndroidChart#licence
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

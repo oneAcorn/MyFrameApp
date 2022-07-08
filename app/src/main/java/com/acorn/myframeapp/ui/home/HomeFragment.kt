@@ -8,6 +8,7 @@ import com.acorn.myframeapp.ui.dialog.DialogActivity
 import com.acorn.myframeapp.ui.internationalization.InternationalActivity
 import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivity
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
+import com.acorn.myframeapp.ui.mpchart.LineChartActivity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -154,7 +155,13 @@ class HomeFragment : BaseDemoFragment() {
                 )
             ),
             Demo("Annotation", activity = AnnotationActivity::class.java),
-            Demo("Internationalization", activity = InternationalActivity::class.java)
+            Demo("Internationalization", activity = InternationalActivity::class.java),
+            Demo(
+                "MpAndroidChart", description = "https://github.com/PhilJay/MPAndroidChart",
+                subItems = arrayListOf(
+                    Demo("LineChart", activity = LineChartActivity::class.java)
+                )
+            )
         )
     }
 
