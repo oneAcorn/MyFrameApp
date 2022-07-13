@@ -43,6 +43,7 @@
         </activity>
         <activity android:name="com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity" />
         <activity android:name="com.acorn.myframeapp.ui.network.NormalMVVMActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.network.MVVMEventActivity" />
         <activity android:name="com.acorn.myframeapp.ui.recyclerview.ConventionalRecyclerViewActivity" />
         <activity android:name="com.acorn.myframeapp.ui.recyclerview.HeaderFooterRecyclerViewActivity" />
         <activity android:name="com.acorn.myframeapp.ui.recyclerview.EmptyRecyclerViewActivity" />

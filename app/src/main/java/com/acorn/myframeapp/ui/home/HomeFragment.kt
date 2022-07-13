@@ -12,6 +12,7 @@ import com.acorn.myframeapp.ui.mpchart.LineChartActivity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
+import com.acorn.myframeapp.ui.network.MVVMEventActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMActivity
 import com.acorn.myframeapp.ui.network.NormalMVVMFragmentActivity
 import com.acorn.myframeapp.ui.photo.TakePhotoOrVideoActivity
@@ -53,6 +54,11 @@ class HomeFragment : BaseDemoFragment() {
                         "Normal MVVM Use In Activity",
                         description = "Error Layout(retryBtn),Empty Layout,LoadingDialog,TitleBar",
                         activity = NormalMVVMActivity::class.java
+                    ),
+                    Demo(
+                        "MVVM test event lost",
+                        description="Use observeForever to avoid event loosing when Activity inactive",
+                        activity = MVVMEventActivity::class.java
                     )
                 )
             ),
