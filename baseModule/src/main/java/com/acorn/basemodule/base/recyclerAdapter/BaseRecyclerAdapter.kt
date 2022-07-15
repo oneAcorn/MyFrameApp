@@ -479,10 +479,13 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
     }
 
     fun add(position: Int, item: T) {
-        if (position >= data.size) {
+        if (position > data.size) {
             return
+        } else if (position == data.size) {
+            data.add(item)
+        } else {
+            data.add(position, item)
         }
-        data.add(position, item)
         notifyItemInserted(position)
     }
 

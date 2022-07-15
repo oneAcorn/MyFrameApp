@@ -20,7 +20,7 @@ class MVVMEventActivity : AppBaseActivity<EventViewModel>() {
 
     override fun initData() {
         super.initData()
-        //和生命周期无关的观察者
+    //和生命周期无关的观察者
         mViewModel?.getIntervalLiveData()?.observeForever {
             sb.append(it)
             sb.append(",")
