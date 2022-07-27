@@ -73,6 +73,7 @@
         <activity android:name=".ui.annotation.AnnotationActivity" />
         <activity android:name=".ui.internationalization.InternationalActivity"/>
         <activity android:name=".ui.mpchart.LineChartActivity"/>
+        <activity android:name=".ui.recyclerview.largedata.LargeDataRecyclerActivity"/>
 
 
         <!-- Android 7.0 文件共享配置，必须配置 -->

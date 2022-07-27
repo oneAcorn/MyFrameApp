@@ -19,6 +19,7 @@ import com.acorn.myframeapp.ui.photo.TakePhotoOrVideoActivity
 import com.acorn.myframeapp.ui.popup.PopupActivity
 import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
+import com.acorn.myframeapp.ui.recyclerview.largedata.LargeDataRecyclerActivity
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
@@ -57,7 +58,7 @@ class HomeFragment : BaseDemoFragment() {
                     ),
                     Demo(
                         "MVVM test event lost",
-                        description="Use observeForever to avoid event loosing when Activity inactive",
+                        description = "Use observeForever to avoid event loosing when Activity inactive",
                         activity = MVVMEventActivity::class.java
                     )
                 )
@@ -106,7 +107,12 @@ class HomeFragment : BaseDemoFragment() {
                         "Sticky Section",
                         activity = StickySectionRecyclerViewActivity::class.java
                     ),
-                    Demo("Draggable", activity = DragRecyclerViewActivity::class.java)
+                    Demo("Draggable", activity = DragRecyclerViewActivity::class.java),
+                    Demo(
+                        "Large Data",
+                        description = "Use Google Paging",
+                        activity = LargeDataRecyclerActivity::class.java
+                    )
                 )
             ),
             Demo(
