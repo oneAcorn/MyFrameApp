@@ -20,6 +20,8 @@ import com.acorn.myframeapp.ui.popup.PopupActivity
 import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
 import com.acorn.myframeapp.ui.recyclerview.largedata.LargeDataRecyclerActivity
+import com.acorn.myframeapp.ui.recyclerview.largedata2.LargeDataDynamicActivity
+import com.acorn.myframeapp.ui.recyclerview.largedata2.LargeDataSourceDynamic
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
@@ -112,7 +114,11 @@ class HomeFragment : BaseDemoFragment() {
                         "Large Data",
                         description = "Use Google Paging",
                         activity = LargeDataRecyclerActivity::class.java
-                    )
+                    ),Demo(
+                        "Large Data2",
+                        description = "Use Google Paging with RemoteMediator",
+                        activity = LargeDataDynamicActivity::class.java
+                    ),
                 )
             ),
             Demo(

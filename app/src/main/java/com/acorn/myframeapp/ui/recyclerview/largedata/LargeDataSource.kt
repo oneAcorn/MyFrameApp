@@ -11,7 +11,7 @@ import com.acorn.basemodule.extendfun.logI
 /**
  * 第一个泛型:分页标识类型，如页码，则为Int
  */
-class LargeDataSource : PagingSource<LargeDataKey, LargeDataBean>() {
+class LargeDataSource : PagingSource<Int, LargeDataBean>() {
 
     /**
      * 假设这里需要做一些后台线程的数据加载任务。
@@ -20,35 +20,32 @@ class LargeDataSource : PagingSource<LargeDataKey, LargeDataBean>() {
      * @param count
      * @return
      */
-    private fun loadData(startPosition: Int, count: Int): List<LargeDataBean> {
+    private fun loadData(pageNo: Int, startPosition: Int, count: Int): List<LargeDataBean> {
         val list = mutableListOf<LargeDataBean>()
         for (i in 0 until count) {
             val id = startPosition + i
-            val data = LargeDataBean(id, "content:$id")
+            val data = LargeDataBean(id, "content:$id", pageNo)
             list.add(data)
         }
         return list
     }
 
-    override fun getRefreshKey(state: PagingState<LargeDataKey, LargeDataBean>): LargeDataKey? =
+    override fun getRefreshKey(state: PagingState<Int, LargeDataBean>): Int? =
         null
 
-    override suspend fun load(params: LoadParams<LargeDataKey>): LoadResult<LargeDataKey, LargeDataBean> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LargeDataBean> {
         return try {
-            val pageNo = params.key?.pageNo ?: 0
+            val pageNo = params.key ?: 0
             val prevKey = if (pageNo > 0) {
-                LargeDataKey(pageNo - 1, "what")
+                pageNo - 1
             } else {
                 null
             }
             logI("pageNo:${params.key}")
             LoadResult.Page(
-                data = loadData(pageNo * params.loadSize, params.loadSize),
+                data = loadData(pageNo, pageNo * params.loadSize, params.loadSize),
                 prevKey = prevKey, //如果可以往上加载更多就设置该参数，否则不设置
-                nextKey = if (pageNo == 5) null else LargeDataKey(
-                    pageNo + 1,
-                    "this?"
-                ) //加载下一页的key 如果传null就说明到底了
+                nextKey = if (pageNo == 500) null else pageNo + 1 //加载下一页的key 如果传null就说明到底了
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
@@ -57,5 +54,3 @@ class LargeDataSource : PagingSource<LargeDataKey, LargeDataBean>() {
 
 
 }
-
-data class LargeDataKey(val pageNo: Int, val somethingElse: String)

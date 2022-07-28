@@ -30,6 +30,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    kotlinOptions {
+        //paging3 https://blog.csdn.net/weixin_42046829/article/details/110140424
+        //RemoteMediator 目前是实验性的 API ，所有实现 RemoteMediator 的类都需要添加 @OptIn(ExperimentalPagingApi::class) 注解。
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
 }
 
 dependencies {
@@ -46,6 +52,7 @@ dependencies {
     implementation 'me.majiajie:pager-bottom-tab-strip:2.4.0'
 
     implementation project(":baseModule")
+    implementation project(":databaseModule")
 
     //SmartRefreshLayout https://github.com/scwang90/SmartRefreshLayout
 //    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
