@@ -1,5 +1,7 @@
 package com.acorn.myframeapp.ui.recyclerview.largedata2
 
+import androidx.paging.PagingDataAdapter
+import com.acorn.basemodule.extendfun.logI
 import com.wcy.databasemodule.biz.ExperimentRecordBiz
 import com.wcy.databasemodule.entities.ExperimentRecord
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -15,7 +17,7 @@ object DataGenerator {
     var isGenerating = false
     private var disposable: Disposable? = null
 
-    fun generateData() {
+    fun generateData(adapter:PagingDataAdapter<*,*>) {
         isGenerating = true
         disposable = Observable.interval(0, 100, TimeUnit.MILLISECONDS)
             .map {
@@ -26,7 +28,8 @@ object DataGenerator {
             .observeOn(Schedulers.computation())
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe {
-
+                logI("retry..")
+//adapter.retry()
             }
     }
 

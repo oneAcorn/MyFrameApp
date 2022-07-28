@@ -36,7 +36,7 @@ class LargeDataDynamicActivity : BaseNoViewModelActivity() {
 
         collectLatest()
         testBtn.singleClick {
-            DataGenerator.generateData()
+            DataGenerator.generateData(mAdapter)
             mAdapter.refresh()
         }
 
