@@ -2,7 +2,6 @@ package com.acorn.myframeapp.ui.recyclerview.largedata
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import androidx.paging.PositionalDataSource
 import com.acorn.basemodule.extendfun.logI
 
 
@@ -12,7 +11,7 @@ import com.acorn.basemodule.extendfun.logI
 /**
  * 第一个泛型:分页标识类型，如页码，则为Int
  */
-class LargeDataSource : PagingSource<Int, LargeDataBean>() {
+class LargeDataSource : PagingSource<LargeDataKey, LargeDataBean>() {
 
     /**
      * 假设这里需要做一些后台线程的数据加载任务。
@@ -31,12 +30,14 @@ class LargeDataSource : PagingSource<Int, LargeDataBean>() {
         return list
     }
 
+    override fun getRefreshKey(state: PagingState<LargeDataKey, LargeDataBean>): LargeDataKey? =
+        null
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LargeDataBean> {
+    override suspend fun load(params: LoadParams<LargeDataKey>): LoadResult<LargeDataKey, LargeDataBean> {
         return try {
-            val pageNo = params.key ?: 0
+            val pageNo = params.key?.pageNo ?: 0
             val prevKey = if (pageNo > 0) {
-                pageNo - 1
+                LargeDataKey(pageNo - 1, "what")
             } else {
                 null
             }
@@ -44,12 +45,17 @@ class LargeDataSource : PagingSource<Int, LargeDataBean>() {
             LoadResult.Page(
                 data = loadData(pageNo * params.loadSize, params.loadSize),
                 prevKey = prevKey, //如果可以往上加载更多就设置该参数，否则不设置
-                nextKey = pageNo + 1 //加载下一页的key 如果传null就说明到底了
+                nextKey = if (pageNo == 5) null else LargeDataKey(
+                    pageNo + 1,
+                    "this?"
+                ) //加载下一页的key 如果传null就说明到底了
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, LargeDataBean>): Int? = null
+
 }
+
+data class LargeDataKey(val pageNo: Int, val somethingElse: String)

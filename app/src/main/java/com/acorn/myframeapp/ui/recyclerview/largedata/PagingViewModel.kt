@@ -9,7 +9,7 @@ import java.util.concurrent.Flow
  * Created by acorn on 2022/7/27.
  */
 class PagingViewModel : ViewModel() {
-    val dataFlow = Pager(
+    val dataFlow = Pager<LargeDataKey,LargeDataBean>(
         PagingConfig(
             pageSize = 10,
             //预刷新的距离，距离最后一个 item 多远时加载数据，默认为 pageSize
@@ -19,7 +19,7 @@ class PagingViewModel : ViewModel() {
             maxSize = 100,
             enablePlaceholders = false
         ),
-        initialKey = 0
+        initialKey = LargeDataKey(0,"any")
     ) {
         LargeDataSource()
     }
