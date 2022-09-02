@@ -119,7 +119,6 @@ class LineChartActivity : BaseNoViewModelActivity(), OnChartValueSelectedListene
         lineData.notifyDataChanged()
         // let the chart know it's data has changed
         lineChart.notifyDataSetChanged()
-        // limit the number of visible entries
 
         // limit the number of visible entries
 //        lineChart.setVisibleXRangeMaximum(120f)

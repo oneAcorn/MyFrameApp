@@ -30,7 +30,7 @@ class MyRemoteMediator : RemoteMediator<Int, ExperimentRecord>() {
                 LoadType.APPEND -> {
                     val lastItem= state.lastItemOrNull()
                         ?: return MediatorResult.Success(
-                            endOfPaginationReached = false
+                            endOfPaginationReached = true
                         )
                     lastItem.pageNo
                 }

@@ -20,3 +20,4 @@ rootProject.name = "MyFrameApp"
 include ':app'
 include ':baseModule'
 include ':databaseModule'
+include ':MPChartLib'
