@@ -81,4 +81,8 @@ dependencies {
 
     //谷歌大数据加载分页库
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
+
+    //apache科学计算
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
+    implementation("org.apache.commons:commons-math3:3.6.1")
 }
