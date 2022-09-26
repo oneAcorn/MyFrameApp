@@ -30,8 +30,13 @@ class PayloadsRecyclerViewActivity : BaseNoViewModelActivity() {
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mAdapter = PayloadsRecyclerAdapter(this, null)
         rv.adapter = mAdapter
-        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
+        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener<PayloadsRecyclerAdapter.PayloadsData> {
+            override fun onItemClick(
+                itemView: View,
+                position: Int,
+                itemViewType: Int,
+                item: PayloadsRecyclerAdapter.PayloadsData
+            ) {
                 showTip(
                     "position:$position,itemViewType:$itemViewType,data:${
                         mAdapter?.getItem(

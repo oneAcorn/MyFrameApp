@@ -39,8 +39,13 @@ class AnimationRecyclerViewActivity : BaseNoViewModelActivity() {
         //是否只播放一次
         mAdapter?.isAnimationFirstOnly = false
         rv.adapter = mAdapter
-        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
+        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener<String> {
+            override fun onItemClick(
+                itemView: View,
+                position: Int,
+                itemViewType: Int,
+                item: String
+            ) {
                 showTip(
                     "position:$position,itemViewType:$itemViewType,data:${
                         mAdapter?.getItem(

@@ -33,8 +33,13 @@ class SwipeSingleActionRecyclerActivity : BaseNoViewModelActivity() {
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mAdapter = SwipeSingleActionRecyclerAdapter(this, getRandomList())
         rv.adapter = mAdapter
-        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
+        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener<String> {
+            override fun onItemClick(
+                itemView: View,
+                position: Int,
+                itemViewType: Int,
+                item: String
+            ) {
                 showTip(
                     "position:$position,itemViewType:$itemViewType,data:${
                         mAdapter?.getItem(

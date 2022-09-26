@@ -18,7 +18,8 @@ import java.net.UnknownHostException
 open class BaseObserver<T : IResponse>(
     networkUI: INetworkUI?,
     private val model: ERROR_MODEL = ERROR_MODEL.TOAST,
-    private val isShowProgressDialog: Boolean = true
+    private val isShowProgressDialog: Boolean = true,
+    private val isProgressDialogCancelable: Boolean = true
 ) : DisposableObserver<T>() {
     private val weakUI = if (networkUI == null) null else WeakReference(networkUI)
     private val handler: ProgressHandler by lazy { ProgressHandler(weakUI) }
@@ -35,7 +36,10 @@ open class BaseObserver<T : IResponse>(
         super.onStart()
         if (isShowProgressDialog) {
 //            weakUI?.get()?.showProgressDialog()
-            handler.sendEmptyMessageDelayed(ProgressHandler.SHOW_DIALOG, showProgressDelayMill)
+            val msg = Message.obtain()
+            msg.what = ProgressHandler.SHOW_DIALOG
+            msg.obj = isProgressDialogCancelable
+            handler.sendMessageDelayed(msg, showProgressDelayMill)
         }
     }
 
@@ -157,7 +161,8 @@ open class BaseObserver<T : IResponse>(
             when (msg.what) {
                 SHOW_DIALOG -> {
                     val ui = weakUI?.get()
-                    ui?.showProgressDialog()
+                    val isDialogCancelable = msg.obj as Boolean
+                    ui?.showProgressDialog(null, isDialogCancelable)
                 }
                 DISMISS_DIALOG -> {
                     val ui = weakUI?.get()

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import com.acorn.basemodule.R
 import com.acorn.basemodule.dialog.ProgressDialog
@@ -16,9 +17,10 @@ import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.basemodule.network.INetworkUI
 import com.acorn.basemodule.network.MyException
-import com.acorn.basemodule.utils.Caches
-import com.acorn.basemodule.utils.MyContextWrapper
+import com.acorn.basemodule.utils.CommonCaches
+import com.acorn.basemodule.utils.InternationalContextWrapper
 import kotlinx.android.synthetic.main.base_activity_layout.*
+import kotlinx.android.synthetic.main.common_layout_title.view.*
 
 
 /**
@@ -45,8 +47,15 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 
     override fun attachBaseContext(newBase: Context) {
         //see https://stackoverflow.com/questions/40221711/android-context-getresources-updateconfiguration-deprecated
-        super.attachBaseContext(MyContextWrapper.wrap(newBase, Caches.currentLanguage ?: ""))
+        //动态切换语言(国际化)
+        super.attachBaseContext(
+            InternationalContextWrapper.wrap(
+                newBase,
+                CommonCaches.currentLanguage ?: ""
+            )
+        )
 
+        //国际化在Material库中可能出现的bug,还没出现,暂时注释
         /**
          *  After android Material library implementation of ContextThemeWrapper to
          *  support dark mode, the language setting would break and language setting is lost.
@@ -102,6 +111,7 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 //        ImmersionBar.setTitleBarMarginTop(this, topView)
         initParameters()
         initView()
+        initListener()
         initData()
     }
 
@@ -126,6 +136,8 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 
     open fun initData() {}
 
+    open fun initListener() {}
+
     /**
      * 是否把布局嵌入到基础布局中
      */
@@ -149,7 +161,8 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
 
     protected fun showToolbar(
         centerTitle: String? = null,
-        callback: ((Toolbar) -> Unit)? = null
+        callbackBefore: ((Toolbar) -> Unit)? = null,
+        callbackAfter: ((Toolbar) -> Unit)? = null
     ) {
         if (!isEmbedInBaseLayout()) {
             throw MyException("Need embed in baseLayout")
@@ -162,13 +175,14 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
             centerTitleTv = findViewById(R.id.centerTitleTv)
             isFirstInit = true
         }
-        callback?.invoke(toolbar!!)
+        callbackBefore?.invoke(toolbar!!)
         if (isFirstInit) {
             setSupportActionBar(toolbar)
             toolbar?.setNavigationOnClickListener {
                 onBackPressed()
             }
         }
+        callbackAfter?.invoke(toolbar!!)
         if (centerTitle != null) {
             //隐藏默认标题
             supportActionBar?.title = null
@@ -179,51 +193,39 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         }
     }
 
-//    /**
-//     * @param title 标题
-//     * @param isShowBackIcon 是否显示返回按钮
-//     * @param rightText 右边按钮文字
-//     * @param rightTextColor 右上角文字颜色
-//     * @param rightTextClickListener 右边按钮点击事件
-//     */
-//    protected fun showTitleLayout(
-//        title: String,
-//        isShowBackIcon: Boolean = true,
-//        rightText: String? = null,
-//        rightTextColor: Int? = null,
-//        rightTextClickListener: (() -> Unit)? = null
-//    ) {
-//        val viewStub: View? = findViewById(R.id.titleViewStub)
-//        (viewStub as? ViewStub)?.inflate()
-//        findViewById<View>(R.id.baseBackIv)
-//            .singleClick {
-//                onBackPressed()
-//            }
-//        findViewById<TextView>(R.id.baseTitleTv).text = title
-//
-//        baseBackIv.visibility = if (isShowBackIcon) View.VISIBLE else View.GONE
-//        rightTv.visibility = if (rightText == null) View.GONE else View.VISIBLE
-//
-////        val titleLayout = findViewById<View>(R.id.baseTitleLayout)
-////        ImmersionBar.with(this).titleBar(viewStub).init()
-//
-//        rightText?.let {
-//            rightTv.visibility = View.VISIBLE
-//            rightTv.text = it
-//            rightTextColor?.let { color ->
-//                rightTv.setTextColor(color)
-//            }
-//            rightTv.singleClick {
-//                rightTextClickListener?.invoke()
-//            }
-//        }
-//    }
+    protected fun setLeftIv(callback: (AppCompatImageView.() -> Unit)) {
+        if (toolbar == null)
+            return
+        callback.invoke(toolbar!!.leftIv)
+    }
 
-    override fun showProgressDialog() {
+    protected fun setToolbar(callback: (Toolbar.() -> Unit)) {
+        if (toolbar == null)
+            return
+        callback.invoke(toolbar!!)
+    }
+
+    override fun showProgressDialog(msg: String?, cancelable: Boolean?) {
         if (progressDialog.dialog?.isShowing != true && !isPausing && !isProgressShowing) {
-            progressDialog.show(supportFragmentManager, "progressDialog", initDialogMsg())
+            val showMsg =
+                if (msg?.isNotEmpty() == true) {
+                    msg
+                } else {
+                    getString(R.string.loading_wait)
+                }
+            progressDialog.backPressCancelable = cancelable ?: true
+            progressDialog.show(supportFragmentManager, "progressDialog", showMsg)
             isProgressShowing = true
         }
+    }
+
+    override fun showProgressDialog(msgRes: Int, vararg params: Any?, cancelable: Boolean?) {
+        val msg = if (params.isEmpty()) {
+            getString(msgRes)
+        } else {
+            getString(msgRes, params)
+        }
+        showProgressDialog(msg, cancelable)
     }
 
     override fun dismissProgressDialog() {
@@ -277,4 +279,12 @@ abstract class BaseActivity<T : BaseNetViewModel> : AppCompatActivity(), INetwor
         showToast(string)
     }
 
+    override fun showTip(msgRes: Int, vararg params: Any?) {
+        val msg = if (params.isEmpty()) {
+            getString(msgRes)
+        } else {
+            getString(msgRes, *params)
+        }
+        showTip(msg)
+    }
 }

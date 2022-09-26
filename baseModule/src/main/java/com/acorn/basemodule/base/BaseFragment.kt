@@ -62,6 +62,7 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
         if (mIsFirstVisible) {
             mIsFirstVisible = false
             initView()
+            initListener()
             initData()
         }
     }
@@ -84,6 +85,8 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
 
     open fun initData() {}
 
+    open fun initListener() {}
+
     /**
      * 是否把布局嵌入到基础布局中
      */
@@ -105,11 +108,27 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
 
     }
 
-    override fun showProgressDialog() {
+    override fun showProgressDialog(msg: String?, cancelable: Boolean?) {
         if (!isHidden && progressDialog.dialog?.isShowing != true && !isPausing && !isProgressShowing) {
-            progressDialog.show(childFragmentManager, "progressDialog", initDialogMsg())
+            val showMsg =
+                if (msg?.isNotEmpty() == true) {
+                    msg
+                } else {
+                    getString(R.string.loading_wait)
+                }
+            progressDialog.backPressCancelable = cancelable ?: true
+            progressDialog.show(childFragmentManager, "progressDialog", showMsg)
             isProgressShowing = true
         }
+    }
+
+    override fun showProgressDialog(msgRes: Int, vararg params: Any?, cancelable: Boolean?) {
+        val msg = if (params.isEmpty()) {
+            getString(msgRes)
+        } else {
+            getString(msgRes, params)
+        }
+        showProgressDialog(msg)
     }
 
     override fun dismissProgressDialog() {
@@ -161,5 +180,14 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
 
     override fun showTip(string: String) {
         showToast(string)
+    }
+
+    override fun showTip(msgRes: Int, vararg params: Any?) {
+        val msg = if (params.isEmpty()) {
+            getString(msgRes)
+        } else {
+            getString(msgRes, params)
+        }
+        showTip(msg)
     }
 }

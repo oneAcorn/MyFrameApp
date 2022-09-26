@@ -33,8 +33,13 @@ class BottomSheetDialog2 : BaseBottomSheetDialog() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mAdapter = ConventionalRecyclerAdapter(requireContext(), null)
         rootView.rv.adapter = mAdapter
-        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
+        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener<String> {
+            override fun onItemClick(
+                itemView: View,
+                position: Int,
+                itemViewType: Int,
+                item: String
+            ) {
                 showToast(
                     "position:$position,itemViewType:$itemViewType,data:${
                         mAdapter?.getItem(

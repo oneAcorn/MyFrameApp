@@ -33,7 +33,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
         internal set
 
     protected val mInflater: LayoutInflater
-    private var mClickListener: OnItemClickListener? = null
+    private var mClickListener: OnItemClickListener<T>? = null
     private var mLongClickListener: OnItemLongClickListener? = null
 
     private lateinit var mHeaderLayout: LinearLayout
@@ -149,7 +149,8 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
                         itemClickListener.onItemClick(
                             it,
                             adjPos,
-                            getItemViewType(holder.layoutPosition)
+                            getItemViewType(holder.layoutPosition),
+                            getItem(adjPos)
                         )
                     }
                 }
@@ -174,7 +175,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
             ITEM_TYPE_EMPTY, ITEM_TYPE_HEADER, ITEM_TYPE_FOOTER -> return
             else -> {
                 val adjPos = position - headerLayoutCount
-                bindData(holder, adjPos, data[adjPos])
+                bindData(holder, adjPos, getItem(adjPos))
             }
         }
     }
@@ -377,6 +378,11 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
         }
     }
 
+    protected fun getDefItem(position: Int): T {
+        val adjPos = position - headerLayoutCount
+        return getItem(adjPos)
+    }
+
     abstract fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): VH
 
     abstract fun bindData(holder: RecyclerView.ViewHolder, position: Int, item: T)
@@ -426,7 +432,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
             } else {
                 position
             }
-            val dataSize = data.size
+            val dataSize = getDefItemCount()
             return if (adjPosition < dataSize) {
                 getDefItemViewType(adjPosition)
             } else {
@@ -459,11 +465,11 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
      * Override this method and return your data size.
      * 重写此方法，返回你的数据数量。
      */
-    protected open fun getDefItemCount(): Int {
+    open fun getDefItemCount(): Int {
         return data.size
     }
 
-    fun getItem(position: Int): T = data[position]
+    open fun getItem(position: Int): T = data[position]
 
     //region 数据操作
 
@@ -479,9 +485,9 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
     }
 
     fun add(position: Int, item: T) {
-        if (position > data.size) {
+        if (position > getDefItemCount()) {
             return
-        } else if (position == data.size) {
+        } else if (position == getDefItemCount()) {
             data.add(item)
         } else {
             data.add(position, item)
@@ -494,13 +500,19 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
         notifyDataSetChanged()
     }
 
+    fun append(item: T) {
+        data.add(item)
+//        notifyItemInserted(itemCount - 1)
+        notifyDataSetChanged()
+    }
+
     fun append(list: List<T>) {
         data.addAll(list)
         notifyDataSetChanged()
     }
 
     fun remove(position: Int) {
-        if (position >= data.size)
+        if (position >= getDefItemCount())
             return
         data.removeAt(position)
         notifyItemRemoved(position)
@@ -723,7 +735,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
                     return position
                 }
             } else {
-                return headerLayoutCount + data.size
+                return headerLayoutCount + getDefItemCount()
             }
             return -1
         }
@@ -871,7 +883,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
     //endregion
 
 
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener<T>) {
         this.mClickListener = itemClickListener
     }
 
@@ -879,8 +891,8 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
         this.mLongClickListener = itemLongClickListener
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(itemView: View, position: Int, itemViewType: Int)
+    interface OnItemClickListener<I> {
+        fun onItemClick(itemView: View, position: Int, itemViewType: Int, item: I)
     }
 
     interface OnItemLongClickListener {

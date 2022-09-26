@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.BaseNoViewModelActivity
-import com.acorn.basemodule.utils.Caches
+import com.acorn.basemodule.utils.CommonCaches
 import kotlinx.android.synthetic.main.activity_international.*
 
 /**
@@ -24,9 +24,9 @@ class InternationalActivity : BaseNoViewModelActivity() {
         showToolbar { it.title = getString(R.string.internationalization_title) }
         internationalBtn.singleClick {
             if (currentLanguage() == "en") {
-                Caches.currentLanguage = "zh"
+                CommonCaches.currentLanguage = "zh"
             } else {
-                Caches.currentLanguage = "en"
+                CommonCaches.currentLanguage = "en"
             }
             finish()
         }

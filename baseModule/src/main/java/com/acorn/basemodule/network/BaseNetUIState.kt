@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.acorn.basemodule.extendfun.appContext
 
 /**
  * 基础网络UI状态，包括显示加载框，失败的布局，toast，空布局等
@@ -20,9 +21,9 @@ class BaseNetUIState : INetworkUI {
     fun observe(owner: LifecycleOwner, trueNetworkUI: INetworkUI) {
         getDialogState().observe(owner, Observer {
             it ?: return@Observer
-            if (it == DialogState.SHOW) {
-                trueNetworkUI.showProgressDialog()
-            } else if (it == DialogState.DISMISS) {
+            if (it.dialogStateEnum == DialogStateEnum.SHOW) {
+                trueNetworkUI.showProgressDialog(null, it.isCancelable)
+            } else if (it.dialogStateEnum == DialogStateEnum.DISMISS) {
                 trueNetworkUI.dismissProgressDialog()
             }
         })
@@ -44,12 +45,16 @@ class BaseNetUIState : INetworkUI {
         })
     }
 
-    override fun showProgressDialog() {
-        dialogState.value = DialogState.SHOW
+    override fun showProgressDialog(msg: String?, cancelable: Boolean?) {
+        dialogState.value = DialogState(DialogStateEnum.SHOW, cancelable ?: true)
+    }
+
+    override fun showProgressDialog(msgRes: Int, vararg params: Any?, cancelable: Boolean?) {
+        dialogState.value = DialogState(DialogStateEnum.SHOW, cancelable ?: true)
     }
 
     override fun dismissProgressDialog() {
-        dialogState.value = DialogState.DISMISS
+        dialogState.value = DialogState(DialogStateEnum.DISMISS, true)
     }
 
     override fun showContentLayout() {
@@ -68,6 +73,15 @@ class BaseNetUIState : INetworkUI {
         errorToastState.value = string
     }
 
+    override fun showTip(msgRes: Int, vararg params: Any?) {
+        val msg = if (params.isEmpty()) {
+            appContext.getString(msgRes)
+        } else {
+            appContext.getString(msgRes, params)
+        }
+        errorToastState.value = msg
+    }
+
     fun getDialogState(): LiveData<DialogState> {
         return dialogState
     }
@@ -84,7 +98,9 @@ class BaseNetUIState : INetworkUI {
         return errorLayoutState
     }
 
-    enum class DialogState {
+    data class DialogState(val dialogStateEnum: DialogStateEnum, val isCancelable: Boolean)
+
+    enum class DialogStateEnum {
         SHOW,
         DISMISS
     }

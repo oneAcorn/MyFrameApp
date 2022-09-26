@@ -100,9 +100,9 @@ public class QDContinuousBottomView extends QMUIContinuousNestedBottomDelegateLa
                 });
 
                 ConventionalRecyclerAdapter adapter = new ConventionalRecyclerAdapter(getContext(), MockDataKt.getRandomList(30));
-                adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+                adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener<String>() {
                     @Override
-                    public void onItemClick(@NonNull View itemView, int position, int itemViewType) {
+                    public void onItemClick(@NonNull View itemView, int position, int itemViewType, String item) {
                         Toast.makeText(getContext(), "click " + position, Toast.LENGTH_SHORT).show();
                     }
                 });

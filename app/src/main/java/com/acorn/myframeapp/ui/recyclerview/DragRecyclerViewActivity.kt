@@ -33,8 +33,13 @@ class DragRecyclerViewActivity : BaseNoViewModelActivity() {
         mAdapter = DragRecyclerAdapter(this, null)
         initDragModule()
         rv.adapter = mAdapter
-        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(itemView: View, position: Int, itemViewType: Int) {
+        mAdapter?.setOnItemClickListener(object : BaseRecyclerAdapter.OnItemClickListener<String> {
+            override fun onItemClick(
+                itemView: View,
+                position: Int,
+                itemViewType: Int,
+                item: String
+            ) {
                 showTip(
                     "position:$position,itemViewType:$itemViewType,data:${
                         mAdapter?.getItem(
