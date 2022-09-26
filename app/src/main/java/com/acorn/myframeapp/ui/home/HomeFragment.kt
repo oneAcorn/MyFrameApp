@@ -5,6 +5,7 @@ import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.annotation.AnnotationActivity
 import com.acorn.myframeapp.ui.dialog.DialogActivity
+import com.acorn.myframeapp.ui.exoplayer.ExoPlayerActivity
 import com.acorn.myframeapp.ui.internationalization.InternationalActivity
 import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivity
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
@@ -101,7 +102,8 @@ class HomeFragment : BaseDemoFragment() {
                         "SwipeAction",
                         description = "swipe item to show more operation",
                         activity = SwipeActionRecyclerActivity::class.java
-                    ), Demo(
+                    ),
+                    Demo(
                         "SwipeAction With One Action",
                         description = "swipe delete when only one action",
                         activity = SwipeSingleActionRecyclerActivity::class.java
@@ -115,7 +117,8 @@ class HomeFragment : BaseDemoFragment() {
                         "Large Data",
                         description = "Use Google Paging",
                         activity = LargeDataRecyclerActivity::class.java
-                    ),Demo(
+                    ),
+                    Demo(
                         "Large Data2",
                         description = "Use Google Paging with RemoteMediator",
                         activity = LargeDataDynamicActivity::class.java
@@ -180,6 +183,12 @@ class HomeFragment : BaseDemoFragment() {
                 subItems = arrayListOf(
                     Demo("LineChart", activity = LineChartActivity::class.java),
                     Demo("LineChart2", activity = LineChartActivity2::class.java)
+                )
+            ),
+            Demo(
+                "Video",
+                subItems = arrayListOf(
+                    Demo("ExoPlayer", activity = ExoPlayerActivity::class.java)
                 )
             )
         )
