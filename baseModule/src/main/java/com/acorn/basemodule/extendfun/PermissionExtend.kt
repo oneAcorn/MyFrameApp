@@ -41,13 +41,15 @@ fun Fragment.requestPermission(
     anyPermDeniedCallback: ((permissions: Array<out String>) -> Unit)? = null
 ) {
     val disposable = RxPermissions(this).request(*permission)
-        .subscribe { granted ->
+        .subscribe({granted->
             if (granted) {
                 allPermGrantedCallback?.invoke()
             } else {
                 anyPermDeniedCallback?.invoke(permission)
             }
-        }
+        },{
+            logE(it)
+        })
 }
 
 fun Context.hasPermissions(vararg perms: String): Boolean {

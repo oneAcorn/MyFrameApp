@@ -24,6 +24,8 @@ abstract class BaseBottomSheetDialog : BottomSheetDialogFragment() {
         if (!isBackgroundDimEnable()) {
             //其他区域不变暗
             setStyle(STYLE_NORMAL, R.style.TransBottomSheetDialogStyle)
+        } else {
+            setStyle(STYLE_NORMAL, R.style.MyBottomSheetDialogStyle)
         }
     }
 
@@ -48,13 +50,15 @@ abstract class BaseBottomSheetDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView =
-            layoutInflater.inflate(getLayoutId(), null)
-                .apply {
-                    initView(this)
-                    initData()
-                }
+        rootView = layoutInflater.inflate(getLayoutId(), null)
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(view)
+        initListener()
+        initData()
     }
 
     override fun onStart() {
@@ -89,6 +93,8 @@ abstract class BaseBottomSheetDialog : BottomSheetDialogFragment() {
     protected open fun isBackgroundDimEnable(): Boolean = true
 
     protected open fun initView(rootView: View) {}
+
+    protected open fun initListener() {}
 
     protected open fun initData() {}
 

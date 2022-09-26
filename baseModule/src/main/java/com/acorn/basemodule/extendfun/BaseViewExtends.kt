@@ -1,23 +1,29 @@
 package com.acorn.basemodule.extendfun
 
-import android.content.Context
+import android.app.Activity
 import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.PixelCopy
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Checkable
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.security.MessageDigest
 import java.util.*
+
 
 // 屏幕宽高
 val screenWidth get() = Resources.getSystem().displayMetrics.widthPixels
@@ -254,12 +260,80 @@ fun RecyclerView.addOnScrollListener(
 }
 
 /**
- * 隐藏软键盘
+ * AppCompatImageView的tint属性(颜色)
  */
-fun EditText.hideSoftInputFromWindow() {
-    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-        .hideSoftInputFromWindow(
-            windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
+fun AppCompatImageView.setTintColor(@ColorInt tint: Int) {
+    DrawableCompat.setTint(drawable, tint)
+}
+
+fun Activity.getScreenshotCompat(
+    view: View,
+    targetHeight: Int? = null,
+    callback: (Bitmap?) -> Unit
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        getScreenshotFromViewAndroidO(view, targetHeight, callback)
+    } else {
+        callback(getScreenshotFromView(view))
+    }
+}
+
+private fun getScreenshotFromView(view: View): Bitmap? {
+    val bitmap: Bitmap
+    view.isDrawingCacheEnabled = true
+    view.buildDrawingCache()
+    var src = view.drawingCache
+    bitmap = Bitmap.createBitmap(src!!, 0, 0, src.width, src.height)
+    view.destroyDrawingCache()
+    view.isDrawingCacheEnabled = false
+    src.recycle()
+    src = null
+    return bitmap
+}
+
+// for api level 28
+private fun Activity.getScreenshotFromViewAndroidO(
+    view: View,
+    targetHeight: Int? = null,
+    callback: (Bitmap?) -> Unit
+) {
+    window?.let { window ->
+        var mWidth = view.width
+        var mHeight = view.height
+        if (targetHeight != null && targetHeight < mHeight) {
+            val targetWidth = targetHeight * (mWidth.toFloat() / mHeight.toFloat())
+            if (targetWidth < mWidth) {
+                mWidth = targetWidth.toInt()
+                mHeight = targetHeight
+            }
+        }
+        val bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888)
+        val locationOfViewInWindow = IntArray(2)
+        view.getLocationInWindow(locationOfViewInWindow)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PixelCopy.request(
+                    window,
+                    Rect(
+                        locationOfViewInWindow[0],
+                        locationOfViewInWindow[1],
+                        locationOfViewInWindow[0] + view.width,
+                        locationOfViewInWindow[1] + view.height
+                    ), bitmap, { copyResult ->
+                        if (copyResult == PixelCopy.SUCCESS) {
+                            callback(bitmap)
+                        } else {
+                            callback(null)
+                        }
+                        // possible to handle other result codes ...
+                    },
+                    Handler(Looper.getMainLooper())
+                )
+            }
+        } catch (e: IllegalArgumentException) {
+            // PixelCopy may throw IllegalArgumentException, make sure to handle it
+            e.printStackTrace()
+            callback(null)
+        }
+    }
 }
