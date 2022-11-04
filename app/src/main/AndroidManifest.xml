@@ -76,7 +76,8 @@
         <activity android:name=".ui.mpchart.LineChartActivity2"/>
         <activity android:name=".ui.recyclerview.largedata.LargeDataRecyclerActivity"/>
         <activity android:name=".ui.recyclerview.largedata2.LargeDataDynamicActivity"/>
-        <activity android:name=".ui.exoplayer.ExoPlayerActivity"/>
+        <activity android:name=".ui.video.ExoPlayerActivity"/>
+        <activity android:name=".ui.video.VlcActivity"/>
 
 
         <!-- Android 7.0 文件共享配置，必须配置 -->

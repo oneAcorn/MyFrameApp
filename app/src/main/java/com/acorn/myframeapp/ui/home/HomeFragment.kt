@@ -5,7 +5,7 @@ import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.annotation.AnnotationActivity
 import com.acorn.myframeapp.ui.dialog.DialogActivity
-import com.acorn.myframeapp.ui.exoplayer.ExoPlayerActivity
+import com.acorn.myframeapp.ui.video.ExoPlayerActivity
 import com.acorn.myframeapp.ui.internationalization.InternationalActivity
 import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivity
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
@@ -23,10 +23,8 @@ import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
 import com.acorn.myframeapp.ui.recyclerview.largedata.LargeDataRecyclerActivity
 import com.acorn.myframeapp.ui.recyclerview.largedata2.LargeDataDynamicActivity
-import com.acorn.myframeapp.ui.recyclerview.largedata2.LargeDataSourceDynamic
+import com.acorn.myframeapp.ui.video.VlcActivity
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
-import com.qmuiteam.qmui.skin.QMUISkinManager
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 
 /**
  * Created by acorn on 2022/5/18.
@@ -188,7 +186,8 @@ class HomeFragment : BaseDemoFragment() {
             Demo(
                 "Video",
                 subItems = arrayListOf(
-                    Demo("ExoPlayer", activity = ExoPlayerActivity::class.java)
+                    Demo("ExoPlayer", activity = ExoPlayerActivity::class.java),
+                    Demo("VLC", activity = VlcActivity::class.java)
                 )
             )
         )

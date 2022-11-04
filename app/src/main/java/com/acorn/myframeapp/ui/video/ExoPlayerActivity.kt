@@ -1,4 +1,4 @@
-package com.acorn.myframeapp.ui.exoplayer
+package com.acorn.myframeapp.ui.video
 
 import android.os.Bundle
 import android.os.Looper
