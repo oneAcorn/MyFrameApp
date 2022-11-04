@@ -32,7 +32,7 @@ class ExoPlayerActivity : BaseNoViewModelActivity() {
         // Attach player to the view.
         playerView.player = exoPlayer
         // Set the media item to be played.
-        exoPlayer.setMediaItem(MediaItem.fromUri("rtsp://admin:wcy12345@192.168.0.203"))
+        exoPlayer.setMediaItem(MediaItem.fromUri("webrtc://192.168.0.210/01/front/ai?eip=192.168.0.210"))
         exoPlayer.addListener(object :Player.Listener{
             override fun onPlaybackStateChanged(playbackState: Int) {
                 super.onPlaybackStateChanged(playbackState)
