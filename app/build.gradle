@@ -78,6 +78,7 @@ dependencies {
     //https://github.com/PhilJay/MPAndroidChart#licence
 //    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation project(":MPChartLib")
+    implementation project(":androidplot-core")
 
     //谷歌大数据加载分页库
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'

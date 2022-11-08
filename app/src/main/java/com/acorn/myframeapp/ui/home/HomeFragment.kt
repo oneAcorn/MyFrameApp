@@ -4,13 +4,14 @@ import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.annotation.AnnotationActivity
+import com.acorn.myframeapp.ui.chart.androidplot.PlotLineChartActivity
 import com.acorn.myframeapp.ui.dialog.DialogActivity
 import com.acorn.myframeapp.ui.video.ExoPlayerActivity
 import com.acorn.myframeapp.ui.internationalization.InternationalActivity
 import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivity
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
-import com.acorn.myframeapp.ui.mpchart.LineChartActivity
-import com.acorn.myframeapp.ui.mpchart.LineChartActivity2
+import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity
+import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity2
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -181,6 +182,12 @@ class HomeFragment : BaseDemoFragment() {
                 subItems = arrayListOf(
                     Demo("LineChart", activity = LineChartActivity::class.java),
                     Demo("LineChart2", activity = LineChartActivity2::class.java)
+                )
+            ),
+            Demo(
+                "AndroidPlot Chart", description = "https://github.com/halfhp/androidplot",
+                subItems = arrayListOf(
+                    Demo("LineChart", activity = PlotLineChartActivity::class.java)
                 )
             ),
             Demo(

@@ -2,6 +2,7 @@
 buildscript {
     dependencies {
         classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0'//greendao
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.5' //androidplot
     }
 }
 

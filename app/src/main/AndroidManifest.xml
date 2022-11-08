@@ -71,13 +71,17 @@
         <activity android:name=".ui.lazyfragment.old.OldLazyFragmentActivity" />
         <activity android:name=".ui.lazyfragment.androidx.AndroidXLazyFragmentActivity" />
         <activity android:name=".ui.annotation.AnnotationActivity" />
-        <activity android:name=".ui.internationalization.InternationalActivity"/>
-        <activity android:name=".ui.mpchart.LineChartActivity"/>
-        <activity android:name=".ui.mpchart.LineChartActivity2"/>
-        <activity android:name=".ui.recyclerview.largedata.LargeDataRecyclerActivity"/>
-        <activity android:name=".ui.recyclerview.largedata2.LargeDataDynamicActivity"/>
-        <activity android:name=".ui.video.ExoPlayerActivity"/>
-        <activity android:name=".ui.video.VlcActivity" android:screenOrientation="sensorLandscape"/>
+        <activity android:name=".ui.internationalization.InternationalActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity" />
+        <activity android:name="com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity2" />
+        <activity android:name="com.acorn.myframeapp.ui.chart.mpchart.CombinedChartActivity" />
+        <activity android:name=".ui.chart.androidplot.PlotLineChartActivity" />
+        <activity android:name=".ui.recyclerview.largedata.LargeDataRecyclerActivity" />
+        <activity android:name=".ui.recyclerview.largedata2.LargeDataDynamicActivity" />
+        <activity android:name=".ui.video.ExoPlayerActivity" />
+        <activity
+            android:name=".ui.video.VlcActivity"
+            android:screenOrientation="sensorLandscape" />
 
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
