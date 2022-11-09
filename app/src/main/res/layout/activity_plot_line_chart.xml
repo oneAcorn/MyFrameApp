@@ -4,24 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/testBtn"
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:id="@+id/testSv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/testBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="test" />
+
+            <Button
+                android:id="@+id/resetPositionBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="Reset" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
 
     <com.androidplot.xy.XYPlot
         android:id="@+id/plot"
+        style="@style/MyPlotTheme.Light"
         android:layout_width="match_parent"
-        style="@style/APDefacto.Dark"
         android:layout_height="0dp"
-        app:rangeTitle="range"
-        app:domainTitle="domain"
+        app:domainTitle="我是x轴"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/testBtn"
+        app:layout_constraintTop_toBottomOf="@id/testSv"
         app:lineLabels="left|bottom"
+        app:rangeTitle="我是y轴"
         app:renderMode="use_background_thread" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

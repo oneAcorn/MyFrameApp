@@ -40,6 +40,7 @@ Supported Elements:
         <enum name="bar" value="2"/>
     </attr>
 
+    <!--domain:x轴-->
     <attr name="domainStepMode" format="enum">
         <enum name="subdivide" value="0"/>
         <enum name="increment_by_val" value="1"/>
@@ -47,7 +48,7 @@ Supported Elements:
     </attr>
 
     <attr name="rangeStepMode" format="enum">
-        <enum name="subdivide" value="0"/>
+        <enum name="subdivide" value="0"/> <!--固定数量-->
         <enum name="increment_by_val" value="1"/>
         <enum name="increment_by_pixels" value="2"/>
     </attr>

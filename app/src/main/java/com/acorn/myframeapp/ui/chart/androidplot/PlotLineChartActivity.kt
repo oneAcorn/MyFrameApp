@@ -39,6 +39,12 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
             plot.redraw()
 //            setData()
         }
+        resetPositionBtn.singleClick {
+            // Setup the boundary mode, boundary values only applicable in FIXED mode.
+            plot.setRangeBoundaries(0,0,BoundaryMode.AUTO)
+            plot.setDomainBoundaries(0,0,BoundaryMode.AUTO)
+            plot.redraw()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -92,19 +98,19 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
         plot.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format = DecimalFormat("0")
 
         //设置线的样式
-        val formatter1 = LineAndPointFormatter(
-            Color.rgb(0, 200, 0), null, null, null
-        )
-        formatter1.linePaint.strokeJoin = Paint.Join.ROUND
-        formatter1.linePaint.strokeWidth = 2f.dp
+//        val formatter1 = LineAndPointFormatter(
+//            Color.rgb(0, 200, 0), null, null, null
+//        )
+//        formatter1.linePaint.strokeJoin = Paint.Join.ROUND
+//        formatter1.linePaint.strokeWidth = 2f.dp
 
-        //x轴
+        //x轴固定5个值
         // thin out domain tick labels so they dont overlap each other:
-        plot.domainStepMode = StepMode.INCREMENT_BY_VAL
+        plot.domainStepMode = StepMode.SUBDIVIDE
         plot.domainStepValue = 5.0
 
-        //y轴
-        plot.rangeStepMode = StepMode.INCREMENT_BY_VAL
+        //y轴固定10个值
+        plot.rangeStepMode = StepMode.SUBDIVIDE
         plot.rangeStepValue = 10.0
 
         //左侧y轴DecimalFormat
