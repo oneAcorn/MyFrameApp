@@ -1,25 +1,26 @@
 package com.acorn.myframeapp.ui.chart.androidplot
 
-import android.graphics.Color
 import android.graphics.DashPathEffect
-import android.graphics.Paint
 import android.os.Bundle
-import com.acorn.basemodule.extendfun.dp
 import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.BaseNoViewModelActivity
+import com.acorn.myframeapp.ui.chart.androidplot.custom.MyXYSeries
+import com.acorn.myframeapp.ui.chart.androidplot.custom.PlotSeriesType
 import com.acorn.myframeapp.ui.chart.androidplot.custom.SeriesClickHelper
+import com.androidplot.acorn.IBoundaryChangeListener
 import com.androidplot.util.PixelUtils
 import com.androidplot.xy.*
 import kotlinx.android.synthetic.main.activity_plot_line_chart.*
 import java.text.DecimalFormat
+import kotlin.math.abs
 import kotlin.random.Random
 
 /**
  * Created by acorn on 2022/11/8.
  */
-class PlotLineChartActivity : BaseNoViewModelActivity() {
+class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener {
     //缩放
     private lateinit var panZoom: PanZoom
 
@@ -46,6 +47,9 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
             plot.setDomainBoundaries(0, 0, BoundaryMode.AUTO)
             plot.redraw()
         }
+        drawFxBtn.singleClick {
+            addFormulaLine()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -65,7 +69,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
         val seriesList = plot.registry.seriesList
         val series = if (seriesList == null || seriesList.isEmpty()) {
 //            val dynamicSeries = DynamicSeries()
-            val dynamicSeries = SimpleXYSeries("test1")
+            val dynamicSeries = MyXYSeries("test1")
 //            val formatter1 = LineAndPointFormatter(
 //                Color.rgb(0, 200, 0), null, null, null
 //            )
@@ -82,11 +86,51 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
         series.addLast(x, y)
     }
 
+    //region Formula
+    private fun addFormulaLine() {
+        // create formatters to use for drawing a series using LineAndPointRenderer
+        // and configure them from xml:
+        val series1Format = LineAndPointFormatter(this, R.xml.line_point_formatter_formula)
+        plot.addSeries(generateSeries(-5.00, 5.00, 100.00), series1Format)
+    }
+
+    private fun generateSeries(minX: Double, maxX: Double, resolution: Double): XYSeries {
+        val range = maxX - minX
+        val step = range / resolution
+        val xVals: MutableList<Number> = ArrayList()
+        val yVals: MutableList<Number> = ArrayList()
+        var x = minX
+        while (x <= maxX) {
+            xVals.add(x)
+            yVals.add(fx(x))
+            x += step
+        }
+        return MyXYSeries(xVals, yVals, "f(x) = (x^2) - 13").apply {
+            seriesType = PlotSeriesType.Formula
+        }
+    }
+
+    private fun fx(x: Double): Double {
+        return abs(x * x) - 13
+    }
+
+    override fun onBoundaryChanged(isDomain: Boolean, lower: Number?, upper: Number?) {
+//        lower ?: return
+//        upper ?: return
+//        val series1Format = LineAndPointFormatter(this, R.xml.line_point_formatter_formula)
+//        for (series in plot.registry.seriesList) {
+//            if (series is MyXYSeries && series.seriesType == PlotSeriesType.Formula) {
+//                plot.removeSeries(series)
+//                plot.addSeries(generateSeries(lower.toDouble(),upper.toDouble(),100.00),series1Format)
+//            }
+//        }
+    }
+    //endregion
 
     private fun initPlot() {
         //设置x轴数值的DecimalFormat
         // only display whole numbers in domain labels
-        plot.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format = DecimalFormat("0")
+        plot.graph.getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).format = DecimalFormat("#.#")
 
         //设置线的样式
 //        val formatter1 = LineAndPointFormatter(
@@ -124,6 +168,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
             PanZoom.Zoom.STRETCH_BOTH,
             PanZoom.ZoomLimit.MIN_TICKS
         )
+        panZoom.setBoundaryChangeListener(this)
         SeriesClickHelper(this).attachPlot(plot, panZoom)
     }
 }

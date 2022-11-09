@@ -2,10 +2,13 @@ package com.androidplot.xy;
 
 import android.graphics.RectF;
 import android.graphics.PointF;
+
 import androidx.annotation.NonNull;
+
 import android.view.*;
 
 import com.androidplot.*;
+import com.androidplot.acorn.IBoundaryChangeListener;
 import com.androidplot.util.*;
 
 import java.io.Serializable;
@@ -148,6 +151,18 @@ public class PanZoom implements View.OnTouchListener {
         this.zoomLimit = limit;
     }
 
+
+    //region BoundaryChangeListener
+    //x轴边界是否改变
+    private boolean isDomainBoundaryChanged = false;
+
+    private IBoundaryChangeListener mBoundaryChangeListener;
+
+    public void setBoundaryChangeListener(IBoundaryChangeListener boundaryChangeListener) {
+        mBoundaryChangeListener = boundaryChangeListener;
+    }
+    //endregion
+
     public State getState() {
         return this.state;
     }
@@ -157,20 +172,23 @@ public class PanZoom implements View.OnTouchListener {
         state.apply(plot);
     }
 
-    protected void adjustRangeBoundary(Number lower, Number upper,  BoundaryMode mode) {
+    protected void adjustRangeBoundary(Number lower, Number upper, BoundaryMode mode) {
         state.setRangeBoundaries(lower, upper, mode);
         state.applyRangeBoundaries(plot);
     }
 
     protected void adjustDomainBoundary(Number lower, Number upper, BoundaryMode mode) {
+//        Log.i("acornTag", "adjustDomainBoundary: "+lower+","+upper);
         state.setDomainBoundaries(lower, upper, mode);
         state.applyDomainBoundaries(plot);
+        isDomainBoundaryChanged = true;
     }
 
     /**
      * Convenience method for enabling pan/zoom behavior on an instance of {@link XYPlot}, using
      * a default behavior of {@link Pan#BOTH} and {@link Zoom#SCALE}.
      * Use {@link PanZoom#attach(XYPlot, Pan, Zoom, ZoomLimit)} for finer grain control of this behavior.
+     *
      * @param plot
      * @return
      */
@@ -182,17 +200,19 @@ public class PanZoom implements View.OnTouchListener {
      * Old method for enabling pan/zoom behavior on an instance of {@link XYPlot}, using
      * the default behavior of {@link ZoomLimit#OUTER}.
      * Use {@link PanZoom#attach(XYPlot, Pan, Zoom, ZoomLimit)} for finer grain control of this behavior.
+     *
      * @param plot
      * @param pan
      * @param zoom
      * @return
      */
     public static PanZoom attach(@NonNull XYPlot plot, @NonNull Pan pan, @NonNull Zoom zoom) {
-        return attach(plot,pan,zoom, ZoomLimit.OUTER);
+        return attach(plot, pan, zoom, ZoomLimit.OUTER);
     }
 
     /**
      * New method for enabling pan/zoom behavior on an instance of {@link XYPlot}.
+     *
      * @param plot
      * @param pan
      * @param zoom
@@ -247,6 +267,9 @@ public class PanZoom implements View.OnTouchListener {
                     break;
 
                 case MotionEvent.ACTION_UP:
+                    if (isDomainBoundaryChanged && mBoundaryChangeListener != null) {
+                        mBoundaryChangeListener.onBoundaryChanged(true, state.domainLowerBoundary, state.domainUpperBoundary);
+                    }
                     reset();
                     break;
             }
@@ -257,6 +280,7 @@ public class PanZoom implements View.OnTouchListener {
 
     /**
      * Calculates the distance between two finger motion events.
+     *
      * @param firstFingerX
      * @param firstFingerY
      * @param secondFingerX
@@ -273,6 +297,7 @@ public class PanZoom implements View.OnTouchListener {
 
     /**
      * Calculates the distance between two finger motion events.
+     *
      * @param evt
      * @return
      */
@@ -335,7 +360,7 @@ public class PanZoom implements View.OnTouchListener {
                 bounds.setMax(plot.getOuterLimits().getMaxX());
                 bounds.setMin(bounds.getMax().floatValue() - diff);
             }
-        } else if(plot.getOuterLimits().getyRegion().isDefined()) {
+        } else if (plot.getOuterLimits().getyRegion().isDefined()) {
             if (bounds.getMin().floatValue() < plot.getOuterLimits().getMinY().floatValue()) {
                 bounds.setMin(plot.getOuterLimits().getMinY());
                 bounds.setMax(bounds.getMin().floatValue() + diff);
@@ -360,7 +385,7 @@ public class PanZoom implements View.OnTouchListener {
         final RectF oldFingersRect = getFingersRect();
         final RectF newFingersRect = fingerDistance(motionEvent);
         setFingersRect(newFingersRect);
-        if(oldFingersRect == null || RectFUtils.areIdentical(oldFingersRect, newFingersRect)) {
+        if (oldFingersRect == null || RectFUtils.areIdentical(oldFingersRect, newFingersRect)) {
             // zooming gesture has not happened yet so skip:
             return;
         }
@@ -418,8 +443,7 @@ public class PanZoom implements View.OnTouchListener {
     }
 
     /**
-     *
-     * @param newRect RectF into which zoom calculation results should be placed.
+     * @param newRect      RectF into which zoom calculation results should be placed.
      * @param scale
      * @param isHorizontal
      */
@@ -439,37 +463,37 @@ public class PanZoom implements View.OnTouchListener {
         float offset = span * scale / 2.0f;
         final RectRegion limits = plot.getOuterLimits();
 
-        if (isHorizontal ) {
+        if (isHorizontal) {
             // zoom limited and increment by value StepMode?
             if (zoomLimit == ZoomLimit.MIN_TICKS) {
                 // make sure we do not zoom in too far (there should be at least one grid line visible)
-                if (plot.getDomainStepValue() > (scale*span)) {
-                    offset = (float)(plot.getDomainStepValue() / 2.0f);
+                if (plot.getDomainStepValue() > (scale * span)) {
+                    offset = (float) (plot.getDomainStepValue() / 2.0f);
                 }
             }
 
             newRect.left = midPoint - offset;
             newRect.right = midPoint + offset;
-            if(limits.isFullyDefined()) {
+            if (limits.isFullyDefined()) {
                 if (newRect.left < limits.getMinX().floatValue()) {
-                    newRect.left =  limits.getMinX().floatValue();
+                    newRect.left = limits.getMinX().floatValue();
                 }
-                if (newRect.right >  limits.getMaxX().floatValue()) {
-                    newRect.right =  limits.getMaxX().floatValue();
+                if (newRect.right > limits.getMaxX().floatValue()) {
+                    newRect.right = limits.getMaxX().floatValue();
                 }
             }
         } else {
             // zoom limited and increment by value StepMode?
             if (zoomLimit == ZoomLimit.MIN_TICKS) {
                 // make sure we do not zoom in too far (there should be at least one grid line visible)
-                if (plot.getRangeStepValue() > (scale*span)) {
-                    offset = (float)(plot.getRangeStepValue() / 2.0f);
+                if (plot.getRangeStepValue() > (scale * span)) {
+                    offset = (float) (plot.getRangeStepValue() / 2.0f);
                 }
             }
 
             newRect.top = midPoint - offset;
             newRect.bottom = midPoint + offset;
-            if(limits.isFullyDefined()) {
+            if (limits.isFullyDefined()) {
                 if (newRect.top < limits.getMinY().floatValue()) {
                     newRect.top = limits.getMinY().floatValue();
                 }
@@ -513,6 +537,7 @@ public class PanZoom implements View.OnTouchListener {
      * to consume the event, it should return true, otherwise it should return false.  Returning
      * false will not prevent future onTouch events from filtering through the delegate as it normally
      * would when attaching directly to an instance of {@link View}.
+     *
      * @param delegate
      */
     public void setDelegate(View.OnTouchListener delegate) {
@@ -523,6 +548,7 @@ public class PanZoom implements View.OnTouchListener {
         this.firstFingerPos = null;
         setFingersRect(null);
         this.setFingersRect(null);
+        isDomainBoundaryChanged = false;
     }
 
     protected RectF getFingersRect() {

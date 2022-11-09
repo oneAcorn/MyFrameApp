@@ -48,6 +48,8 @@ class SeriesClickHelper(context: Context) : GestureDetector.OnGestureListener {
         val seriesList = plot.registry.seriesList
         val lineRenderer = plot.getRenderer(LineAndPointRenderer::class.java)
         for (series in seriesList) {
+            //公式无法点击
+            if(series is MyXYSeries && series.seriesType==PlotSeriesType.Formula) continue
             val cachePoints = lineRenderer.getCurrentPointsCache(series) ?: continue
 //            showToastAndLog("tap (${event.x},${event.y})")
             var clickPointIndex = -1
@@ -57,7 +59,7 @@ class SeriesClickHelper(context: Context) : GestureDetector.OnGestureListener {
                     break
                 }
             }
-            if (clickPointIndex > 0) {
+            if (clickPointIndex >= 0) {
                 showToastAndLog("tap ${series.getX(clickPointIndex)},${series.getY(clickPointIndex)}")
             }
         }
