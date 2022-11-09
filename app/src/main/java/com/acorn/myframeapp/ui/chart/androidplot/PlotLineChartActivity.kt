@@ -9,6 +9,7 @@ import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.BaseNoViewModelActivity
+import com.acorn.myframeapp.ui.chart.androidplot.custom.SeriesClickHelper
 import com.androidplot.util.PixelUtils
 import com.androidplot.xy.*
 import kotlinx.android.synthetic.main.activity_plot_line_chart.*
@@ -41,8 +42,8 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
         }
         resetPositionBtn.singleClick {
             // Setup the boundary mode, boundary values only applicable in FIXED mode.
-            plot.setRangeBoundaries(0,0,BoundaryMode.AUTO)
-            plot.setDomainBoundaries(0,0,BoundaryMode.AUTO)
+            plot.setRangeBoundaries(0, 0, BoundaryMode.AUTO)
+            plot.setDomainBoundaries(0, 0, BoundaryMode.AUTO)
             plot.redraw()
         }
     }
@@ -56,16 +57,6 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         panZoom.state = savedInstanceState.getSerializable("pan-zoom-state") as PanZoom.State
         plot.redraw()
-    }
-
-    private fun setData() {
-        val formatter1 = LineAndPointFormatter(
-            Color.rgb(0, 200, 0), null, null, null
-        )
-        val dynamicSeries =
-            SimpleXYSeries(mutableListOf(1, 3, 2, -1), mutableListOf(10, 2, 1, 8), "test1")
-        dynamicSeries.xOrder = OrderedXYSeries.XOrder.NONE
-        plot.addSeries(dynamicSeries, formatter1)
     }
 
     private fun appendData(x: Float, y: Float) {
@@ -133,5 +124,6 @@ class PlotLineChartActivity : BaseNoViewModelActivity() {
             PanZoom.Zoom.STRETCH_BOTH,
             PanZoom.ZoomLimit.MIN_TICKS
         )
+        SeriesClickHelper(this).attachPlot(plot, panZoom)
     }
 }

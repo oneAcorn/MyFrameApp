@@ -68,6 +68,11 @@ fun showToast(str: String) {
     }.show()
 }
 
+fun showToastAndLog(str: String) {
+    showToast(str)
+    logI(str)
+}
+
 fun Context.getCurrentLanguage(): String {
     val curLanguage = CommonCaches.currentLanguage
     if (curLanguage != null) {
@@ -211,7 +216,7 @@ fun Fragment.getNotchHeight(callback: NotchCallback) {
     activity?.getNotchHeight(callback)
 }
 
-fun Window.hideStatusBar(){
+fun Window.hideStatusBar() {
     setFlags(
         WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN
