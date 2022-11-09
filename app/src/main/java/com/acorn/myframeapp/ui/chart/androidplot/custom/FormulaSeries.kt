@@ -1,15 +1,12 @@
 package com.acorn.myframeapp.ui.chart.androidplot.custom
 
-import com.androidplot.xy.SimpleXYSeries
-
 /**
+ * TODO getX,getY动态计算,不存入内存
  * Created by acorn on 2022/11/9.
  */
-open class MyXYSeries : SimpleXYSeries {
-    var seriesType: PlotSeriesType = PlotSeriesType.Line
+class FormulaSeries : MyXYSeries {
 
     constructor(title: String) : super(title)
-
     constructor(format: ArrayFormat, title: String, vararg model: Number) : super(
         format,
         title,

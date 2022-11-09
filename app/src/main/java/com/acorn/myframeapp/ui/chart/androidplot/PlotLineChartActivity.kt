@@ -115,6 +115,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
     }
 
     override fun onBoundaryChanged(isDomain: Boolean, lower: Number?, upper: Number?) {
+        //TODO 改用FromulaSeries
 //        lower ?: return
 //        upper ?: return
 //        val series1Format = LineAndPointFormatter(this, R.xml.line_point_formatter_formula)
