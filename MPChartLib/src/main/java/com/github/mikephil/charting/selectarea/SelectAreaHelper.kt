@@ -6,12 +6,9 @@ import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewConfiguration
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.wcy.basemodule.extendfun.logI
 
 /**
  * Created by acorn on 2022/9/5.
