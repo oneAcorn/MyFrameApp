@@ -64,6 +64,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
 
     private boolean mDrawCircleHole = true;
 
+    private String id = null;
 
     public LineDataSet(List<Entry> yVals, String label) {
         super(yVals, label);
@@ -349,6 +350,15 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
     public void setCircleColor(int color) {
         resetCircleColors();
         mCircleColors.add(color);
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**

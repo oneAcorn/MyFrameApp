@@ -437,6 +437,14 @@ public interface IDataSet<T extends Entry> {
     boolean isDrawValuesEnabled();
 
     /**
+     * 是否允许在有非常多的entry(ChartInterface.getMaxVisibleCount())显示时也绘制Value
+     * @param allow
+     */
+    void setAllowDrawValueWhenManyEntrys(boolean allow);
+
+    boolean isAllowDrawValueWhenManyEntrys();
+
+    /**
      * Set this to true to draw y-icons on the chart.
      *
      * NOTE (for bar and line charts): if `maxVisibleCount` is reached, no icons will be drawn even

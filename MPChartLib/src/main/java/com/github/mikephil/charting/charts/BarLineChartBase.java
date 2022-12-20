@@ -10,6 +10,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.highlight.ChartHighlighter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.BarLineScatterCandleBubbleDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.jobs.AnimatedMoveViewJob;
 import com.github.mikephil.charting.jobs.AnimatedZoomJob;
 import com.github.mikephil.charting.jobs.MoveViewJob;
@@ -31,10 +33,19 @@ import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 import com.github.mikephil.charting.listener.OnDrawListener;
 import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.renderer.YAxisRenderer;
+import com.github.mikephil.charting.selectarea.SelectAreaHelper;
+import com.github.mikephil.charting.selectarea.SelectedSet;
 import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
+
+import java.util.HashMap;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 /**
  * Base-class of LineChart, BarChart, ScatterChart and CandleStickChart.
@@ -134,6 +145,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
     protected Transformer mRightAxisTransformer;
 
     protected XAxisRenderer mXAxisRenderer;
+
+    protected SelectAreaHelper mSelectAreaHelper;
 
     // /** the approximator object used for data filtering */
     // private Approximator mApproximator;
@@ -288,6 +301,9 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
         drawDescription(canvas);
 
         drawMarkers(canvas);
+
+        if (mSelectAreaHelper != null)
+            mSelectAreaHelper.draw(canvas);
 
         if (mLogEnabled) {
             long drawtime = (System.currentTimeMillis() - starttime);
@@ -573,6 +589,10 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
         if (mChartTouchListener == null || mData == null)
             return false;
+
+        if (mSelectAreaHelper != null && mSelectAreaHelper.isSelectAreaMode()) {
+            return mSelectAreaHelper.onTouch(this, event);
+        }
 
         // check if touch gestures are enabled
         if (!mTouchEnabled)
@@ -1235,8 +1255,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
     /**
      * When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-     *   be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-     *   that there is unwanted clipping.
+     * be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
+     * that there is unwanted clipping.
      *
      * @param enabled
      */
@@ -1256,8 +1276,8 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
 
     /**
      * When disabled, the data and/or highlights will not be clipped to contentRect. Disabling this option can
-     *   be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
-     *   that there is unwanted clipping.
+     * be useful, when the data lies fully within the content rect, but is drawn in such a way (such as thick lines)
+     * that there is unwanted clipping.
      *
      * @return
      */
@@ -1670,5 +1690,27 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
         } else {
             mViewPortHandler.refresh(mViewPortHandler.getMatrixTouch(), this, true);
         }
+
+        if (mSelectAreaHelper != null)
+            mSelectAreaHelper.calculateBounds(w, h);
+    }
+
+    @Override
+    protected boolean verifyDrawable(@NonNull Drawable who) {
+        return super.verifyDrawable(who) || (mSelectAreaHelper != null && mSelectAreaHelper.verifyDrawable(who));
+    }
+
+    public void enterSelectAreaMode(Function1<List<SelectedSet>, Unit> callback) {
+        if (mSelectAreaHelper == null)
+            return;
+        mSelectAreaHelper.enterSelectAreaMode(callback);
+        invalidate();
+    }
+
+    public void quitSelectAreaMode(){
+        if(mSelectAreaHelper==null)
+            return;
+        mSelectAreaHelper.quitSelectAreaMode();
+        invalidate();
     }
 }

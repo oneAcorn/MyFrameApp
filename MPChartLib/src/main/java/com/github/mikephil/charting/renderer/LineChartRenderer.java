@@ -535,13 +535,17 @@ public class LineChartRenderer extends LineRadarRenderer {
     @Override
     public void drawValues(Canvas c) {
 
-        if (isDrawingValuesAllowed(mChart)) {
+//        if (isDrawingValuesAllowed(mChart)) {
 
             List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
 
             for (int i = 0; i < dataSets.size(); i++) {
 
                 ILineDataSet dataSet = dataSets.get(i);
+
+                if (!isDrawingValuesAllowed(mChart) && !dataSet.isAllowDrawValueWhenManyEntrys()) {
+                    continue;
+                }
 
                 if (!shouldDrawValues(dataSet) || dataSet.getEntryCount() < 1)
                     continue;
@@ -600,7 +604,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
                 MPPointF.recycleInstance(iconsOffset);
             }
-        }
+//        }
     }
 
     @Override

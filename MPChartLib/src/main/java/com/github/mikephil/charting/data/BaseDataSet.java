@@ -88,6 +88,8 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
      */
     protected boolean mVisible = true;
 
+    private boolean isDrawValueAllowedWhenManyEntrys;
+
     /**
      * Default constructor.
      */
@@ -502,5 +504,16 @@ public abstract class BaseDataSet<T extends Entry> implements IDataSet<T> {
         baseDataSet.mValueColors = mValueColors;
         baseDataSet.mValueTextSize = mValueTextSize;
         baseDataSet.mVisible = mVisible;
+    }
+
+
+    @Override
+    public void setAllowDrawValueWhenManyEntrys(boolean allow) {
+        isDrawValueAllowedWhenManyEntrys = allow;
+    }
+
+    @Override
+    public boolean isAllowDrawValueWhenManyEntrys() {
+        return isDrawValueAllowedWhenManyEntrys;
     }
 }
