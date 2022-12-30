@@ -95,5 +95,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
     //vlc
-    implementation 'org.videolan.android:libvlc-all:3.6.0-eap1'
+    implementation 'org.videolan.android:libvlc-all:4.0.0-eap5'
 }

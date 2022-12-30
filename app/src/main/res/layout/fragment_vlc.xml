@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.videolan.libvlc.util.VLCVideoLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/vlcLayout"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent">
+
+    <org.videolan.libvlc.util.VLCVideoLayout
+        android:id="@+id/vlcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:indeterminateTint="@android:color/white"
+        android:indeterminateTintMode="src_atop" />
+</FrameLayout>

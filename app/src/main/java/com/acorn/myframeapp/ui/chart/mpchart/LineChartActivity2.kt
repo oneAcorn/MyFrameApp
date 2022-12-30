@@ -25,12 +25,12 @@ import java.util.*
  */
 class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListener {
     private val queue = LinkedList<PointF>().apply {
-        offer(PointF(2f, 3f))
-        offer(PointF(-1f, 6f))
-        offer(PointF(1f, 2f))
-        offer(PointF(3f, 4f))
         offer(PointF(5f, 1f))
         offer(PointF(4f, 6f))
+        offer(PointF(3f, 4f))
+        offer(PointF(2f, 3f))
+        offer(PointF(1f, 2f))
+        offer(PointF(-1f, 6f))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
