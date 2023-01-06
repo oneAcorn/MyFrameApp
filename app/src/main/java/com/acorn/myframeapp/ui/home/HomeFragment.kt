@@ -12,6 +12,7 @@ import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivit
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity2
+import com.acorn.myframeapp.ui.coroutine.flow.CoroutineFlowActivity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -195,6 +196,12 @@ class HomeFragment : BaseDemoFragment() {
                 subItems = arrayListOf(
                     Demo("ExoPlayer", activity = ExoPlayerActivity::class.java),
                     Demo("VLC", activity = VlcActivity::class.java)
+                )
+            ),
+            Demo(
+                "Coroutine",
+                subItems = arrayListOf(
+                    Demo("Flow", activity = CoroutineFlowActivity::class.java)
                 )
             )
         )

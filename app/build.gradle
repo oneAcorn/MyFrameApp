@@ -96,4 +96,6 @@ dependencies {
 
     //vlc
     implementation 'org.videolan.android:libvlc-all:4.0.0-eap5'
+
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
 }
