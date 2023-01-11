@@ -500,6 +500,10 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
         notifyDataSetChanged()
     }
 
+    fun prependWithoutNotify(list: List<T>) {
+        data.addAll(0, list)
+    }
+
     fun append(item: T) {
         data.add(item)
 //        notifyItemInserted(itemCount - 1)
