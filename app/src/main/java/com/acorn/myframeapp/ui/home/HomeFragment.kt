@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.acorn.myframeapp.demo.BaseDemoFragment
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.annotation.AnnotationActivity
+import com.acorn.myframeapp.ui.camera.CameraXBasicActivity
 import com.acorn.myframeapp.ui.chart.androidplot.PlotLineChartActivity
 import com.acorn.myframeapp.ui.dialog.DialogActivity
 import com.acorn.myframeapp.ui.video.ExoPlayerActivity
@@ -202,6 +203,12 @@ class HomeFragment : BaseDemoFragment() {
                 "Coroutine",
                 subItems = arrayListOf(
                     Demo("Flow", activity = CoroutineFlowActivity::class.java)
+                )
+            ),
+            Demo(
+                "Camera",
+                subItems = arrayListOf(
+                    Demo("CameraX", activity = CameraXBasicActivity::class.java)
                 )
             )
         )

@@ -36,14 +36,14 @@ class SeriesClickHelper(context: Context) : GestureDetector.OnGestureListener {
         }
     }
 
-    override fun onDown(p0: MotionEvent?): Boolean {
+    override fun onDown(p0: MotionEvent): Boolean {
         return false
     }
 
-    override fun onShowPress(p0: MotionEvent?) {
+    override fun onShowPress(p0: MotionEvent) {
     }
 
-    override fun onSingleTapUp(event: MotionEvent?): Boolean {
+    override fun onSingleTapUp(event: MotionEvent): Boolean {
         event ?: return false
         val seriesList = plot.registry.seriesList
         val lineRenderer = plot.getRenderer(LineAndPointRenderer::class.java)
@@ -70,14 +70,14 @@ class SeriesClickHelper(context: Context) : GestureDetector.OnGestureListener {
         return abs(x - targetPoint.x) < clickAreaThreshold && abs(y - targetPoint.y) < clickAreaThreshold
     }
 
-    override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+    override fun onScroll(p0: MotionEvent, p1: MotionEvent, p2: Float, p3: Float): Boolean {
         return false
     }
 
-    override fun onLongPress(p0: MotionEvent?) {
+    override fun onLongPress(p0: MotionEvent) {
     }
 
-    override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+    override fun onFling(p0: MotionEvent, p1: MotionEvent, p2: Float, p3: Float): Boolean {
         return false
     }
 }

@@ -21,6 +21,13 @@ import kotlinx.android.synthetic.main.base_fragment_layout.view.*
  */
 abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
     private var mIsFirstVisible = true
+
+    //mIsFirstVisible会在onDestroyView后重置,但是ViewModel的observe会在onDestroy后remove
+    //所以当onDestroyView但没有onDestroy时,
+    // 会再次触发initListener,导致多次ViewModel.observe(如果此代码写在initListener中的话)
+    //所以改为在initObservers中ViewModel.observe
+    private var mIsNeedInitObserver = true
+    protected var isAlreadyInitData = false
     private var isProgressShowing = false
     private var isPausing = false
     private val progressDialog: ProgressDialog by lazy {
@@ -61,9 +68,15 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
         //懒加载,如果在ViewPager中使用,需要用BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         if (mIsFirstVisible) {
             mIsFirstVisible = false
+            isAlreadyInitData = false
             initView()
             initListener()
+            if (mIsNeedInitObserver) {
+                initObservers()
+                mIsNeedInitObserver = false
+            }
             initData()
+            isAlreadyInitData = true
         }
     }
 
@@ -86,6 +99,14 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
     open fun initData() {}
 
     open fun initListener() {}
+
+    /**
+     * //mIsFirstVisible会在onDestroyView后重置,但是ViewModel的observe会在onDestroy后remove
+    //所以当onDestroyView但没有onDestroy时,
+    // 会再次触发initListener,导致多次ViewModel.observe(如果此代码写在initListener中的话)
+    //所以改为在initObservers中ViewModel.observe
+     */
+    open fun initObservers() {}
 
     /**
      * 是否把布局嵌入到基础布局中

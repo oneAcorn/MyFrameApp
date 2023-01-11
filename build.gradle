@@ -15,3 +15,9 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    compileSdk = 33
+    targetSdk = 33
+    minSdk = 21
+}
