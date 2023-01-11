@@ -16,10 +16,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/testBtn1"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/switchBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="switch" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/takePicBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="take picture" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/recordBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="start record" />
         </LinearLayout>
     </HorizontalScrollView>
 

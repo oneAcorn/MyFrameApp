@@ -118,4 +118,7 @@ dependencies {
 //    implementation "androidx.camera:camera-mlkit-vision:${camerax_version}"
 //    // If you want to additionally use the CameraX Extensions library
 //    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    //谷歌人脸识别(也有物体识别)
+    implementation 'com.google.mlkit:face-detection:16.1.5'
 }
