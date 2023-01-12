@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.acorn.basemodule.R
+import com.acorn.basemodule.extendfun.getGenericityClass
+import com.acorn.basemodule.extendfun.reflectStaticFun
 import com.acorn.basemodule.network.BaseNetViewModel
 import kotlinx.android.synthetic.main.base_fragment_layout.view.*
 
@@ -44,5 +46,11 @@ abstract class BaseBindingFragment<T : BaseNetViewModel, U : ViewBinding> : Base
         return 0
     }
 
-    abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): U
+    private fun createBinding(inflater: LayoutInflater, container: ViewGroup?): U {
+        return getGenericityClass(1).reflectStaticFun(
+            "inflate",
+            arrayOf(LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java),
+            inflater, container, isEmbedInBaseLayout()
+        ) as U
+    }
 }

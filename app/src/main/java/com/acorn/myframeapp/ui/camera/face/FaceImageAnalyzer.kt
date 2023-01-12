@@ -13,12 +13,13 @@ import com.google.mlkit.vision.face.FaceDetectorOptions
  * Created by acorn on 2023/1/11.
  */
 class FaceImageAnalyzer : ImageAnalysis.Analyzer {
-    private val highAccuracyOpts = FaceDetectorOptions.Builder()
-        .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
-        .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
-        .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+    private val opts = FaceDetectorOptions.Builder()
+        .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST) //性能模式,高精度模式
+        .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_NONE) //地标(眼睛,嘴巴,眉毛等的位置)
+        .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE) //按类别分类
+        .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
         .build()
-    private val detector = FaceDetection.getClient(highAccuracyOpts)
+    private val detector = FaceDetection.getClient(opts)
 
 
     @SuppressLint("UnsafeOptInUsageError")

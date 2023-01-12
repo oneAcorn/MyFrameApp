@@ -141,7 +141,4 @@ class CameraXBasicActivity : BaseBindingActivity<BaseNetViewModel, ActivityCamer
     }
 
     override fun getViewModel(): BaseNetViewModel? = null
-
-    override fun createBinding(): ActivityCameraxBasicBinding =
-        ActivityCameraxBasicBinding.inflate(layoutInflater)
 }
