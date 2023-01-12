@@ -26,6 +26,7 @@ import com.acorn.myframeapp.ui.pulllayout.QMUIPullLayoutActivity
 import com.acorn.myframeapp.ui.recyclerview.*
 import com.acorn.myframeapp.ui.recyclerview.largedata.LargeDataRecyclerActivity
 import com.acorn.myframeapp.ui.recyclerview.largedata2.LargeDataDynamicActivity
+import com.acorn.myframeapp.ui.reflect.ReflectActivity
 import com.acorn.myframeapp.ui.video.VlcActivity
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
 
@@ -210,7 +211,8 @@ class HomeFragment : BaseDemoFragment() {
                 subItems = arrayListOf(
                     Demo("CameraX", activity = CameraXBasicActivity::class.java)
                 )
-            )
+            ),
+            Demo("Reflect", activity = ReflectActivity::class.java)
         )
     }
 

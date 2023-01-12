@@ -87,6 +87,7 @@
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".ui.coroutine.flow.CoroutineFlowActivity" />
         <activity android:name=".ui.camera.CameraXBasicActivity" />
+        <activity android:name=".ui.reflect.ReflectActivity" />
 
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
