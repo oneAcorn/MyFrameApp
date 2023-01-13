@@ -2,6 +2,7 @@ package com.acorn.myframeapp.demo
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.myframeapp.R
@@ -27,7 +28,7 @@ abstract class BaseDemoActivity : BaseNoViewModelActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_demo)
+        super.setContentView(R.layout.layout_demo)
         rv.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@BaseDemoActivity)
@@ -35,6 +36,11 @@ abstract class BaseDemoActivity : BaseNoViewModelActivity() {
                 onItemClickListener = this@BaseDemoActivity.onItemClickListener
             }
         }
+    }
+
+    override fun setContentView(layoutResID: Int) {
+        layoutInflater.inflate(layoutResID, container, true)
+        container.visibility = View.VISIBLE
     }
 
     abstract fun getItems(): Array<Demo>

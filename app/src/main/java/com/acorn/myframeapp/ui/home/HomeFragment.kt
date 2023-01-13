@@ -14,6 +14,7 @@ import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity2
 import com.acorn.myframeapp.ui.coroutine.flow.CoroutineFlowActivity
+import com.acorn.myframeapp.ui.matrix.Matrix1Activity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -212,7 +213,13 @@ class HomeFragment : BaseDemoFragment() {
                     Demo("CameraX", activity = CameraXBasicActivity::class.java)
                 )
             ),
-            Demo("Reflect", activity = ReflectActivity::class.java)
+            Demo("Reflect", activity = ReflectActivity::class.java),
+            Demo(
+                "Matrix",
+                subItems = arrayListOf(
+                    Demo("Matrix1", activity = Matrix1Activity::class.java)
+                )
+            )
         )
     }
 
