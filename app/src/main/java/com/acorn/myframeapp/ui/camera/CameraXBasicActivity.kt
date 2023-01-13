@@ -2,6 +2,8 @@ package com.acorn.myframeapp.ui.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.RectF
 import android.net.Uri
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -12,6 +14,7 @@ import androidx.camera.video.VideoRecordEvent
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.video.AudioConfig
+import androidx.core.graphics.toRect
 import androidx.core.util.Consumer
 import com.acorn.basemodule.base.BaseBindingActivity
 import com.acorn.basemodule.extendfun.logE
@@ -34,6 +37,29 @@ class CameraXBasicActivity : BaseBindingActivity<BaseNetViewModel, ActivityCamer
     private lateinit var cameraExecutor: ExecutorService //相机需要执行任务的线程池 后续会用到
     private var lensFacing = 0
     private var recording: Recording? = null
+    private val faceAnalyzer = FaceImageAnalyzer { face, percentRectF ->
+        binding.previewView.bitmap?.let {
+            binding.leftIv.setImageBitmap(it)
+            val bitmapWidth = it.width.toFloat()
+            val bitmapHeight = it.height.toFloat()
+            val left = percentRectF.left * bitmapWidth
+            val top = percentRectF.top * bitmapHeight
+            val right = percentRectF.right * bitmapWidth
+            val bottom = percentRectF.bottom * bitmapHeight
+            val realRect = RectF(left, top, right, bottom).toRect()
+            binding.previewRectView.setRect(realRect)
+//            Bitmap.createBitmap(
+//                it,
+//                left.toInt(),
+//                top.toInt(),
+//                realRect.width(),
+//                realRect.height()
+//            )?.let { bmp ->
+//                binding.rightIv.setImageBitmap(bmp)
+//            }
+        }
+
+    }
 
     override fun initView() {
         super.initView()
@@ -56,7 +82,7 @@ class CameraXBasicActivity : BaseBindingActivity<BaseNetViewModel, ActivityCamer
         cameraController.cameraSelector =
             CameraSelector.Builder().requireLensFacing(lensFacing).build()
         //人脸检测
-        cameraController.setImageAnalysisAnalyzer(cameraExecutor, FaceImageAnalyzer())
+        cameraController.setImageAnalysisAnalyzer(cameraExecutor, faceAnalyzer)
         binding.previewView.controller = cameraController
     }
 

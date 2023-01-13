@@ -41,6 +41,37 @@
         android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/leftIv"
         app:layout_constraintTop_toBottomOf="@id/hsv" />
+
+    <com.acorn.myframeapp.widget.PreviewRectView
+        android:id="@+id/previewRectView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/previewView"
+        app:layout_constraintLeft_toLeftOf="@id/previewView"
+        app:layout_constraintRight_toRightOf="@id/previewView"
+        app:layout_constraintTop_toTopOf="@id/previewView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/leftIv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/rightIv" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/rightIv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toRightOf="@id/leftIv"
+        app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
