@@ -20,6 +20,9 @@ import java.nio.ByteBuffer
 /**
  * @param interval 检测人脸间隔时间(ms)
  * @param callback 检测到的第一个人脸(复数取第一个)
+ * 脸部框对不齐问题还没解决,想解决可参考
+ * https://github.com/googlesamples/mlkit/blob/master/android/vision-quickstart/app/src/main/java/com/google/mlkit/vision/demo/GraphicOverlay.java
+ * GraphicOverlay中的updateTransformationIfNeeded()方法
  * Created by acorn on 2023/1/11.
  */
 class FaceImageAnalyzer(

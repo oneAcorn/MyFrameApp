@@ -1,10 +1,9 @@
 package com.acorn.myframeapp.ui.matrix
 
-import android.graphics.Matrix
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.AppCompatImageView
+import com.acorn.basemodule.extendfun.updateMatrix
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoActivity
 import com.acorn.myframeapp.demo.Demo
@@ -24,6 +23,10 @@ class Matrix1Activity : BaseDemoActivity() {
         private const val CLICK_TRANSLATE_CENTER = 0
         private const val CLICK_SCALE_BY_CENTER = 1
         private const val CLICK_SCALE_NEGATIVE = 2
+        private const val CLICK_ROTATION = 3
+        private const val CLICK_SKEW = 4
+        private const val CLICK_TRANSLATE_AND_SCALE1 = 5
+        private const val CLICK_TRANSLATE_AND_SCALE2 = 6
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +60,11 @@ class Matrix1Activity : BaseDemoActivity() {
         return arrayOf(
             Demo("translate to center", CLICK_TRANSLATE_CENTER),
             Demo("scale by center", CLICK_SCALE_BY_CENTER),
-            Demo("scale negative", CLICK_SCALE_NEGATIVE)
+            Demo("scale negative", CLICK_SCALE_NEGATIVE),
+            Demo("rotation", CLICK_ROTATION),
+            Demo("skew", CLICK_SKEW),
+            Demo("translate to center and scale by center 1", CLICK_TRANSLATE_AND_SCALE1),
+            Demo("translate to center and scale by center 2", CLICK_TRANSLATE_AND_SCALE2)
         )
     }
 
@@ -72,23 +79,23 @@ class Matrix1Activity : BaseDemoActivity() {
             CLICK_SCALE_NEGATIVE -> {
                 scaleNegativeValue()
             }
-        }
-    }
-
-    private fun AppCompatImageView.updateMatrix(matrixCallback: Matrix.(dWidth: Int, dHeight: Int, vWidth: Int, vHeight: Int) -> Unit) {
-        imageMatrix = Matrix().apply {
-            //显示图片的宽高
-            val dWidth = matrixIv.drawable.intrinsicWidth
-            val dHeight = matrixIv.drawable.intrinsicHeight
-
-            //ImageView的宽高
-            val vWidth = matrixIv.measuredWidth
-            val vHeight = matrixIv.measuredHeight
-            this.matrixCallback(dWidth, dHeight, vWidth, vHeight)
+            CLICK_ROTATION -> {
+                rotation()
+            }
+            CLICK_SKEW -> {
+                skew()
+            }
+            CLICK_TRANSLATE_AND_SCALE1 -> {
+                translateAndScale1()
+            }
+            CLICK_TRANSLATE_AND_SCALE2 -> {
+                translateAndScale2()
+            }
         }
     }
 
     private fun translate2Center() {
+        //调用set会默认调用reset
         //ImageView需要设置ScaleType=Matrix
         matrixIv.updateMatrix { dWidth, dHeight, vWidth, vHeight ->
             setTranslate(
@@ -113,6 +120,40 @@ class Matrix1Activity : BaseDemoActivity() {
             val pivotPointX = dWidth / 2f
             val pivotPointY = dHeight / 2f
             setScale(1f, -1f, pivotPointX, pivotPointY)
+        }
+    }
+
+    private fun rotation() {
+        matrixIv.updateMatrix { dWidth, dHeight, vWidth, vHeight ->
+            setRotate(45f, dWidth / 2f, dHeight / 2f)
+        }
+    }
+
+    private fun skew() {
+        matrixIv.updateMatrix { dWidth, dHeight, vWidth, vHeight ->
+            //skew的kx,ky默认是0,表示不倾斜
+            setSkew(1f, 0f, dWidth / 2f, dHeight / 2f)
+        }
+    }
+
+    private fun translateAndScale1() {
+        matrixIv.updateMatrix { dWidth, dHeight, vWidth, vHeight ->
+            //调用set会默认调用reset
+            setTranslate(
+                (vWidth - dWidth) * 0.5f,
+                (vHeight - dHeight) * 0.5f
+            )
+            postScale(0.5f, 0.5f, vWidth / 2f, vHeight / 2f)
+        }
+    }
+
+    private fun translateAndScale2() {
+        matrixIv.updateMatrix { dWidth, dHeight, vWidth, vHeight ->
+            setTranslate(
+                (vWidth - dWidth) * 0.5f,
+                (vHeight - dHeight) * 0.5f
+            )
+            preScale(0.5f, 0.5f, dWidth / 2f, dHeight / 2f)
         }
     }
 }
