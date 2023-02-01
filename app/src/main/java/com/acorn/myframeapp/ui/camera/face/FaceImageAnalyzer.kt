@@ -12,8 +12,10 @@ import com.acorn.basemodule.extendfun.logI
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceContour
+import com.google.mlkit.vision.face.FaceContour.ContourType
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.google.mlkit.vision.face.FaceLandmark
 import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 
@@ -23,6 +25,7 @@ import java.nio.ByteBuffer
  * 脸部框对不齐问题还没解决,想解决可参考
  * https://github.com/googlesamples/mlkit/blob/master/android/vision-quickstart/app/src/main/java/com/google/mlkit/vision/demo/GraphicOverlay.java
  * GraphicOverlay中的updateTransformationIfNeeded()方法
+ * 和FaceGraphic中的draw()方法
  * Created by acorn on 2023/1/11.
  */
 class FaceImageAnalyzer(
@@ -31,10 +34,10 @@ class FaceImageAnalyzer(
 ) :
     ImageAnalysis.Analyzer {
     private val opts = FaceDetectorOptions.Builder()
-        .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST) //性能模式,高精度模式
-        .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_NONE) //地标(眼睛,嘴巴,眉毛等的位置)
+        .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE) //性能模式,高精度模式
+        .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL) //地标(眼睛,嘴巴,眉毛等的位置)
         .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE) //按类别分类
-        .setContourMode(FaceDetectorOptions.CONTOUR_MODE_NONE)
+        .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
         .build()
     private val detector = FaceDetection.getClient(opts)
     private val handler = Handler(Looper.getMainLooper())
@@ -42,7 +45,7 @@ class FaceImageAnalyzer(
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(imageProxy: ImageProxy) {
-        logI("face analyze")
+//        logI("face analyze")
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
@@ -57,7 +60,14 @@ class FaceImageAnalyzer(
 //                    )
 //                    logI("face analyze success:$it,${mediaImage.cropRect}")
                     it.takeIf { it.isNotEmpty() }?.get(0)?.let { face ->
-                        logI("face analyze callback:${face.boundingBox},${mediaImage.cropRect},${image.rotationDegrees}")
+                        val leftEyeLandmark = face.getLandmark(FaceLandmark.LEFT_EYE)
+                        val rightEyeLandmark = face.getLandmark(FaceLandmark.RIGHT_EYE)
+                        val leftEyeContour = face.getContour(FaceContour.LEFT_EYE)?.points
+                        val rightEyeContour = face.getContour(FaceContour.RIGHT_EYE)?.points
+                        logI(
+                            "face analyze callback:${face.boundingBox},${mediaImage.cropRect},${image.rotationDegrees},\n" +
+                                    "leftEye:${leftEyeContour?.size},rightEye:${rightEyeContour?.size},leftEyeLandmark:${leftEyeLandmark},rightEyeLandmark:$rightEyeLandmark"
+                        )
                         val faceRect = face.boundingBox.toRectF()
                         val frameRect = mediaImage.cropRect.toRectF()
                         val frameWidth = frameRect.width()

@@ -89,6 +89,21 @@
         <activity android:name=".ui.camera.CameraXBasicActivity" />
         <activity android:name=".ui.reflect.ReflectActivity" />
         <activity android:name=".ui.matrix.Matrix1Activity" />
+        <activity
+            android:name=".ui.usb.UsbCommunicateActivity"
+            android:exported="true">
+            <!--对USB插入的设备响应-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <!--规定响应usb设备的类型-->
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
 
         <!-- Android 7.0 文件共享配置，必须配置 -->
         <provider
