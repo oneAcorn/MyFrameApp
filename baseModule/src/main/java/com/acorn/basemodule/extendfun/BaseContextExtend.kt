@@ -3,8 +3,10 @@ package com.acorn.basemodule.extendfun
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -233,3 +235,14 @@ fun Window.showStatusBar(window: Window) {
     clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 }
 //endregion
+
+fun Context.isPortraitMode(): Boolean {
+    val orientation: Int = resources.configuration.orientation
+    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        return false
+    }
+    if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+        return true
+    }
+    return false
+}

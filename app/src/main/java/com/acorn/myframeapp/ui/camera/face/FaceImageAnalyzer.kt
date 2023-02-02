@@ -30,7 +30,7 @@ import java.nio.ByteBuffer
  */
 class FaceImageAnalyzer(
     private val interval: Long = 300L,
-    private val callback: ((face: Face, percentRectF: RectF) -> Unit)? = null
+    private val callback: ((face: Face, percentRect: Rect) -> Unit)? = null
 ) :
     ImageAnalysis.Analyzer {
     private val opts = FaceDetectorOptions.Builder()
@@ -49,7 +49,7 @@ class FaceImageAnalyzer(
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-//            logI("image:${image.byteBuffer}")
+            logI("image:${imageProxy.cropRect},${mediaImage.cropRect}")
             // Pass image to an ML Kit Vision API
             detector.process(image)
                 .addOnSuccessListener {
@@ -78,7 +78,7 @@ class FaceImageAnalyzer(
                         val bottomPercent = faceRect.bottom / frameHeight
                         callback?.invoke(
                             face,
-                            RectF(leftPercent, topPercent, rightPercent, bottomPercent)
+                            mediaImage.cropRect
                         )
                     }
                     //分析完图片需要关闭

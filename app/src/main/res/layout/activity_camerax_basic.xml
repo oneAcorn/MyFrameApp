@@ -44,8 +44,8 @@
         app:layout_constraintBottom_toTopOf="@id/leftIv"
         app:layout_constraintTop_toBottomOf="@id/hsv" />
 
-    <com.acorn.myframeapp.widget.PreviewRectView
-        android:id="@+id/previewRectView"
+    <com.acorn.myframeapp.ui.camera.widget.MLFaceDetectOverlay
+        android:id="@+id/previewOverlay"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/previewView"
