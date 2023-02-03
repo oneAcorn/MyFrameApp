@@ -14,6 +14,9 @@ import com.acorn.myframeapp.R
 import com.google.mlkit.vision.face.Face
 
 /**
+ * 参考 * https://github.com/googlesamples/mlkit/blob/master/android/vision-quickstart/app/src/main/java/com/google/mlkit/vision/demo/GraphicOverlay.java
+ * GraphicOverlay中的updateTransformationIfNeeded()方法
+ * 和FaceGraphic中的draw()方法
  * Created by acorn on 2023/1/12.
  */
 class MLFaceDetectOverlay : View, IGraphic {
@@ -136,11 +139,6 @@ class MLFaceDetectOverlay : View, IGraphic {
     fun updateFace(face: Face) {
         this.face = face
         postInvalidate()
-    }
-
-    fun setRect(rect: Rect) {
-        this.mRect = rect
-        invalidate()
     }
 
     override fun scale(imagePixel: Float): Float {

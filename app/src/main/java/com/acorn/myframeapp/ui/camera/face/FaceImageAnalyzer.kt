@@ -12,7 +12,6 @@ import com.acorn.basemodule.extendfun.logI
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceContour
-import com.google.mlkit.vision.face.FaceContour.ContourType
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import com.google.mlkit.vision.face.FaceLandmark
@@ -30,7 +29,7 @@ import java.nio.ByteBuffer
  */
 class FaceImageAnalyzer(
     private val interval: Long = 300L,
-    private val callback: ((face: Face, percentRect: Rect) -> Unit)? = null
+    private val callback: ((face: Face, cropRect: Rect) -> Unit)? = null
 ) :
     ImageAnalysis.Analyzer {
     private val opts = FaceDetectorOptions.Builder()
@@ -76,10 +75,7 @@ class FaceImageAnalyzer(
                         val topPercent = faceRect.top / frameHeight
                         val rightPercent = faceRect.right / frameWidth
                         val bottomPercent = faceRect.bottom / frameHeight
-                        callback?.invoke(
-                            face,
-                            mediaImage.cropRect
-                        )
+                        callback?.invoke(face, mediaImage.cropRect)
                     }
                     //分析完图片需要关闭
                     //The image needs to be closed by calling close when the analyzing is done.

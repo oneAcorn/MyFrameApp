@@ -31,19 +31,19 @@ import kotlin.math.min
 class CameraXBasicActivity : BaseBindingActivity<BaseNetViewModel, ActivityCameraxBasicBinding>() {
     private lateinit var cameraController: LifecycleCameraController//声明一个CameraController
     private lateinit var cameraExecutor: ExecutorService //相机需要执行任务的线程池 后续会用到
-    private var isNeedSetImageSource = true
+    private var needSetImageSource = true
     private var lensFacing = 0
     private var recording: Recording? = null
-    private val faceAnalyzer = FaceImageAnalyzer { face, percentRectF ->
-        initPreviewOverlay(percentRectF.width(), percentRectF.height())
+    private val faceAnalyzer = FaceImageAnalyzer { face, cropRectF ->
+        initImageSource(cropRectF.width(), cropRectF.height())
         binding.previewView.bitmap?.let {
             binding.leftIv.setImageBitmap(it)
             val bitmapWidth = it.width.toFloat()
             val bitmapHeight = it.height.toFloat()
-            val left = percentRectF.left * bitmapWidth
-            val top = percentRectF.top * bitmapHeight
-            val right = percentRectF.right * bitmapWidth
-            val bottom = percentRectF.bottom * bitmapHeight
+            val left = cropRectF.left * bitmapWidth
+            val top = cropRectF.top * bitmapHeight
+            val right = cropRectF.right * bitmapWidth
+            val bottom = cropRectF.bottom * bitmapHeight
             val realRect = RectF(left, top, right, bottom).toRect()
 //            binding.previewOverlay.setRect(realRect)
             binding.previewOverlay.updateFace(face)
@@ -88,8 +88,8 @@ class CameraXBasicActivity : BaseBindingActivity<BaseNetViewModel, ActivityCamer
 //        initPreviewOverlay()
     }
 
-    private fun initPreviewOverlay(width: Int?, height: Int?) {
-        if (!isNeedSetImageSource) return
+    private fun initImageSource(width: Int?, height: Int?) {
+        if (!needSetImageSource) return
         width ?: return
         height ?: return
         logI("setImageSourceInfo $width,$height")
@@ -103,7 +103,7 @@ class CameraXBasicActivity : BaseBindingActivity<BaseNetViewModel, ActivityCamer
         } else {
             binding.previewOverlay.setImageSourceInfo(max, min, isImageFlipped)
         }
-        isNeedSetImageSource = false
+        needSetImageSource = false
     }
 
     override fun initListener() {
