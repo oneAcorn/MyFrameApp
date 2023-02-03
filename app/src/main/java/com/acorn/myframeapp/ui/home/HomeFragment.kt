@@ -28,6 +28,7 @@ import com.acorn.myframeapp.ui.recyclerview.*
 import com.acorn.myframeapp.ui.recyclerview.largedata.LargeDataRecyclerActivity
 import com.acorn.myframeapp.ui.recyclerview.largedata2.LargeDataDynamicActivity
 import com.acorn.myframeapp.ui.reflect.ReflectActivity
+import com.acorn.myframeapp.ui.usb.UsbCommunicateActivity
 import com.acorn.myframeapp.ui.video.VlcActivity
 import com.acorn.myframeapp.ui.webview.X5WebviewActivity
 
@@ -219,7 +220,8 @@ class HomeFragment : BaseDemoFragment() {
                 subItems = arrayListOf(
                     Demo("Matrix1", activity = Matrix1Activity::class.java)
                 )
-            )
+            ),
+            Demo("Usb Communication", activity = UsbCommunicateActivity::class.java)
         )
     }
 

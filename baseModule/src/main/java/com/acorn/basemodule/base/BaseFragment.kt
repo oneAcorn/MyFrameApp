@@ -59,7 +59,9 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel = getViewModel()
-        mViewModel?.attachUI(this)
+        if (mViewModel?.isActivityShared() == false) {
+            mViewModel?.attachUI(this)
+        }
     }
 
     override fun onResume() {
@@ -87,7 +89,9 @@ abstract class BaseFragment<T : BaseNetViewModel> : Fragment(), INetworkUI {
 
     override fun onDestroy() {
         super.onDestroy()
-        mViewModel?.detachUI()
+        if (mViewModel?.isActivityShared() == false) {
+            mViewModel?.detachUI()
+        }
     }
 
     abstract fun getLayoutId(): Int

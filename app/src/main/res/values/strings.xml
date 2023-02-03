@@ -7,4 +7,11 @@
     <string name="cancel">取消</string>
     <string name="internationalization_title">国际化</string>
     <string name="internationalization_btn">中文</string>
+    <string name="connecting">连接中</string>
+    <string name="connect_failed">连接失败(%1$s)</string>
+    <string name="connect_ble">连接</string>
+    <string name="disconnect_ble">断开</string>
+    <string name="already_connected">已连接</string>
+    <string name="dialog_title_select_usb">请选择USB设备</string>
+    <string name="usb_empty_tip">无法检索到USB设备</string>
 </resources>

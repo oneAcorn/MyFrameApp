@@ -6,6 +6,7 @@ import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.utils.download.ApkDownloadUtil
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoActivity
+import com.acorn.myframeapp.demo.BaseNoViewModelDemoActivity
 import com.acorn.myframeapp.demo.Demo
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet
@@ -14,7 +15,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomGridSheetBuilder
 /**
  * Created by acorn on 2022/5/27.
  */
-class DialogActivity : BaseDemoActivity() {
+class DialogActivity : BaseNoViewModelDemoActivity() {
 
     companion object {
         private const val CLICK_BOTTOM_SHEET_LIST = 0

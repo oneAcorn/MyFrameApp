@@ -521,6 +521,13 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(
         data.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    fun removeItem(item: T) {
+        val position = data.indexOf(item)
+        if (position < 0) return
+        data.remove(item)
+        notifyItemRemoved(position)
+    }
     //endregion
 
 

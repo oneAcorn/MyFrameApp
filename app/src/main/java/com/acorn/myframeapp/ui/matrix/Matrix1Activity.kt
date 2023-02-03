@@ -6,6 +6,7 @@ import android.view.MenuItem
 import com.acorn.basemodule.extendfun.updateMatrix
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.demo.BaseDemoActivity
+import com.acorn.myframeapp.demo.BaseNoViewModelDemoActivity
 import com.acorn.myframeapp.demo.Demo
 import kotlinx.android.synthetic.main.activity_matrix1.*
 
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_matrix1.*
  *
  * Created by acorn on 2023/1/13.
  */
-class Matrix1Activity : BaseDemoActivity() {
+class Matrix1Activity : BaseNoViewModelDemoActivity() {
     companion object {
         private const val CLICK_TRANSLATE_CENTER = 0
         private const val CLICK_SCALE_BY_CENTER = 1

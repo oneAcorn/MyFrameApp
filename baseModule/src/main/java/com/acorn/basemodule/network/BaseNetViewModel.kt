@@ -29,4 +29,6 @@ open class BaseNetViewModel : ViewModel() {
     }
 
     protected fun getUI(): INetworkUI? = mUiRef?.get()
+
+    open fun isActivityShared() = false
 }

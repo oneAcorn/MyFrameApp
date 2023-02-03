@@ -2,24 +2,23 @@ package com.acorn.myframeapp.ui.dialog
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatDialog
-import androidx.appcompat.app.AppCompatDialogFragment
 import com.acorn.basemodule.base.BaseDialogFragment
+import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
 import kotlinx.android.synthetic.main.dialog_confirm.*
 
 /**
  * Created by acorn on 2022/5/27.
  */
-class ConfirmDialog : BaseDialogFragment() {
-    private var confirmClickCallback: ((dialog:ConfirmDialog) -> Unit)? = null
+class ConfirmDialog : BaseDialogFragment<BaseNetViewModel>() {
+    private var confirmClickCallback: ((dialog: ConfirmDialog) -> Unit)? = null
     private var cancelClickCallback: (() -> Unit)? = null
 
     companion object {
         fun newInstance(
             title: String?,
             content: String?,
-            confirmClickCallback: ((dialog:ConfirmDialog) -> Unit)?,
+            confirmClickCallback: ((dialog: ConfirmDialog) -> Unit)?,
             cancelClickCallback: (() -> Unit)?
         ): ConfirmDialog {
             val args = Bundle()
@@ -34,6 +33,7 @@ class ConfirmDialog : BaseDialogFragment() {
     }
 
     override fun getLayoutId(): Int = R.layout.dialog_confirm
+    override fun getViewModel(): BaseNetViewModel? = null
 
     override fun initView(view: View) {
         super.initView(view)

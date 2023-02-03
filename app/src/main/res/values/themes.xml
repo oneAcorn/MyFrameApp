@@ -79,4 +79,17 @@
         <item name="rangeTitleTextColor">@color/ap_black</item>
         <item name="legendTextColor">@color/ap_black</item>
     </style>
+
+    <style name="MyConnectBtn" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="backgroundTint">@color/transparent_press</item>
+        <item name="cornerRadius">3dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#3D7EFF</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

@@ -8,6 +8,7 @@ import android.widget.ImageView
 import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.utils.GlideEngine
 import com.acorn.myframeapp.demo.BaseDemoActivity
+import com.acorn.myframeapp.demo.BaseNoViewModelDemoActivity
 import com.acorn.myframeapp.demo.Demo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -30,7 +31,7 @@ import java.io.File
  *
  * Created by acorn on 2022/5/27.
  */
-class TakePhotoOrVideoActivity : BaseDemoActivity() {
+class TakePhotoOrVideoActivity : BaseNoViewModelDemoActivity() {
     private val resultCallback = object : OnResultCallbackListener<LocalMedia> {
         override fun onResult(result: ArrayList<LocalMedia>?) {
             result ?: return
