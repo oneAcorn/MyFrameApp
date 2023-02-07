@@ -1,31 +1,24 @@
 package com.acorn.myframeapp.bean
 
 import android.hardware.usb.UsbDevice
+import android.hardware.usb.UsbDeviceConnection
+import android.hardware.usb.UsbEndpoint
+import android.hardware.usb.UsbInterface
 import android.os.Parcel
 import android.os.Parcelable
+import com.acorn.myframeapp.ui.usb.kits.ByteUtils
+import kotlin.concurrent.thread
 
 /**
  * Created by acorn on 2023/2/3.
  */
-data class UsbBean(val device: UsbDevice) : Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readParcelable(UsbDevice::class.java.classLoader)!!) {
-    }
+data class UsbBean(
+    val device: UsbDevice,
+    var usbInterface: UsbInterface? = null,
+    var endpointIn: UsbEndpoint? = null, //输入(相对于Host(上位机)的输入)
+    var endpointOut: UsbEndpoint? = null, //输出(相对于Host(上位机)的输出)
+    var usbConnection: UsbDeviceConnection? = null
+)
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeParcelable(device, flags)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<UsbBean> {
-        override fun createFromParcel(parcel: Parcel): UsbBean {
-            return UsbBean(parcel)
-        }
-
-        override fun newArray(size: Int): Array<UsbBean?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+fun UsbBean.isConnected(): Boolean =
+    endpointIn != null && endpointOut != null && usbConnection != null

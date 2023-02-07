@@ -8,6 +8,7 @@ import com.acorn.basemodule.base.BaseBindingViewHolder
 import com.acorn.basemodule.base.recyclerAdapter.BaseRecyclerAdapter
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.myframeapp.bean.UsbBean
+import com.acorn.myframeapp.bean.isConnected
 import com.acorn.myframeapp.databinding.ItemBleDeviceBinding
 
 /**
@@ -21,7 +22,6 @@ class UsbConnectAdapter(
     var connectBtnClickCallback: ((UsbBean) -> Unit)? = null
     var disconnectBtnClickCallback: ((UsbBean) -> Unit)? = null
 
-
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): BleConnectViewHolder {
         return BleConnectViewHolder(ItemBleDeviceBinding.inflate(mInflater, parent, false))
     }
@@ -31,12 +31,18 @@ class UsbConnectAdapter(
         (holder as? BleConnectViewHolder)?.bindData(item)
     }
 
+    fun notifyItem(usbBean: UsbBean) {
+        val position = data.indexOf(usbBean)
+        if (position < 0) return
+        notifyItemChanged(position)
+    }
+
     inner class BleConnectViewHolder(binding: ItemBleDeviceBinding) :
         BaseBindingViewHolder<ItemBleDeviceBinding>(binding) {
 
         fun bindData(item: UsbBean) {
             //TODO implement
-            val isConnected: Boolean = false
+            val isConnected: Boolean = item.isConnected()
 
             binding.deviceNameTv.text = item.device.productName
             binding.connectBtn.visibility = if (isConnected) View.GONE else View.VISIBLE

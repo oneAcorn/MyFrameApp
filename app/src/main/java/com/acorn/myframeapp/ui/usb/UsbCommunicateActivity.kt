@@ -5,10 +5,13 @@ import android.os.Bundle
 import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.R
+import com.acorn.myframeapp.bean.UsbBean
+import com.acorn.myframeapp.bean.isConnected
 import com.acorn.myframeapp.demo.BaseDemoActivity
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.usb.dialog.UsbConnectDialog
 import com.acorn.myframeapp.ui.usb.service.IUsbListener
+import com.acorn.myframeapp.ui.usb.service.UsbCommunicateService
 import com.acorn.myframeapp.ui.usb.service.bindUsbCommunicateService
 import com.acorn.myframeapp.ui.usb.viewmodel.UsbViewModel
 import kotlinx.android.synthetic.main.activity_usb_communicate.*
@@ -17,22 +20,45 @@ import kotlinx.android.synthetic.main.activity_usb_communicate.*
  * Created by acorn on 2023/2/1.
  */
 class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
+    private var usbBinder: UsbCommunicateService.UsbCommunicateBinder? = null
+
     companion object {
         private const val CLICK_CONNECT_DIALOG = 0
+        private const val SEND_MSG = 1
+        private const val RECV_MSG = 2
     }
 
     override fun getItems(): Array<Demo> {
         return arrayOf(
-            Demo("ConnectDialog", CLICK_CONNECT_DIALOG)
+            Demo("ConnectDialog", CLICK_CONNECT_DIALOG),
+            Demo("Send msg", SEND_MSG),
+            Demo("Receive msg", RECV_MSG)
         )
     }
 
     override fun onItemClick(data: Demo, idOrPosition: Int) {
         when (idOrPosition) {
             CLICK_CONNECT_DIALOG -> {
-                UsbConnectDialog.newInstance().show(supportFragmentManager, "ConnectDialog")
+                UsbConnectDialog.newInstance { usbBean ->
+                    usbBinder?.getService()?.requestUsbPermission(usbBean)
+                }.show(supportFragmentManager, "ConnectDialog")
+            }
+            SEND_MSG -> {
+                usbBinder?.getService()?.sendMsg(getTestDevice())
+            }
+            RECV_MSG->{
+                usbBinder?.getService()?.recvMsgControl(getTestDevice())
             }
         }
+    }
+
+    private fun getTestDevice(): UsbBean? {
+        val bean = usbBinder?.getService()?.mUsbDevices?.takeIf { it.isNotEmpty() }?.get(0)
+            ?.takeIf { it.isConnected() }
+        if (bean == null) {
+            showTip("没有设备")
+        }
+        return bean
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +81,7 @@ class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
         super.initData()
         bindUsbCommunicateService { binder ->
             binder.addListener(this, this)
+            usbBinder = binder
 //            it.setUsbDevicesStateListner()
             mViewModel?.let { binder.setUsbDevicesStateListner(it) }
         }

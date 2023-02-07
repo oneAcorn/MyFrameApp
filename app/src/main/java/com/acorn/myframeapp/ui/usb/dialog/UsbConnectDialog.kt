@@ -19,11 +19,13 @@ import com.acorn.myframeapp.ui.usb.viewmodel.UsbViewModel
  */
 class UsbConnectDialog : BaseBindingDialogFragment<UsbViewModel, DialogUsbConnectBinding>() {
     private var mAdapter: UsbConnectAdapter? = null
+    private var connectUsbCallback: ((UsbBean) -> Unit)? = null
 
     companion object {
-        fun newInstance(): UsbConnectDialog {
+        fun newInstance(connectUsbCallback: (UsbBean) -> Unit): UsbConnectDialog {
             val args = Bundle()
             val fragment = UsbConnectDialog()
+            fragment.connectUsbCallback = connectUsbCallback
             fragment.arguments = args
             return fragment
         }
@@ -40,6 +42,8 @@ class UsbConnectDialog : BaseBindingDialogFragment<UsbViewModel, DialogUsbConnec
     override fun initListener() {
         super.initListener()
         mAdapter?.connectBtnClickCallback = {
+            connectUsbCallback?.invoke(it)
+            mAdapter?.notifyItem(it)
         }
         mAdapter?.disconnectBtnClickCallback = {
         }
