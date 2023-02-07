@@ -3,6 +3,7 @@ package com.acorn.myframeapp.ui.usb
 import android.content.res.Configuration
 import android.os.Bundle
 import com.acorn.basemodule.extendfun.logI
+import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.bean.UsbBean
@@ -25,14 +26,16 @@ class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
     companion object {
         private const val CLICK_CONNECT_DIALOG = 0
         private const val SEND_MSG = 1
-        private const val RECV_MSG = 2
+        private const val RECV_MSG_CTRL = 2
+        private const val RECV_MSG_BULK = 3
     }
 
     override fun getItems(): Array<Demo> {
         return arrayOf(
             Demo("ConnectDialog", CLICK_CONNECT_DIALOG),
             Demo("Send msg", SEND_MSG),
-            Demo("Receive msg", RECV_MSG)
+            Demo("Receive msg controlTransfer", RECV_MSG_CTRL),
+            Demo("Receive msg bulkTransfer", RECV_MSG_BULK)
         )
     }
 
@@ -46,8 +49,11 @@ class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
             SEND_MSG -> {
                 usbBinder?.getService()?.sendMsg(getTestDevice())
             }
-            RECV_MSG->{
-                usbBinder?.getService()?.recvMsgControl(getTestDevice())
+            RECV_MSG_CTRL -> {
+//                usbBinder?.getService()?.recvMsgControl(getTestDevice())
+            }
+            RECV_MSG_BULK -> {
+                usbBinder?.getService()?.recvMsgBulk(getTestDevice())
             }
         }
     }
@@ -61,12 +67,6 @@ class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
         return bean
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_usb_communicate)
-//        showTip("onCreate")
-    }
-
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         log(newConfig.toString())
@@ -74,7 +74,15 @@ class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
 
     override fun initView() {
         super.initView()
+        setContentView(R.layout.activity_usb_communicate)
         showToolbar("Usb Communication")
+    }
+
+    override fun initListener() {
+        super.initListener()
+        clearBtn.singleClick {
+            logTv.text = null
+        }
     }
 
     override fun initData() {

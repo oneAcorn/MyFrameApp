@@ -7,7 +7,9 @@ import android.content.*
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.os.Binder
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -68,6 +70,7 @@ class UsbCommunicateService : Service() {
     val mUsbDevices = mutableListOf<UsbBean>()
     private var usbDevicesListener: IUsbDevicesState? = null
     private val disposable: CompositeDisposable = CompositeDisposable()
+    private val mHandler = Handler(Looper.getMainLooper())
 
     private fun registerBroadcast() {
         if (mReceiver != null) return
@@ -112,6 +115,12 @@ class UsbCommunicateService : Service() {
         usbDevicesListener?.usbDevicesInit(mUsbDevices)
     }
 
+    private fun postLog(str: String) {
+        mHandler.post {
+            log(str)
+        }
+    }
+
     private fun log(str: String) {
         listenerMap.values.forEach {
             it.log(str)
@@ -138,7 +147,7 @@ class UsbCommunicateService : Service() {
 //                val ret = conn.controlTransfer(0x21, 0x09, 0x2110, 0, cmd, cmd.size, 3000)
 //                val ret = conn.controlTransfer(0x80, 0x06, 0x1021, 0, cmd, cmd.size, 3000)
                 val ret = conn.bulkTransfer(endpointOut, cmd, cmd.size, 3000)
-                log("sendMsg.:$ret")
+                postLog("sendMsg.:$ret")
                 if (ret > 0) {
                     emitter.onNext(UsbResponseState.Success(cmd.copyOfRange(0, ret)))
                     emitter.onComplete()
@@ -154,6 +163,7 @@ class UsbCommunicateService : Service() {
                     log("recv error:${state.e?.message}")
                 }
             }, {
+                log(it.message ?: "error")
                 it.printStackTrace()
             })
     }
@@ -169,8 +179,8 @@ class UsbCommunicateService : Service() {
             } else {
                 val maxSize = endPointIn.maxPacketSize
                 val byteArr = ByteArray(maxSize)
-                val ret = conn.bulkTransfer(endPointIn, byteArr, maxSize, 5)
-                log("recv0 maxSize:${maxSize},ret:${ret}")
+                val ret = conn.bulkTransfer(endPointIn, byteArr, maxSize, 5000)
+                postLog("recv0 maxSize:${maxSize},ret:${ret}")
                 if (ret > 0) {
                     emitter.onNext(UsbResponseState.Success(byteArr.copyOfRange(0, ret)))
                     emitter.onComplete()
@@ -187,6 +197,41 @@ class UsbCommunicateService : Service() {
                     log("recv error:${it.e?.message}")
                 }
             }, {
+                log(it.message ?: "error")
+                it.printStackTrace()
+            })
+    }
+
+    @SuppressLint("CheckResult")
+    fun recvMsgBulk(usbBean: UsbBean?) {
+        usbBean ?: return
+        Observable.create<UsbResponseState> { emitter ->
+            val endPointIn = usbBean.endpointIn
+            val conn = usbBean.usbConnection
+            if (endPointIn == null || conn == null || !usbBean.isConnected()) {
+                emitter.onError(MyException("usb doesn't connect"))
+            } else {
+                val maxSize = endPointIn.maxPacketSize
+                val byteArr = ByteArray(maxSize)
+                val ret = conn.bulkTransfer(endPointIn, byteArr, maxSize, 3000)
+                postLog("recv0 maxSize:${maxSize},ret:${ret}")
+                if (ret > 0) {
+                    emitter.onNext(UsbResponseState.Success(byteArr.copyOfRange(0, ret)))
+                    emitter.onComplete()
+                } else {
+                    emitter.onError(MyException("read null"))
+                }
+            }
+        }
+            .commonRequest(disposable)
+            .subscribe({
+                if (it is UsbResponseState.Success) {
+                    log("recv:${it.byteArray?.toLogString()}")
+                } else if (it is UsbResponseState.Error) {
+                    log("recv error:${it.e?.message}")
+                }
+            }, {
+                log(it.message ?: "error")
                 it.printStackTrace()
             })
     }
