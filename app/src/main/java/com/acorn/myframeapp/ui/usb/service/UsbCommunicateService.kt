@@ -66,7 +66,7 @@ fun AppCompatActivity.bindUsbCommunicateService(callback: ((UsbCommunicateServic
 class UsbCommunicateService : Service() {
     private lateinit var usbManager: UsbManager
     private var mReceiver: MyUsbPermissionReceiver? = null
-    private val listenerMap = mutableMapOf<String, IUsbListener>()
+    private val listenerMap = mutableMapOf<String, ILogListener>()
     val mUsbDevices = mutableListOf<UsbBean>()
     private var usbDevicesListener: IUsbDevicesState? = null
     private val disposable: CompositeDisposable = CompositeDisposable()
@@ -169,40 +169,6 @@ class UsbCommunicateService : Service() {
     }
 
     @SuppressLint("CheckResult")
-    fun recvMsgControl(usbBean: UsbBean?) {
-        usbBean ?: return
-        Observable.create<UsbResponseState> { emitter ->
-            val endPointIn = usbBean.endpointIn
-            val conn = usbBean.usbConnection
-            if (endPointIn == null || conn == null || !usbBean.isConnected()) {
-                emitter.onError(MyException("usb doesn't connect"))
-            } else {
-                val maxSize = endPointIn.maxPacketSize
-                val byteArr = ByteArray(maxSize)
-                val ret = conn.bulkTransfer(endPointIn, byteArr, maxSize, 5000)
-                postLog("recv0 maxSize:${maxSize},ret:${ret}")
-                if (ret > 0) {
-                    emitter.onNext(UsbResponseState.Success(byteArr.copyOfRange(0, ret)))
-                    emitter.onComplete()
-                } else {
-                    emitter.onError(MyException("read null"))
-                }
-            }
-        }
-            .commonRequest(disposable)
-            .subscribe({
-                if (it is UsbResponseState.Success) {
-                    log("recv:${it.byteArray?.toLogString()}")
-                } else if (it is UsbResponseState.Error) {
-                    log("recv error:${it.e?.message}")
-                }
-            }, {
-                log(it.message ?: "error")
-                it.printStackTrace()
-            })
-    }
-
-    @SuppressLint("CheckResult")
     fun recvMsgBulk(usbBean: UsbBean?) {
         usbBean ?: return
         Observable.create<UsbResponseState> { emitter ->
@@ -255,7 +221,7 @@ class UsbCommunicateService : Service() {
     }
 
     /**
-     * 判断是否是WCY公司自己的设备
+     * 判断是否是公司自己的设备
      */
     private fun UsbDevice.isWcyDevice(): Boolean {
         return productId == UsbConstants.PRODUCT_ID && vendorId == UsbConstants.VENDOR_ID
@@ -305,6 +271,7 @@ class UsbCommunicateService : Service() {
 //            listenerList.forEach {
 //                it.onDataSetChanged(mUsbDevices)
 //            }
+            usbDevicesListener?.usbConnected(this)
         } else {
             log("failed")
             connection?.close()
@@ -362,7 +329,7 @@ class UsbCommunicateService : Service() {
     }
 
     inner class UsbCommunicateBinder : Binder() {
-        fun addListener(activity: AppCompatActivity, listener: IUsbListener) {
+        fun addListener(activity: AppCompatActivity, listener: ILogListener) {
             //同一个activity，不同实例也需要区分开
             listenerMap[activity.toString()] = listener
         }
@@ -373,6 +340,7 @@ class UsbCommunicateService : Service() {
 
         fun setUsbDevicesStateListner(listener: IUsbDevicesState) {
             usbDevicesListener = listener
+            mUsbDevices.takeIf { it.isNotEmpty() }?.let { usbDevicesListener?.usbDevicesInit(it) }
         }
 
         fun getService(): UsbCommunicateService {

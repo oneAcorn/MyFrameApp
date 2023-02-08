@@ -11,4 +11,6 @@ interface IUsbDevicesState {
     fun usbDeviceInsert(bean: UsbBean)
 
     fun usbDeviceRemove(bean: UsbBean)
+
+    fun usbConnected(bean: UsbBean)
 }

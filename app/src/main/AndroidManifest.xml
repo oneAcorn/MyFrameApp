@@ -107,7 +107,8 @@
         <activity
             android:name=".ui.usb.UsbCommunicateActivity"
             android:configChanges="keyboard|keyboardHidden|navigation"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <!--对USB插入的设备响应-->
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />

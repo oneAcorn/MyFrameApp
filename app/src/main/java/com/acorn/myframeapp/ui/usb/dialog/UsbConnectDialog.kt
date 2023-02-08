@@ -43,7 +43,6 @@ class UsbConnectDialog : BaseBindingDialogFragment<UsbViewModel, DialogUsbConnec
         super.initListener()
         mAdapter?.connectBtnClickCallback = {
             connectUsbCallback?.invoke(it)
-            mAdapter?.notifyItem(it)
         }
         mAdapter?.disconnectBtnClickCallback = {
         }
@@ -61,6 +60,9 @@ class UsbConnectDialog : BaseBindingDialogFragment<UsbViewModel, DialogUsbConnec
                 }
                 is UsbBeanUIState.Remove -> {
                     mAdapter?.removeItem(state.bean)
+                }
+                is UsbBeanUIState.Connected -> {
+                    mAdapter?.notifyItem(state.bean)
                 }
             }
         }

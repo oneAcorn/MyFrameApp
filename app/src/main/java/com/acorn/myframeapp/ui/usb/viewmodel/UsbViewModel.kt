@@ -29,4 +29,8 @@ class UsbViewModel : BaseNetViewModel(), IUsbDevicesState {
     override fun usbDeviceRemove(bean: UsbBean) {
         _usbDevicesLiveData.value = UsbBeanUIState.Remove(bean)
     }
+
+    override fun usbConnected(bean: UsbBean) {
+        _usbDevicesLiveData.value = UsbBeanUIState.Connected(bean)
+    }
 }

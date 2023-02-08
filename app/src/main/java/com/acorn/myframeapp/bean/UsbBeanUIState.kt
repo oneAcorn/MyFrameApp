@@ -9,4 +9,6 @@ sealed class UsbBeanUIState {
     data class Insert(val bean: UsbBean) : UsbBeanUIState()
 
     data class Remove(val bean: UsbBean) : UsbBeanUIState()
+
+    data class Connected(val bean: UsbBean) : UsbBeanUIState()
 }

@@ -1,7 +1,6 @@
 package com.acorn.myframeapp.ui.usb
 
 import android.content.res.Configuration
-import android.os.Bundle
 import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.createViewModel
@@ -11,7 +10,7 @@ import com.acorn.myframeapp.bean.isConnected
 import com.acorn.myframeapp.demo.BaseDemoActivity
 import com.acorn.myframeapp.demo.Demo
 import com.acorn.myframeapp.ui.usb.dialog.UsbConnectDialog
-import com.acorn.myframeapp.ui.usb.service.IUsbListener
+import com.acorn.myframeapp.ui.usb.service.ILogListener
 import com.acorn.myframeapp.ui.usb.service.UsbCommunicateService
 import com.acorn.myframeapp.ui.usb.service.bindUsbCommunicateService
 import com.acorn.myframeapp.ui.usb.viewmodel.UsbViewModel
@@ -20,22 +19,20 @@ import kotlinx.android.synthetic.main.activity_usb_communicate.*
 /**
  * Created by acorn on 2023/2/1.
  */
-class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
+class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), ILogListener {
     private var usbBinder: UsbCommunicateService.UsbCommunicateBinder? = null
 
     companion object {
         private const val CLICK_CONNECT_DIALOG = 0
         private const val SEND_MSG = 1
-        private const val RECV_MSG_CTRL = 2
-        private const val RECV_MSG_BULK = 3
+        private const val RECV_MSG_BULK = 2
     }
 
     override fun getItems(): Array<Demo> {
         return arrayOf(
             Demo("ConnectDialog", CLICK_CONNECT_DIALOG),
             Demo("Send msg", SEND_MSG),
-            Demo("Receive msg controlTransfer", RECV_MSG_CTRL),
-            Demo("Receive msg bulkTransfer", RECV_MSG_BULK)
+            Demo("Receive msg bulkTransfer", RECV_MSG_BULK),
         )
     }
 
@@ -48,9 +45,6 @@ class UsbCommunicateActivity : BaseDemoActivity<UsbViewModel>(), IUsbListener {
             }
             SEND_MSG -> {
                 usbBinder?.getService()?.sendMsg(getTestDevice())
-            }
-            RECV_MSG_CTRL -> {
-//                usbBinder?.getService()?.recvMsgControl(getTestDevice())
             }
             RECV_MSG_BULK -> {
                 usbBinder?.getService()?.recvMsgBulk(getTestDevice())
