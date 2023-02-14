@@ -83,4 +83,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
 
     api 'com.tencent:mmkv:1.2.13'
+
+    //for LifeCycleService
+    api "android.arch.lifecycle:extensions:1.1.1"
 }

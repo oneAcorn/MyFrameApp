@@ -292,7 +292,7 @@ class UsbCommunicateService : Service() {
                     break
                 }
             }
-            log("Usb Event ${intent.action},${Thread.currentThread()}")
+            log("Usb Event ${intent.action},${device?.deviceName},${device?.productName}")
             when (intent.action) {
                 UsbConstants.PERMISSION_USB -> { //申请USB权限的回调
                     synchronized(this) {
