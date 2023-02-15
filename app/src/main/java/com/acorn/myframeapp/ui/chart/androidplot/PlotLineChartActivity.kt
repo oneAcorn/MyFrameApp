@@ -1,9 +1,11 @@
 package com.acorn.myframeapp.ui.chart.androidplot
 
+import android.annotation.SuppressLint
 import android.graphics.DashPathEffect
 import android.os.Bundle
 import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.singleClick
+import com.acorn.basemodule.network.commonRequest
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.base.BaseNoViewModelActivity
 import com.acorn.myframeapp.ui.chart.androidplot.custom.MyXYSeries
@@ -12,8 +14,13 @@ import com.acorn.myframeapp.ui.chart.androidplot.custom.SeriesClickHelper
 import com.androidplot.acorn.IBoundaryChangeListener
 import com.androidplot.util.PixelUtils
 import com.androidplot.xy.*
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_plot_line_chart.*
+import okhttp3.internal.Util
 import java.text.DecimalFormat
+import java.util.concurrent.ScheduledThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -23,6 +30,7 @@ import kotlin.random.Random
 class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener {
     //缩放
     private lateinit var panZoom: PanZoom
+    private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +58,71 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
         drawFxBtn.singleClick {
             addFormulaLine()
         }
+        startBtn.singleClick {
+            if (startBtn.text == "start") {
+                startAddData()
+                startBtn.text = "stop"
+            } else {
+                stopAddData()
+                startBtn.text = "start"
+            }
+        }
+        clearBtn.singleClick {
+            plot.clear()
+            plot.redraw()
+        }
+    }
+
+    private var scheduledExecutor: ScheduledThreadPoolExecutor? = null
+
+    private var isAddData = false
+
+    @SuppressLint("CheckResult")
+    private fun startAddData() {
+//        Observable.create<Boolean> { emitter ->
+//            while (true) {
+//                Thread.sleep(10)
+//                emitter.onNext(true)
+//            }
+//        }
+//            .commonRequest(disposable)
+//            .subscribe {
+//                appendData(Random.nextFloat() * 20f, Random.nextFloat() * 50f)
+//                plot.redraw()
+//            }
+
+//        isAddData = true
+//        while (isAddData) {
+//            Thread.sleep(1000)
+//            appendData(Random.nextFloat() * 20f, Random.nextFloat() * 50f)
+//            plot.redraw()
+//        }
+
+        scheduledExecutor = ScheduledThreadPoolExecutor(1, Util.threadFactory("append", false))
+
+        scheduledExecutor?.scheduleAtFixedRate(
+            {
+                appendData(Random.nextFloat() * 2000f, Random.nextFloat() * 5000f)
+                plot.redraw()
+            },
+            0,
+            10,
+            TimeUnit.MILLISECONDS
+        )
+    }
+
+    private fun stopAddData() {
+        scheduledExecutor?.shutdownNow()
+        scheduledExecutor = null
+//        isAddData = false
+//        if (!disposable.isDisposed) {
+//            disposable.dispose()
+//        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopAddData()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -64,7 +137,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
     }
 
     private fun appendData(x: Float, y: Float) {
-        showTip("append:$x,$y")
+//        showTip("append:$x,$y")
         logI("append:$x,$y")
         val seriesList = plot.registry.seriesList
         val series = if (seriesList == null || seriesList.isEmpty()) {
@@ -74,6 +147,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
 //                Color.rgb(0, 200, 0), null, null, null
 //            )
             val formatter1 = LineAndPointFormatter(this, R.xml.line_point_formatter_with_labels)
+            formatter1.setPointLabeler(null)
             plot.addSeries(dynamicSeries, formatter1)
             dynamicSeries
         } else {
@@ -84,6 +158,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
 //        }
 //        series.list?.add(PointF(x, y))
         series.addLast(x, y)
+        logI("count:${series.size()}")
     }
 
     //region Formula
