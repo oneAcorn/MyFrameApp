@@ -98,11 +98,12 @@
         <activity
             android:name=".ui.video.VlcActivity"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".ui.coroutine.flow.CoroutineFlowActivity" />
+        <activity android:name=".ui.coroutines.flow.CoroutineFlowActivity" />
         <activity android:name=".ui.camera.CameraXBasicActivity" />
         <activity android:name=".ui.reflect.ReflectActivity" />
         <activity android:name=".ui.matrix.Matrix1Activity" />
-        <activity android:name=".ui.coroutine.normal.LifecycleScopeImplActivity" />
+        <activity android:name=".ui.coroutines.normal.LifecycleScopeImplActivity" />
+        <activity android:name=".ui.coroutines.flow.CancelableFlowActivity" />
 
         <!--configChanges加上这3个才能防止插入USB时,Activity重新创建-->
         <activity

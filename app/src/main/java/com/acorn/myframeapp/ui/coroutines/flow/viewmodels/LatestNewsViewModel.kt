@@ -1,16 +1,15 @@
-package com.acorn.myframeapp.ui.coroutine.flow.viewmodels
+package com.acorn.myframeapp.ui.coroutines.flow.viewmodels
 
 import androidx.lifecycle.viewModelScope
 import com.acorn.basemodule.network.BaseNetViewModel
-import com.acorn.myframeapp.ui.coroutine.flow.bean.News
-import com.acorn.myframeapp.ui.coroutine.flow.bean.UserData
-import com.acorn.myframeapp.ui.coroutine.flow.datasource.NewsRemoteDataSource
-import com.acorn.myframeapp.ui.coroutine.flow.datasource.NewsRepository
+import com.acorn.myframeapp.ui.coroutines.flow.bean.News
+import com.acorn.myframeapp.ui.coroutines.flow.bean.UserData
+import com.acorn.myframeapp.ui.coroutines.flow.datasource.NewsRemoteDataSource
+import com.acorn.myframeapp.ui.coroutines.flow.datasource.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**

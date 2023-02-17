@@ -1,4 +1,4 @@
-package com.acorn.myframeapp.ui.coroutine.normal.viewmodel
+package com.acorn.myframeapp.ui.coroutines.normal.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*

@@ -1,4 +1,4 @@
-package com.acorn.myframeapp.ui.coroutine.flow.bean
+package com.acorn.myframeapp.ui.coroutines.flow.bean
 
 /**
  * Created by acorn on 2023/1/5.

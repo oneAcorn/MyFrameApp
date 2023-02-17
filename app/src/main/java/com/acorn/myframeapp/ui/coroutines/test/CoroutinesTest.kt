@@ -1,6 +1,5 @@
-package com.acorn.myframeapp.ui.coroutine.test
+package com.acorn.myframeapp.ui.coroutines.test
 
-import com.acorn.basemodule.extendfun.logI
 import kotlinx.coroutines.*
 
 /**

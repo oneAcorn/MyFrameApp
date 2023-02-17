@@ -27,18 +27,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/normal/LifecycleScopeImplActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/normal/viewmodel/ViewModelScopeImplViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/test/CoroutinesTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_lifecycle_scope_impl.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/CancelableFlowActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/viewmodels/CancelableNewsViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cancelable_flow.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/datasource/NewsRemoteDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/datasource/NewsRemoteDataSource.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/datasource/NewsRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/datasource/NewsRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/viewmodels/LatestNewsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/viewmodels/LatestNewsViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/recyclerview/adapter/ConventionalRecyclerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/recyclerview/adapter/ConventionalRecyclerAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_plot_line_chart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_plot_line_chart.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +218,7 @@
       </method>
     </configuration>
     <configuration name="CoroutinesTestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.coroutine.test.CoroutinesTestKt" />
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.coroutines.test.CoroutinesTestKt" />
       <module name="MyFrameApp.app.main" />
       <shortenClasspath name="MANIFEST" />
       <method v="2">
@@ -471,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676424015901</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="coroutines">
+      <created>1676610754977</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1676610754977</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -538,6 +539,7 @@
     <MESSAGE value="CameraX+MLKit" />
     <MESSAGE value="usb" />
     <MESSAGE value="PlotLine test" />
-    <option name="LAST_COMMIT_MESSAGE" value="PlotLine test" />
+    <MESSAGE value="coroutines" />
+    <option name="LAST_COMMIT_MESSAGE" value="coroutines" />
   </component>
 </project>

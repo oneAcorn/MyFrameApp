@@ -1,6 +1,5 @@
-package com.acorn.myframeapp.ui.coroutine.normal
+package com.acorn.myframeapp.ui.coroutines.normal
 
-import android.os.Bundle
 import com.acorn.basemodule.base.BaseBindingActivity
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.databinding.ActivityLifecycleScopeImplBinding

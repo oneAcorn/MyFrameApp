@@ -1,6 +1,6 @@
-package com.acorn.myframeapp.ui.coroutine.flow.viewmodels
+package com.acorn.myframeapp.ui.coroutines.flow.viewmodels
 
-import com.acorn.myframeapp.ui.coroutine.flow.bean.News
+import com.acorn.myframeapp.ui.coroutines.flow.bean.News
 import kotlin.random.Random
 
 /**

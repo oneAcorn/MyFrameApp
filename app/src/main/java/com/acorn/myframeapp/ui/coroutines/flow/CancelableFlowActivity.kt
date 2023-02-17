@@ -1,45 +1,45 @@
-package com.acorn.myframeapp.ui.coroutine.flow
+package com.acorn.myframeapp.ui.coroutines.flow
 
-import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.acorn.basemodule.base.BaseActivity
+import com.acorn.basemodule.base.BaseBindingActivity
+import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.createViewModel
-import com.acorn.myframeapp.R
-import com.acorn.myframeapp.ui.coroutine.flow.viewmodels.LatestNewsUiState
-import com.acorn.myframeapp.ui.coroutine.flow.viewmodels.LatestNewsViewModel
+import com.acorn.myframeapp.databinding.ActivityCancelableFlowBinding
+import com.acorn.myframeapp.ui.coroutines.flow.viewmodels.CancelableNewsViewModel
+import com.acorn.myframeapp.ui.coroutines.flow.viewmodels.LatestNewsUiState
 import com.acorn.myframeapp.ui.recyclerview.adapter.ConventionalRecyclerAdapter
-import kotlinx.android.synthetic.main.activity_coroutine_flow.*
 import kotlinx.coroutines.launch
 
 /**
- * https://developer.android.com/kotlin/flow?hl=en
- * Created by acorn on 2023/1/5.
+ * Created by acorn on 2023/2/17.
  */
-class CoroutineFlowActivity : BaseActivity<LatestNewsViewModel>() {
+class CancelableFlowActivity :
+    BaseBindingActivity<CancelableNewsViewModel, ActivityCancelableFlowBinding>() {
     private lateinit var adaper: ConventionalRecyclerAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coroutine_flow)
-    }
 
     override fun initView() {
         super.initView()
-        rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adaper = ConventionalRecyclerAdapter(this, null)
-        rv.adapter = adaper
+        binding.rv.adapter = adaper
     }
 
     override fun initListener() {
         super.initListener()
-        initFlow()
+        binding.startBtn.singleClick {
+            mViewModel?.startFetchNews()
+        }
+        binding.stopBtn.singleClick {
+            mViewModel?.stopFetchNews()
+        }
     }
 
     override fun initData() {
         super.initData()
+        initFlow()
     }
 
     private fun initFlow() {
@@ -59,6 +59,7 @@ class CoroutineFlowActivity : BaseActivity<LatestNewsViewModel>() {
 //                                adaper.append(it)
                                 adaper.prependWithoutNotify(it)
                                 adaper.notifyItemRangeInserted(0, it.size)
+                                binding.rv.smoothScrollToPosition(0)
                             }
                         }
                         is LatestNewsUiState.Error -> {
@@ -70,6 +71,6 @@ class CoroutineFlowActivity : BaseActivity<LatestNewsViewModel>() {
         }
     }
 
-    override fun getViewModel(): LatestNewsViewModel =
-        createViewModel(LatestNewsViewModel::class.java)
+    override fun getViewModel(): CancelableNewsViewModel =
+        createViewModel(CancelableNewsViewModel::class.java)
 }

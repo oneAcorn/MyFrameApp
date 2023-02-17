@@ -1,8 +1,8 @@
-package com.acorn.myframeapp.ui.coroutine.flow.datasource
+package com.acorn.myframeapp.ui.coroutines.flow.datasource
 
 import com.acorn.basemodule.extendfun.logI
-import com.acorn.myframeapp.ui.coroutine.flow.bean.News
-import com.acorn.myframeapp.ui.coroutine.flow.viewmodels.NewsApi
+import com.acorn.myframeapp.ui.coroutines.flow.bean.News
+import com.acorn.myframeapp.ui.coroutines.flow.viewmodels.NewsApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
