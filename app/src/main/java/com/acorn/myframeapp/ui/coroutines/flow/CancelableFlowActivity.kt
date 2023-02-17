@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.acorn.basemodule.base.BaseBindingActivity
+import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.createViewModel
 import com.acorn.myframeapp.databinding.ActivityCancelableFlowBinding
@@ -50,6 +51,7 @@ class CancelableFlowActivity :
                 // Trigger the flow and start listening for values.
                 // Note that this happens when lifecycle is STARTED and stops
                 // collecting when the lifecycle is STOPPED
+                //当处于stop状态一段时间后再次start,会把这段时间内flow生产的数据一次性发射到ui
                 mViewModel?.uiState?.collect { uiState ->
                     when (uiState) {
                         is LatestNewsUiState.Success -> {
@@ -57,6 +59,7 @@ class CancelableFlowActivity :
                                 it.content
                             }.let {
 //                                adaper.append(it)
+                                logI("collect")
                                 adaper.prependWithoutNotify(it)
                                 adaper.notifyItemRangeInserted(0, it.size)
                                 binding.rv.smoothScrollToPosition(0)

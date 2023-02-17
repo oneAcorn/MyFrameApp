@@ -27,12 +27,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/CancelableFlowActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutine/flow/viewmodels/CancelableNewsViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cancelable_flow.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/CancelableFlowActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/CancelableFlowActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/viewmodels/CancelableNewsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/viewmodels/CancelableNewsViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,21 +98,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{ &quot;keyToString&quot;: { &quot;DEBUGGABLE_DEVICE&quot;:
-        &quot;teclast-m40_pro_z3a1_-23073240137007&quot;, &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.acorn.myframeapp&quot;,
-        &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;, &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
-        &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;DRAWABLE&quot;, &quot;RunOnceActivity.cidr.known.project.marker&quot;:
-        &quot;true&quot;, &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;, &quot;android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED&quot;:
-        &quot;View&quot;, &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED&quot;:
-        &quot;XYPlot&quot;, &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED&quot;:
-        &quot;MLFaceDetectOverlay&quot;, &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED&quot;:
-        &quot;MLFaceDetectOverlay&quot;, &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-        &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;, &quot;dart.analysis.tool.window.visible&quot;:
-        &quot;false&quot;, &quot;last_opened_file_path&quot;: &quot;F:/work/MyCode/MyFrameApp/app/src/main/res/drawable&quot;,
-        &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
-        &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;true&quot;, &quot;show.migrate.to.gradle.popup&quot;:
-        &quot;false&quot; }
-        }</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DEBUGGABLE_DEVICE": "teclast-m40_pro_z3a1_-23073240137007",
+    "DEBUGGABLE_PROCESS": "com.acorn.myframeapp",
+    "DEBUGGER_ID": "Auto",
+    "PROJECT_TRUSTED_KEY": "true",
+    "ResourceManagerPrefKey.ResourceType": "DRAWABLE",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHOW_ALL_PROCESSES": "false",
+    "android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED": "View",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED": "XYPlot",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED": "MLFaceDetectOverlay",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED": "MLFaceDetectOverlay",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "F:/work/MyCode/MyFrameApp/app/src/main/res/drawable",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "show.do.not.copy.http.proxy.settings.to.gradle": "true",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
@@ -472,7 +476,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676610754977</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="coroutines flow">
+      <created>1676616338321</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1676616338321</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -540,6 +551,7 @@
     <MESSAGE value="usb" />
     <MESSAGE value="PlotLine test" />
     <MESSAGE value="coroutines" />
-    <option name="LAST_COMMIT_MESSAGE" value="coroutines" />
+    <MESSAGE value="coroutines flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="coroutines flow" />
   </component>
 </project>

@@ -6,10 +6,7 @@ import com.acorn.myframeapp.ui.coroutines.flow.bean.UserData
 import com.acorn.myframeapp.ui.coroutines.flow.datasource.NewsRemoteDataSource
 import com.acorn.myframeapp.ui.coroutines.flow.datasource.NewsRepository
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.cancellable
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.*
 
 /**
  * Created by acorn on 2023/2/17.
