@@ -1,5 +1,6 @@
 package com.acorn.myframeapp.ui.coroutine.flow.datasource
 
+import com.acorn.basemodule.extendfun.logI
 import com.acorn.myframeapp.ui.coroutine.flow.bean.News
 import com.acorn.myframeapp.ui.coroutine.flow.viewmodels.NewsApi
 import kotlinx.coroutines.flow.Flow
@@ -17,6 +18,7 @@ class NewsRemoteDataSource(
         while (true) {
             val latestNews = newsApi.fetchLatestNews()
             emit(latestNews)
+            logI("DataSource Flow:${Thread.currentThread()}")
             kotlinx.coroutines.delay(refreshIntervalMs)
         }
     }

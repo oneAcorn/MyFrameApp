@@ -34,6 +34,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:text="f(x)" />
+            <Button
+                android:id="@+id/startBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="start" />
+
+            <Button
+                android:id="@+id/clearBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:text="clear" />
         </LinearLayout>
     </HorizontalScrollView>
 

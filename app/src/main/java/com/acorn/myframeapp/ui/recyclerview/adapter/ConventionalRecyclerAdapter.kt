@@ -21,7 +21,7 @@ class ConventionalRecyclerAdapter(context: Context, datas: List<String>? = null)
     }
 
     override fun bindData(holder: RecyclerView.ViewHolder, position: Int, item: String) {
-        logI("bindData:$position")
+//        logI("bindData:$position")
         (holder.itemView as? TextView)?.text = getItem(position)
     }
 

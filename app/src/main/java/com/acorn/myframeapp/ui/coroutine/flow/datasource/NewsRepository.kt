@@ -1,5 +1,6 @@
 package com.acorn.myframeapp.ui.coroutine.flow.datasource
 
+import com.acorn.basemodule.extendfun.logI
 import com.acorn.myframeapp.ui.coroutine.flow.bean.News
 import com.acorn.myframeapp.ui.coroutine.flow.bean.UserData
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,7 +19,10 @@ class NewsRepository(
     val favoriteLatestNews: Flow<List<News>> =
         newsRemoteDataSource.latestNews
             .map { newsList -> newsList.filter { userData.isFavoriteTopic(it.topic) } }
-            .onEach { newsList -> _latestNewsList = newsList }
+            .onEach { newsList ->
+                logI("Repository flowOn ${Thread.currentThread()}")
+                _latestNewsList = newsList
+            }
             // flowOn affects the upstream flow ↑
             .flowOn(defaultDispatcher)
             // the downstream flow ↓ is not affected

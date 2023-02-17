@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class LatestNewsViewModel : BaseNetViewModel() {
     private val newsRepository: NewsRepository = NewsRepository(
         NewsRemoteDataSource(NewsApiImpl()),
-        UserData("老张"), Dispatchers.Main
+        UserData("老张"), Dispatchers.IO
     )
 
     /**

@@ -102,6 +102,7 @@
         <activity android:name=".ui.camera.CameraXBasicActivity" />
         <activity android:name=".ui.reflect.ReflectActivity" />
         <activity android:name=".ui.matrix.Matrix1Activity" />
+        <activity android:name=".ui.coroutine.normal.LifecycleScopeImplActivity" />
 
         <!--configChanges加上这3个才能防止插入USB时,Activity重新创建-->
         <activity

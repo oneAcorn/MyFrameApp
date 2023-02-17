@@ -14,6 +14,7 @@ import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity2
 import com.acorn.myframeapp.ui.coroutine.flow.CoroutineFlowActivity
+import com.acorn.myframeapp.ui.coroutine.normal.LifecycleScopeImplActivity
 import com.acorn.myframeapp.ui.matrix.Matrix1Activity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
@@ -205,7 +206,12 @@ class HomeFragment : BaseDemoFragment() {
             Demo(
                 "Coroutine",
                 subItems = arrayListOf(
-                    Demo("Flow", activity = CoroutineFlowActivity::class.java)
+                    Demo("Flow", activity = CoroutineFlowActivity::class.java),
+                    Demo(
+                        "LifecycleScope impl",
+                        description = "手动实现的lifecycleScope.还一个手动实现的ViewModelScope,详见ViewModelScopeImplViewModel",
+                        activity = LifecycleScopeImplActivity::class.java
+                    )
                 )
             ),
             Demo(
