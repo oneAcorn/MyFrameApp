@@ -27,16 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/CancelableFlowActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/CancelableFlowActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/viewmodels/CancelableNewsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/viewmodels/CancelableNewsViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[23073240137007]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -84,6 +83,10 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava3/rxjava/3.0.4/615c91aa196b925c3ff725cbc7b9cc2880dc33bf/rxjava-3.0.4-sources.jar!/io/reactivex/rxjava3/core/Observable.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://E:/Androidtoo/sdk2/sources/android-33/java/text/SimpleDateFormat.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -98,28 +101,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DEBUGGABLE_DEVICE": "teclast-m40_pro_z3a1_-23073240137007",
-    "DEBUGGABLE_PROCESS": "com.acorn.myframeapp",
-    "DEBUGGER_ID": "Auto",
-    "PROJECT_TRUSTED_KEY": "true",
-    "ResourceManagerPrefKey.ResourceType": "DRAWABLE",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHOW_ALL_PROCESSES": "false",
-    "android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED": "View",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED": "XYPlot",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED": "MLFaceDetectOverlay",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED": "MLFaceDetectOverlay",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "F:/work/MyCode/MyFrameApp/app/src/main/res/drawable",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
-    "show.do.not.copy.http.proxy.settings.to.gradle": "true",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;teclast-m40_pro_z3a1_-23073240137007&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.acorn.myframeapp&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
+    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;DRAWABLE&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
+    &quot;android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED&quot;: &quot;XYPlot&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/work/MyCode/MyFrameApp/app/src/main/res/drawable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;true&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
@@ -149,7 +152,7 @@
       <recent name="com.acorn.basemodule.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Android App.app">
+  <component name="RunManager" selected="Kotlin.SamplingTestKt">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="MyFrameApp.app.main" />
       <option name="DEPLOY" value="true" />
@@ -236,14 +239,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SamplingTestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.sampling.SamplingTestKt" />
+      <module name="MyFrameApp.app.main" />
+      <shortenClasspath name="MANIFEST" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Android App.app" />
       <item itemvalue="Application.LinearRegressionDemo" />
+      <item itemvalue="Kotlin.SamplingTestKt" />
       <item itemvalue="Kotlin.CoroutinesTestKt" />
       <item itemvalue="Kotlin.LinearFitTestKt" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.SamplingTestKt" />
         <item itemvalue="Kotlin.CoroutinesTestKt" />
         <item itemvalue="Kotlin.LinearFitTestKt" />
         <item itemvalue="Application.LinearRegressionDemo" />
