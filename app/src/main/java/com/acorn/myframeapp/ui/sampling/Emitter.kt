@@ -13,9 +13,9 @@ import java.util.concurrent.atomic.AtomicLong
  */
 class Emitter(
     val sampling: Int,
-    val groupCount: Int,
+    private val groupCount: Int,
     private val duration: Long,
-    val beginTime: Long
+    private val beginTime: Long
 ) {
     private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
     private var curDuration = AtomicLong(0)

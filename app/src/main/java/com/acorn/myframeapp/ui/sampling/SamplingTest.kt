@@ -13,7 +13,7 @@ import kotlin.math.abs
  * Created by acorn on 2023/2/24.
  */
 fun main() {
-    test(5, 2000)
+    test(50, 2000)
     Thread.sleep(10 * 1000)
 }
 
@@ -49,6 +49,9 @@ private fun test(sampling: Int, duration: Long) {
 }
 
 private fun findNearestValue(curElapsedTime: Long, sampling: Int, curData: EmitData): Int {
+    if (curData.data.size == 1) {
+        return curData.data[0]
+    }
     val interval = (1000 / sampling).toLong()
     var targetIndex = 0
     var minDifferent: Long? = null

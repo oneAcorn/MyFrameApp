@@ -27,9 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -496,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676616338321</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="sampling">
+      <created>1677223282690</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1677223282690</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -565,6 +571,7 @@
     <MESSAGE value="PlotLine test" />
     <MESSAGE value="coroutines" />
     <MESSAGE value="coroutines flow" />
-    <option name="LAST_COMMIT_MESSAGE" value="coroutines flow" />
+    <MESSAGE value="sampling" />
+    <option name="LAST_COMMIT_MESSAGE" value="sampling" />
   </component>
 </project>
