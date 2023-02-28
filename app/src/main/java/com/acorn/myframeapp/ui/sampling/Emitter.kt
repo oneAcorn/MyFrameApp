@@ -7,13 +7,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
+import kotlin.math.min
 
 /**
  * Created by acorn on 2023/2/24.
  */
 class Emitter(
-    val sampling: Int,
-    private val groupCount: Int,
+    val mSampling: Int,
+    val groupCount: Int,
     private val duration: Long,
     private val beginTime: Long
 ) {
@@ -21,10 +22,11 @@ class Emitter(
     private var curDuration = AtomicLong(0)
     private var curIndex = AtomicInteger(1)
     var emitData: EmitData? = null
+    private val mInterval = (1000 / mSampling * groupCount).toLong()
 
     @SuppressLint("CheckResult")
     fun startEmit() {
-        getSamplingEmitter(sampling, groupCount, duration)
+        getSamplingEmitter(groupCount, duration)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .subscribe({
@@ -45,23 +47,51 @@ class Emitter(
      * @param duration 总持续时间
      */
     private fun getSamplingEmitter(
-        sampling: Int,
         groupCount: Int,
         duration: Long
     ): Observable<List<Int>> {
-        val interval = (1000 / sampling * groupCount).toLong()
         return Observable.create<List<Int>> { emitter ->
             while (curDuration.get() < duration) {
                 val list = mutableListOf<Int>()
                 for (i in 0 until groupCount) {
                     list.add(curIndex.getAndAdd(1))
                 }
+                getDataTimes.set(0)
                 emitter.onNext(list)
-                curDuration.getAndAdd(interval)
-                Thread.sleep(interval)
+                curDuration.getAndAdd(mInterval)
+                Thread.sleep(mInterval)
             }
             emitter.onComplete()
         }
+    }
+
+    /**
+     * 取值次数
+     */
+    private val getDataTimes = AtomicLong(0)
+
+    fun getDataBySampling(consumerSampling: Int): Int? {
+//        val curData = emitData?.data ?: return null
+//        if (curData.isEmpty()) return null
+        if (groupCount <= 1) {
+            return emitData?.data?.get(0)
+        }
+        //第几次取值
+        val times = getDataTimes.getAndAdd(1).toInt()
+//        val consumerInterval = 1000 / consumerSampling
+        return if (consumerSampling >= mSampling) {
+            //生产者慢于消费者则通过提供重复数据满足消费者
+            val dataIndex = min(times / (consumerSampling / mSampling), (emitData?.data?.size?:1) - 1)
+            log("dataIndex:$dataIndex,times:$times,$consumerSampling,$mSampling")
+            emitData?.data?.get(dataIndex)
+        } else {
+            //生产者快于消费者,则提供多组数据中的最后一组数据
+            emitData?.data?.last()
+        }
+    }
+
+    private fun log(str: String) {
+        println("emitter-->${simpleDateFormat.format(Date())}:$str")
     }
 }
 

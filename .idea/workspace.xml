@@ -27,6 +27,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" afterDir="false" />
     </list>
@@ -502,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677223282690</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="sampling">
+      <created>1677223821016</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1677223821016</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -573,5 +581,17 @@
     <MESSAGE value="coroutines flow" />
     <MESSAGE value="sampling" />
     <option name="LAST_COMMIT_MESSAGE" value="sampling" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <condition expression="times==3" language="kotlin" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt</url>
+          <line>83</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
