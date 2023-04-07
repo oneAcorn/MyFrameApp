@@ -14,6 +14,7 @@ import com.androidplot.xy.LineAndPointRenderer
 import com.androidplot.xy.PanZoom
 import com.androidplot.xy.XYPlot
 import kotlinx.android.synthetic.main.activity_plot_line_chart.*
+import java.util.ArrayList
 import kotlin.math.abs
 
 /**
@@ -50,7 +51,8 @@ class SeriesClickHelper(context: Context) : GestureDetector.OnGestureListener {
         for (series in seriesList) {
             //公式无法点击
             if(series is MyXYSeries && series.seriesType==PlotSeriesType.Formula) continue
-            val cachePoints = lineRenderer.getCurrentPointsCache(series) ?: continue
+            //需要先clone,防止concurrent exception
+            val cachePoints = (lineRenderer.getCurrentPointsCache(series)?.clone() as? ArrayList<PointF>)  ?: continue
 //            showToastAndLog("tap (${event.x},${event.y})")
             var clickPointIndex = -1
             for ((i, pointF) in cachePoints.withIndex()) {

@@ -14,12 +14,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addBtn"
+        android:id="@+id/addBugBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Add bug Data"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lineChart" />
+
+    <Button
+        android:id="@+id/addDataBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Add Data"
         android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/addBugBtn"
+        app:layout_constraintTop_toBottomOf="@id/lineChart" />
+
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Reset Data"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toRightOf="@id/addDataBtn"
         app:layout_constraintTop_toBottomOf="@id/lineChart" />
 </androidx.constraintlayout.widget.ConstraintLayout>

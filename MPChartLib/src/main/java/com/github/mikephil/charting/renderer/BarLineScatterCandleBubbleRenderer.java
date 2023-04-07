@@ -1,5 +1,6 @@
 package com.github.mikephil.charting.renderer;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
@@ -91,6 +92,24 @@ public abstract class BarLineScatterCandleBubbleRenderer extends DataRenderer {
             min = entryFrom == null ? 0 : dataSet.getEntryIndex(entryFrom);
             max = entryTo == null ? 0 : dataSet.getEntryIndex(entryTo);
             range = (int) ((max - min) * phaseX);
+
+
+            //测试代码,用于查看为什么x轴只能递增
+//            float phaseX = Math.max(0.f, Math.min(1.f, mAnimator.getPhaseX()));
+//
+//            float low = chart.getLowestVisibleX();
+//            float high = chart.getHighestVisibleX();
+//
+//            Entry entryFrom = dataSet.getEntryForXValue(low, Float.NaN, DataSet.Rounding.DOWN);
+//            Entry entryTo = dataSet.getEntryForXValue(high, Float.NaN, DataSet.Rounding.UP);
+//
+//            int fromIndex = entryFrom == null ? 0 : dataSet.getEntryIndex(entryFrom);
+//            int toIndex = entryTo == null ? 0 : dataSet.getEntryIndex(entryTo);
+//
+//            min = Math.min(fromIndex, toIndex);
+//            max = Math.max(fromIndex, toIndex);
+//            range = (int) ((max - min) * phaseX);
+//            LogExtendKt.logI("phaseX:" + phaseX + ",low:" + low + ",high:" + high + ",entryFrom:{" + entryFrom + "},entryTo:{" + entryTo + "},min:" + min + ",max:" + max + ",range:" + range);
         }
     }
 }

@@ -26,16 +26,24 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
+    <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="sampling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/SamplingTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/BarLineScatterCandleBubbleRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/BarLineScatterCandleBubbleRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/LineChartRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/LineChartRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/utils/ViewPortHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/utils/ViewPortHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/androidplot/PlotLineChartActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/androidplot/PlotLineChartActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/androidplot/custom/SeriesClickHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/androidplot/custom/SeriesClickHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/LineChartActivity2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/LineChartActivity2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/test/CoroutinesTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/test/CoroutinesTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_line_chart2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_line_chart2.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[23073240137007]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -111,15 +119,20 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
     &quot;android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED&quot;: &quot;BarLineChartBase&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED&quot;: &quot;Chart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED&quot;: &quot;LineChart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED&quot;: &quot;Plot&quot;,
     &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED&quot;: &quot;XYPlot&quot;,
     &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED&quot;: &quot;MyLineChart&quot;,
     &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;F:/work/MyCode/MyFrameApp/app/src/main/res/drawable&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
-    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;true&quot;,
+    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;false&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
 }</component>
@@ -152,7 +165,7 @@
       <recent name="com.acorn.basemodule.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.SamplingTestKt">
+  <component name="RunManager" selected="Android App.app">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="MyFrameApp.app.main" />
       <option name="DEPLOY" value="true" />
@@ -256,8 +269,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.SamplingTestKt" />
         <item itemvalue="Kotlin.CoroutinesTestKt" />
+        <item itemvalue="Kotlin.SamplingTestKt" />
         <item itemvalue="Kotlin.LinearFitTestKt" />
         <item itemvalue="Application.LinearRegressionDemo" />
       </list>
@@ -510,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677223821016</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="sampling">
+      <created>1677549010788</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1677549010788</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -590,6 +610,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt</url>
           <line>83</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java</url>
+          <line>590</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

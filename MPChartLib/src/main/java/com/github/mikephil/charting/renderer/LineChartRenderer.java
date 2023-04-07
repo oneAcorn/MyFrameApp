@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -537,73 +538,73 @@ public class LineChartRenderer extends LineRadarRenderer {
 
 //        if (isDrawingValuesAllowed(mChart)) {
 
-            List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
+        List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
 
-            for (int i = 0; i < dataSets.size(); i++) {
+        for (int i = 0; i < dataSets.size(); i++) {
 
-                ILineDataSet dataSet = dataSets.get(i);
+            ILineDataSet dataSet = dataSets.get(i);
 
-                if (!isDrawingValuesAllowed(mChart) && !dataSet.isAllowDrawValueWhenManyEntrys()) {
-                    continue;
-                }
-
-                if (!shouldDrawValues(dataSet) || dataSet.getEntryCount() < 1)
-                    continue;
-
-                // apply the text-styling defined by the DataSet
-                applyValueTextStyle(dataSet);
-
-                Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
-
-                // make sure the values do not interfear with the circles
-                int valOffset = (int) (dataSet.getCircleRadius() * 1.75f);
-
-                if (!dataSet.isDrawCirclesEnabled())
-                    valOffset = valOffset / 2;
-
-                mXBounds.set(mChart, dataSet);
-
-                float[] positions = trans.generateTransformedValuesLine(dataSet, mAnimator.getPhaseX(), mAnimator
-                        .getPhaseY(), mXBounds.min, mXBounds.max);
-
-                MPPointF iconsOffset = MPPointF.getInstance(dataSet.getIconsOffset());
-                iconsOffset.x = Utils.convertDpToPixel(iconsOffset.x);
-                iconsOffset.y = Utils.convertDpToPixel(iconsOffset.y);
-
-                for (int j = 0; j < positions.length; j += 2) {
-
-                    float x = positions[j];
-                    float y = positions[j + 1];
-
-                    if (!mViewPortHandler.isInBoundsRight(x))
-                        break;
-
-                    if (!mViewPortHandler.isInBoundsLeft(x) || !mViewPortHandler.isInBoundsY(y))
-                        continue;
-
-                    Entry entry = dataSet.getEntryForIndex(j / 2 + mXBounds.min);
-
-                    if (dataSet.isDrawValuesEnabled()) {
-                        drawValue(c, dataSet.getValueFormatter(), entry.getY(), entry, i, x,
-                                y - valOffset, dataSet.getValueTextColor(j / 2));
-                    }
-
-                    if (entry.getIcon() != null && dataSet.isDrawIconsEnabled()) {
-
-                        Drawable icon = entry.getIcon();
-
-                        Utils.drawImage(
-                                c,
-                                icon,
-                                (int)(x + iconsOffset.x),
-                                (int)(y + iconsOffset.y),
-                                icon.getIntrinsicWidth(),
-                                icon.getIntrinsicHeight());
-                    }
-                }
-
-                MPPointF.recycleInstance(iconsOffset);
+            if (!isDrawingValuesAllowed(mChart) && !dataSet.isAllowDrawValueWhenManyEntrys()) {
+                continue;
             }
+
+            if (!shouldDrawValues(dataSet) || dataSet.getEntryCount() < 1)
+                continue;
+
+            // apply the text-styling defined by the DataSet
+            applyValueTextStyle(dataSet);
+
+            Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
+
+            // make sure the values do not interfear with the circles
+            int valOffset = (int) (dataSet.getCircleRadius() * 1.75f);
+
+            if (!dataSet.isDrawCirclesEnabled())
+                valOffset = valOffset / 2;
+
+            mXBounds.set(mChart, dataSet);
+
+            float[] positions = trans.generateTransformedValuesLine(dataSet, mAnimator.getPhaseX(), mAnimator
+                    .getPhaseY(), mXBounds.min, mXBounds.max);
+
+            MPPointF iconsOffset = MPPointF.getInstance(dataSet.getIconsOffset());
+            iconsOffset.x = Utils.convertDpToPixel(iconsOffset.x);
+            iconsOffset.y = Utils.convertDpToPixel(iconsOffset.y);
+
+            for (int j = 0; j < positions.length; j += 2) {
+
+                float x = positions[j];
+                float y = positions[j + 1];
+
+                if (!mViewPortHandler.isInBoundsRight(x))
+                    break;
+
+                if (!mViewPortHandler.isInBoundsLeft(x) || !mViewPortHandler.isInBoundsY(y))
+                    continue;
+
+                Entry entry = dataSet.getEntryForIndex(j / 2 + mXBounds.min);
+
+                if (dataSet.isDrawValuesEnabled()) {
+                    drawValue(c, dataSet.getValueFormatter(), entry.getY(), entry, i, x,
+                            y - valOffset, dataSet.getValueTextColor(j / 2));
+                }
+
+                if (entry.getIcon() != null && dataSet.isDrawIconsEnabled()) {
+
+                    Drawable icon = entry.getIcon();
+
+                    Utils.drawImage(
+                            c,
+                            icon,
+                            (int) (x + iconsOffset.x),
+                            (int) (y + iconsOffset.y),
+                            icon.getIntrinsicWidth(),
+                            icon.getIntrinsicHeight());
+                }
+            }
+
+            MPPointF.recycleInstance(iconsOffset);
+        }
 //        }
     }
 
@@ -672,11 +673,11 @@ public class LineChartRenderer extends LineRadarRenderer {
             }
 
             int boundsRangeCount = mXBounds.range + mXBounds.min;
-
+            LogExtendKt.logI("drawcircle xBounds:{min:" + mXBounds.min + ",max:" + mXBounds.max + ",range:" + mXBounds.range+"}");
             for (int j = mXBounds.min; j <= boundsRangeCount; j++) {
 
                 Entry e = dataSet.getEntryForIndex(j);
-
+                LogExtendKt.logI("drawcircle j:" + j + ",entry:" + e);
                 if (e == null) break;
 
                 mCirclesBuffer[0] = e.getX();
@@ -684,12 +685,16 @@ public class LineChartRenderer extends LineRadarRenderer {
 
                 trans.pointValuesToPixel(mCirclesBuffer);
 
-                if (!mViewPortHandler.isInBoundsRight(mCirclesBuffer[0]))
+                if (!mViewPortHandler.isInBoundsRight(mCirclesBuffer[0])) {
+                    LogExtendKt.logI("drawcircle isInBoundsRight false");
                     break;
+                }
 
                 if (!mViewPortHandler.isInBoundsLeft(mCirclesBuffer[0]) ||
-                        !mViewPortHandler.isInBoundsY(mCirclesBuffer[1]))
+                        !mViewPortHandler.isInBoundsY(mCirclesBuffer[1])) {
+                    LogExtendKt.logI("drawcircle isInBoundsLeft false or isInBoundsY false");
                     continue;
+                }
 
                 Bitmap circleBitmap = imageCache.getBitmap(j);
 

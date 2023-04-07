@@ -5,6 +5,8 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.view.View;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
+
 /**
  * Class that contains information about the charts current viewport settings, including offsets, scale & translation
  * levels, ...
@@ -225,6 +227,7 @@ public class ViewPortHandler {
 
     /**
      * Zooms out to original size.
+     *
      * @param outputMatrix
      */
     public void resetZoom(Matrix outputMatrix) {
@@ -603,6 +606,7 @@ public class ViewPortHandler {
 
     public boolean isInBoundsRight(float x) {
         x = (float) ((int) (x * 100.f)) / 100.f;
+        LogExtendKt.logI("isInBoundsRight() " + x + ",mContentRect.right:" + mContentRect.right);
         return mContentRect.right >= x - 1;
     }
 

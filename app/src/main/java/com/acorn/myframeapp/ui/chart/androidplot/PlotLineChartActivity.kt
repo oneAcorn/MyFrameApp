@@ -32,6 +32,10 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
     private lateinit var panZoom: PanZoom
     private val disposable = CompositeDisposable()
 
+    companion object {
+        private const val MAX_POINT_NUMBER = 2000
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plot_line_chart)
@@ -102,7 +106,7 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
 
         scheduledExecutor?.scheduleAtFixedRate(
             {
-                appendData(Random.nextFloat() * 2000f, Random.nextFloat() * 5000f)
+                appendData(Random.nextFloat() * 200000f, Random.nextFloat() * 500000f)
                 plot.redraw()
             },
             0,
@@ -157,6 +161,9 @@ class PlotLineChartActivity : BaseNoViewModelActivity(), IBoundaryChangeListener
 //            series.list = mutableListOf()
 //        }
 //        series.list?.add(PointF(x, y))
+        if(series.size()>= MAX_POINT_NUMBER){
+            series.removeFirst()
+        }
         series.addLast(x, y)
         logI("count:${series.size()}")
     }

@@ -1,5 +1,6 @@
 package com.acorn.myframeapp.ui.coroutines.test
 
+import com.acorn.basemodule.extendfun.logI
 import kotlinx.coroutines.*
 
 /**
@@ -12,7 +13,9 @@ suspend fun main() {
 //    testSuspend()
 //    testChildJob()
 //    testChildJob2()
-    getUserInfo()
+//    getUserInfo()
+//    testMillisDuration()
+    testJobCancel()
 
     println("主线程结束")
     //这里的sleep只是保持进程存活, 目的是为了等待协程执行完
@@ -136,3 +139,36 @@ private suspend fun fetchUserInfo() {     // Dispatchers.Main
     }                             // Dispatchers.Main
 }
 //endregion
+
+private fun testMillisDuration() {
+    GlobalScope.launch(Dispatchers.IO) {
+        val beginTime = System.currentTimeMillis()
+        delay(100)
+        println("1")
+        withContext(Dispatchers.Default) {
+            println("2")
+            delay(200)
+        }
+        println("3")
+        val endTimes = System.currentTimeMillis()
+        println("duration:${endTimes - beginTime}")
+    }
+}
+
+
+private fun testJobCancel() {
+    val job = GlobalScope.launch {
+        while (true) {
+            println("I'm alive")
+            delay(100)
+        }
+    }
+    GlobalScope.launch {
+        println("scope2 start")
+        delay(1000)
+        job.cancel()
+        println("scope2 alive")
+        delay(200)
+        println("scope2 still alive")
+    }
+}

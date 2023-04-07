@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
 import com.github.mikephil.charting.components.XAxis.XAxisPosition;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
@@ -1408,6 +1409,7 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
      */
     @Override
     public float getLowestVisibleX() {
+//        LogExtendKt.logI("x:"+mViewPortHandler.contentLeft()+",y:"+mViewPortHandler.contentBottom());
         getTransformer(AxisDependency.LEFT).getValuesByTouchPoint(mViewPortHandler.contentLeft(),
                 mViewPortHandler.contentBottom(), posForGetLowestVisibleX);
         float result = (float) Math.max(mXAxis.mAxisMinimum, posForGetLowestVisibleX.x);

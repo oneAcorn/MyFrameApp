@@ -32,6 +32,14 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
         offer(PointF(1f, 2f))
         offer(PointF(-1f, 6f))
     }
+    private val queue2 = LinkedList<PointF>().apply {
+        offer(PointF(1f, 1f))
+        offer(PointF(2f, 2f))
+        offer(PointF(3f, 3f))
+        offer(PointF(4f, 4f))
+        offer(PointF(5f, 3f))
+        offer(PointF(6f, 2f))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,9 +89,17 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
 
             axisRight.isEnabled = false
         }
-        addBtn.singleClick {
+        addBugBtn.singleClick {
             val point = queue.poll() ?: return@singleClick
             addEntry(Entry(point.x, point.y))
+        }
+        addDataBtn.singleClick {
+            val point = queue2.poll() ?: return@singleClick
+            addEntry(Entry(point.x, point.y))
+        }
+        resetBtn.singleClick {
+            lineChart.data.clearValues()
+            lineChart.invalidate()
         }
     }
 
