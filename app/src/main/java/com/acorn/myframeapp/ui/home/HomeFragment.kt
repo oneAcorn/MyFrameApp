@@ -13,6 +13,7 @@ import com.acorn.myframeapp.ui.lazyfragment.androidx.AndroidXLazyFragmentActivit
 import com.acorn.myframeapp.ui.lazyfragment.old.OldLazyFragmentActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity
 import com.acorn.myframeapp.ui.chart.mpchart.LineChartActivity2
+import com.acorn.myframeapp.ui.chart.mpchart.XFreeLineChartActivity
 import com.acorn.myframeapp.ui.coroutines.flow.CancelableFlowActivity
 import com.acorn.myframeapp.ui.coroutines.flow.CoroutineFlowActivity
 import com.acorn.myframeapp.ui.coroutines.normal.LifecycleScopeImplActivity
@@ -188,7 +189,8 @@ class HomeFragment : BaseDemoFragment() {
                 "MpAndroidChart", description = "https://github.com/PhilJay/MPAndroidChart",
                 subItems = arrayListOf(
                     Demo("LineChart", activity = LineChartActivity::class.java),
-                    Demo("LineChart2", activity = LineChartActivity2::class.java)
+                    Demo("LineChart2", activity = LineChartActivity2::class.java),
+                    Demo("XFreeLineChart", activity = XFreeLineChartActivity::class.java)
                 )
             ),
             Demo(

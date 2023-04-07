@@ -3,6 +3,7 @@ package com.acorn.myframeapp.ui.chart.mpchart
 import android.graphics.Color
 import android.graphics.PointF
 import android.os.Bundle
+import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.myframeapp.R
@@ -18,7 +19,10 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_line_chart2.*
+import okhttp3.internal.Util
 import java.util.*
+import java.util.concurrent.ScheduledThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by acorn on 2022/7/8.
@@ -73,6 +77,10 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
             // modify the legend ...
             l.form = LegendForm.LINE
             l.textColor = Color.WHITE
+            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            l.orientation = Legend.LegendOrientation.VERTICAL
+            l.setDrawInside(false)
 
             xAxis.textColor = Color.WHITE
             xAxis.setDrawGridLines(false)
@@ -90,8 +98,13 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
             axisRight.isEnabled = false
         }
         addBugBtn.singleClick {
-            val point = queue.poll() ?: return@singleClick
-            addEntry(Entry(point.x, point.y))
+//            val point = queue.poll() ?: return@singleClick
+//            addEntry(Entry(point.x, point.y))
+            val multiplyX = if (mCurIndex % 2 == 0) 1 else -1
+            val entry=Entry(mCurIndex.toFloat(), (mCurIndex * multiplyX).toFloat())
+            addEntry(entry)
+            logI("addEntry($mCurIndex):$entry")
+            mCurIndex++
         }
         addDataBtn.singleClick {
             val point = queue2.poll() ?: return@singleClick
@@ -101,6 +114,40 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
             lineChart.data.clearValues()
             lineChart.invalidate()
         }
+
+        startBtn.singleClick {
+            if (startBtn.text == "start") {
+                startAddData()
+                startBtn.text = "stop"
+            } else {
+                stopAddData()
+                startBtn.text = "start"
+            }
+        }
+    }
+
+    private var scheduledExecutor: ScheduledThreadPoolExecutor? = null
+    private var mCurIndex = 0
+    private fun startAddData() {
+        scheduledExecutor = ScheduledThreadPoolExecutor(1, Util.threadFactory("append", false))
+
+//        curIndex = 0
+        scheduledExecutor?.scheduleAtFixedRate(
+            {
+                val multiplyX = if (mCurIndex % 2 == 0) 1 else -1
+                addEntry(Entry(mCurIndex.toFloat(), (mCurIndex * multiplyX).toFloat()))
+//                logI("addEntry($curIndex)")
+                mCurIndex++
+            },
+            0,
+            10,
+            TimeUnit.MILLISECONDS
+        )
+    }
+
+    private fun stopAddData() {
+        scheduledExecutor?.shutdownNow()
+        scheduledExecutor = null
     }
 
     private fun addEntry(entry: Entry) {

@@ -42,4 +42,14 @@
         android:textAllCaps="false"
         app:layout_constraintLeft_toRightOf="@id/addDataBtn"
         app:layout_constraintTop_toBottomOf="@id/lineChart" />
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="start"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toRightOf="@id/resetBtn"
+        app:layout_constraintTop_toBottomOf="@id/lineChart" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -606,7 +606,7 @@ public class ViewPortHandler {
 
     public boolean isInBoundsRight(float x) {
         x = (float) ((int) (x * 100.f)) / 100.f;
-        LogExtendKt.logI("isInBoundsRight() " + x + ",mContentRect.right:" + mContentRect.right);
+//        LogExtendKt.logI("isInBoundsRight() " + x + ",mContentRect.right:" + mContentRect.right);
         return mContentRect.right >= x - 1;
     }
 

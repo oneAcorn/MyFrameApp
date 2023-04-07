@@ -673,11 +673,11 @@ public class LineChartRenderer extends LineRadarRenderer {
             }
 
             int boundsRangeCount = mXBounds.range + mXBounds.min;
-            LogExtendKt.logI("drawcircle xBounds:{min:" + mXBounds.min + ",max:" + mXBounds.max + ",range:" + mXBounds.range+"}");
+//            LogExtendKt.logI("drawcircle xBounds:{min:" + mXBounds.min + ",max:" + mXBounds.max + ",range:" + mXBounds.range+"}");
             for (int j = mXBounds.min; j <= boundsRangeCount; j++) {
 
                 Entry e = dataSet.getEntryForIndex(j);
-                LogExtendKt.logI("drawcircle j:" + j + ",entry:" + e);
+//                LogExtendKt.logI("drawcircle j:" + j + ",entry:" + e);
                 if (e == null) break;
 
                 mCirclesBuffer[0] = e.getX();
@@ -686,13 +686,13 @@ public class LineChartRenderer extends LineRadarRenderer {
                 trans.pointValuesToPixel(mCirclesBuffer);
 
                 if (!mViewPortHandler.isInBoundsRight(mCirclesBuffer[0])) {
-                    LogExtendKt.logI("drawcircle isInBoundsRight false");
+//                    LogExtendKt.logI("drawcircle isInBoundsRight false");
                     break;
                 }
 
                 if (!mViewPortHandler.isInBoundsLeft(mCirclesBuffer[0]) ||
                         !mViewPortHandler.isInBoundsY(mCirclesBuffer[1])) {
-                    LogExtendKt.logI("drawcircle isInBoundsLeft false or isInBoundsY false");
+//                    LogExtendKt.logI("drawcircle isInBoundsLeft false or isInBoundsY false");
                     continue;
                 }
 
