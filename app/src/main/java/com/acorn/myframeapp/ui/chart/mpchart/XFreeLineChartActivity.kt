@@ -3,11 +3,13 @@ package com.acorn.myframeapp.ui.chart.mpchart
 import android.graphics.Color
 import android.graphics.PointF
 import com.acorn.basemodule.base.BaseBindingActivity
-import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
+import com.acorn.myframeapp.R
 import com.acorn.myframeapp.databinding.ActivityXFreeLineChartBinding
+import com.acorn.myframeapp.ui.chart.views.MyMarkerView
+import com.github.mikephil.charting.acorn.dataset.XFreeLineDataSet
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -21,7 +23,6 @@ import okhttp3.internal.Util
 import java.util.*
 import java.util.concurrent.ScheduledThreadPoolExecutor
 import java.util.concurrent.TimeUnit
-import kotlin.random.Random
 
 /**
  * Created by acorn on 2023/4/7.
@@ -81,7 +82,7 @@ class XFreeLineChartActivity :
         }
         binding.startInfiniteBtn.singleClick {
             if (binding.startInfiniteBtn.text == "start infinite") {
-                startInfiniteAddData()
+                startInfiniteAddData(20000, 10)
                 binding.startInfiniteBtn.text = "stop"
             } else {
                 stopAddData()
@@ -92,6 +93,10 @@ class XFreeLineChartActivity :
             val lineData = binding.xFreeLineChart.data
             val dataSet = lineData?.getDataSetByIndex(0)
             dataSet?.removeFirst()
+            lineData.notifyDataChanged()
+            // let the chart know it's data has changed
+            binding.xFreeLineChart.notifyDataSetChanged()
+            binding.xFreeLineChart.invalidate()
         }
     }
 
@@ -105,7 +110,7 @@ class XFreeLineChartActivity :
             {
                 val multiplyX = if (curIndex % 2 == 0) 1 else -1
                 addEntry(Entry(curIndex.toFloat(), (curIndex * multiplyX).toFloat()))
-                logI("addEntry($curIndex)")
+//                logI("addEntry($curIndex)")
                 curIndex++
             },
             0,
@@ -122,7 +127,7 @@ class XFreeLineChartActivity :
             {
                 val multiplyX = if (curIndex % 2 == 0) 1 else -1
                 addEntry(Entry((curIndex * multiplyX).toFloat(), curIndex.toFloat()))
-                logI("addEntry($curIndex)")
+//                logI("addEntry($curIndex)")
                 curIndex++
             },
             0,
@@ -135,27 +140,28 @@ class XFreeLineChartActivity :
      * Start infinite add data
      * 超出一定数量直接从头部删除,保持恒定的最大数量
      */
-    private fun startInfiniteAddData() {
+    private fun startInfiniteAddData(maxAmount: Long, period: Long) {
         scheduledExecutor = ScheduledThreadPoolExecutor(1, Util.threadFactory("append", false))
 
 //        curIndex = 0
         scheduledExecutor?.scheduleAtFixedRate(
             {
                 val multiplyX = if (curIndex % 2 == 0) 1 else -1
-                addEntry(Entry(curIndex.toFloat(), (curIndex * multiplyX).toFloat()))
-                val lineData = binding.xFreeLineChart.data
-                val dataSet = lineData?.getDataSetByIndex(0)
-                if (dataSet != null && dataSet.entryCount >= 200) {
-                    dataSet.removeFirst()
-                    lineData.notifyDataChanged()
-                    // let the chart know it's data has changed
-                    binding.xFreeLineChart.notifyDataSetChanged()
-                }
+                addEntry(Entry(curIndex.toFloat(), (curIndex * multiplyX).toFloat()), maxAmount)
 //                logI("addEntry($curIndex)")
+//                val lineData = binding.xFreeLineChart.data
+//                val dataSet = lineData?.getDataSetByIndex(0)
+//                if (dataSet != null && dataSet.entryCount >= 20) {
+//                    dataSet.removeFirst()
+//                    lineData.notifyDataChanged()
+//                    // let the chart know it's data has changed
+//                    binding.xFreeLineChart.notifyDataSetChanged()
+//                    binding.xFreeLineChart.invalidate()
+//                }
                 curIndex++
             },
             0,
-            10,
+            period,
             TimeUnit.MILLISECONDS
         )
     }
@@ -181,9 +187,13 @@ class XFreeLineChartActivity :
             // add empty data
             this.data = data
 
+            //点击point显示的MarkerView
+            val markerView = MyMarkerView(this@XFreeLineChartActivity, R.layout.custom_marker_view)
+            markerView.chartView = this
+            marker = markerView
+
             // get the legend (only possible after setting data)
             val l: Legend = legend
-
             // modify the legend ...
             l.form = Legend.LegendForm.LINE
             l.textColor = Color.BLUE
@@ -206,10 +216,12 @@ class XFreeLineChartActivity :
 //            axisLeft.setCenterAxisLabels(true)
 
             axisRight.isEnabled = false
+
+            isLogEnabled=true
         }
     }
 
-    private fun addEntry(entry: Entry) {
+    private fun addEntry(entry: Entry, limitMaxAmount: Long = -1) {
         //上面创建过了,直接获取.
         val lineData = binding.xFreeLineChart.data
         //一个dataSet代表一条线
@@ -220,7 +232,13 @@ class XFreeLineChartActivity :
         }
         //向第一条线添加数据
         lineData.addEntry(entry, 0)
+//        logI("entryCount:${dataSet.entryCount}")
+        if (limitMaxAmount > 0 && dataSet.entryCount >= limitMaxAmount) {
+            dataSet.removeFirst()
+        }
         lineData.notifyDataChanged()
+//        logI("after notify entryCount:${dataSet.entryCount}")
+
         // let the chart know it's data has changed
         binding.xFreeLineChart.notifyDataSetChanged()
 
@@ -233,8 +251,8 @@ class XFreeLineChartActivity :
 //        lineChart.invalidate()
     }
 
-    private fun createSet(): LineDataSet {
-        val set = LineDataSet(null, "Test Data")
+    private fun createSet(): XFreeLineDataSet {
+        val set = XFreeLineDataSet(null, "Test Data")
         set.axisDependency = YAxis.AxisDependency.LEFT
         set.color = ColorTemplate.getHoloBlue()
         set.setCircleColor(Color.WHITE)

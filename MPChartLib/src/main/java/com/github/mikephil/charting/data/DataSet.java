@@ -1,6 +1,8 @@
 
 package com.github.mikephil.charting.data;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +80,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     public void calcMinMaxY(float fromX, float toX) {
         mYMax = -Float.MAX_VALUE;
         mYMin = Float.MAX_VALUE;
-        
+
         if (mEntries == null || mEntries.isEmpty())
             return;
 
@@ -181,7 +183,6 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
     public abstract DataSet<T> copy();
 
     /**
-     *
      * @param dataSet
      */
     protected void copy(DataSet dataSet) {
@@ -300,7 +301,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
 
     @Override
     public T getEntryForXValue(float xValue, float closestToY, Rounding rounding) {
-
+        LogExtendKt.logI("getEntryForXValue:" + xValue + "," + closestToY);
         int index = getEntryIndex(xValue, closestToY, rounding);
         if (index > -1)
             return mEntries.get(index);
@@ -371,6 +372,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
                 }
             }
 
+            //处理当x轴有多个点的情况(因为是有序数组,只有比如(x:3,y:1),(3,2),(3,5)这种情况)
             // Search by closest to y-value
             if (!Float.isNaN(closestToY)) {
                 while (closest > 0 && mEntries.get(closest - 1).getX() == closestXValue)

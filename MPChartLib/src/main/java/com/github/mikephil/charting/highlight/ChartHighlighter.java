@@ -1,5 +1,6 @@
 package com.github.mikephil.charting.highlight;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarLineScatterCandleBubbleData;
 import com.github.mikephil.charting.data.DataSet;
@@ -164,6 +165,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
         //noinspection unchecked
         List<Entry> entries = set.getEntriesForXValue(xVal);
         if (entries.size() == 0) {
+//            LogExtendKt.logI("buildHighlights");
             // Try to find closest x-value and take all entries for that x-value
             final Entry closest = set.getEntryForXValue(xVal, Float.NaN, rounding);
             if (closest != null)

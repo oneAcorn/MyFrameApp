@@ -27,18 +27,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/renderer/DataSetImageCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/renderer/XFreeLineChartRenderer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_x_free_line_chart.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/dataset/XFreeLineDataSet.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/extendfun/DataSetExtend.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/extendfun/PointExtend.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/views/MyMarkerView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/marker2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_marker_view.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/LineChartRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/LineChartRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/utils/ViewPortHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/utils/ViewPortHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/renderer/XFreeLineChartRenderer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/renderer/XFreeLineChartRenderer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/data/DataSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/data/DataSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/highlight/ChartHighlighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/highlight/ChartHighlighter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/BarLineChartTouchListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/BarLineChartTouchListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/LineChartActivity2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/LineChartActivity2.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_line_chart2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_line_chart2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +79,8 @@
         <option value="Kotlin Data Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin File" />
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -111,43 +113,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DEBUGGABLE_DEVICE&quot;: &quot;teclast-m40_pro_z3a1_-23073240137007&quot;,
-    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.acorn.myframeapp&quot;,
-    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
-    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;DRAWABLE&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
-    &quot;android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt_SELECTED&quot;: &quot;XFreeLineChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED&quot;: &quot;BarLineChartBase&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED&quot;: &quot;Chart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED&quot;: &quot;LineChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED&quot;: &quot;Plot&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED&quot;: &quot;XYPlot&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED&quot;: &quot;MyLineChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/work/MyCode/MyFrameApp/app/src/main/res/drawable&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
-    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;false&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DEBUGGABLE_DEVICE": "teclast-m40_pro_z3a1_-23073240137007",
+    "DEBUGGABLE_PROCESS": "com.acorn.myframeapp",
+    "DEBUGGER_ID": "Auto",
+    "PROJECT_TRUSTED_KEY": "true",
+    "ResourceManagerPrefKey.ResourceType": "DRAWABLE",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHOW_ALL_PROCESSES": "false",
+    "android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED": "View",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt_SELECTED": "XFreeLineChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED": "BarLineChartBase",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED": "Chart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED": "LineChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED": "Plot",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED": "XYPlot",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED": "MLFaceDetectOverlay",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED": "MyLineChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED": "MLFaceDetectOverlay",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "F:/work/MyCode/MyFrameApp/app/src/main/res/drawable-xhdpi",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "show.do.not.copy.http.proxy.settings.to.gradle": "false",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\drawable" />
-      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\layout" />
-      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\color" />
       <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\drawable-xhdpi" />
+      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\layout" />
+      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\drawable" />
+      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\color" />
       <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\xml" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
@@ -164,6 +166,7 @@
       <recent name="com.acorn.basemodule.utils" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.acorn.myframeapp.ui.chart.views" />
       <recent name="com.acorn.myframeapp.ui.usb.kits" />
       <recent name="com.acorn.basemodule.utils" />
     </key>
@@ -540,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680835822516</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart">
+      <created>1680859616017</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1680859616017</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -585,7 +595,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bug" />
     <MESSAGE value="paging3 custom key" />
     <MESSAGE value="paging3" />
     <MESSAGE value="MpChartLib" />
@@ -610,21 +619,46 @@
     <MESSAGE value="coroutines flow" />
     <MESSAGE value="sampling" />
     <MESSAGE value="test MpAndroidChart" />
-    <option name="LAST_COMMIT_MESSAGE" value="test MpAndroidChart" />
+    <MESSAGE value="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <condition expression="times==3" language="kotlin" />
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/sampling/Emitter.kt</url>
-          <line>83</line>
-          <option name="timeStamp" value="3" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java</url>
+          <line>700</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/renderer/LineChartRenderer.java</url>
-          <line>431</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/highlight/ChartHighlighter.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/utils/Transformer.java</url>
+          <line>405</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/data/ChartData.java</url>
+          <line>337</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/data/DataSet.java</url>
+          <line>304</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/data/DataSet.java</url>
+          <line>323</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/dataset/XFreeLineDataSet.kt</url>
+          <line>17</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -96,12 +96,14 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
 //            axisLeft.setCenterAxisLabels(true)
 
             axisRight.isEnabled = false
+
+            isLogEnabled = true
         }
         addBugBtn.singleClick {
 //            val point = queue.poll() ?: return@singleClick
 //            addEntry(Entry(point.x, point.y))
             val multiplyX = if (mCurIndex % 2 == 0) 1 else -1
-            val entry=Entry(mCurIndex.toFloat(), (mCurIndex * multiplyX).toFloat())
+            val entry = Entry(mCurIndex.toFloat(), (mCurIndex * multiplyX).toFloat())
             addEntry(entry)
             logI("addEntry($mCurIndex):$entry")
             mCurIndex++
@@ -183,6 +185,7 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
         set.circleRadius = 4f
         set.fillAlpha = 65
         set.fillColor = ColorTemplate.getHoloBlue()
+        //定位点的那个十字线
         set.highLightColor = Color.rgb(244, 117, 117)
         set.valueTextColor = Color.WHITE
         set.valueTextSize = 9f

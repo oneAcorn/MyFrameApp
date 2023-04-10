@@ -1,15 +1,13 @@
 package com.github.mikephil.charting.acorn.renderer
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import com.acorn.basemodule.extendfun.logI
+import android.graphics.*
+import com.github.mikephil.charting.acorn.extendfun.safeGetEntryForIndex
 import com.github.mikephil.charting.animation.ChartAnimator
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
 import com.github.mikephil.charting.interfaces.datasets.IDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineScatterCandleRadarDataSet
 import com.github.mikephil.charting.renderer.DataRenderer
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.ViewPortHandler
@@ -96,8 +94,8 @@ class XFreeLineChartRenderer(
         }
         var j = 0
         for (i in 0 until entryCount) {
-            val e1 = dataSet.getEntryForIndex(if (i == 0) 0 else i - 1)
-            val e2 = dataSet.getEntryForIndex(i)
+            val e1 = dataSet.safeGetEntryForIndex(if (i == 0) 0 else i - 1)
+            val e2 = dataSet.safeGetEntryForIndex(i)
             if (e1 == null || e2 == null) continue
 
             mLineBuffer[j++] = e1.x
@@ -175,8 +173,9 @@ class XFreeLineChartRenderer(
             }
 
             val entryCount = dataSet.entryCount
+//            logI("renderer:$entryCount")
             for (j in 0 until entryCount) {
-                val e = dataSet.getEntryForIndex(j) ?: continue
+                val e = dataSet.safeGetEntryForIndex(j) ?: continue
                 mCirclesBuffer[0] = e.x
                 mCirclesBuffer[1] = e.y * phaseY
                 trans.pointValuesToPixel(mCirclesBuffer)
@@ -203,8 +202,72 @@ class XFreeLineChartRenderer(
         }
     }
 
-    override fun drawHighlighted(c: Canvas?, indices: Array<out Highlight>?) {
+    override fun drawHighlighted(c: Canvas, indices: Array<out Highlight>) {
+        val lineData = mChart.lineData
+
+        for (high in indices) {
+            val set = lineData.getDataSetByIndex(high.dataSetIndex)
+            if (set == null || !set.isHighlightEnabled) continue
+            val e = set.getEntryForXValue(high.x, high.y)
+//            if (!isInBoundsX(e, set)) continue
+            val pix = mChart.getTransformer(set.axisDependency).getPixelForValues(
+                e.x, e.y * mAnimator.phaseY
+            )
+            high.setDraw(pix.x.toFloat(), pix.y.toFloat())
+
+            // draw the lines
+            drawHighlightLines(c, pix.x.toFloat(), pix.y.toFloat(), set)
+        }
     }
+
+    /**
+     * path that is used for drawing highlight-lines (drawLines(...) cannot be used because of dashes)
+     */
+    private val mHighlightLinePath = Path()
+
+    /**
+     * Draws vertical & horizontal highlight-lines if enabled.
+     *
+     * @param c
+     * @param x x-position of the highlight line intersection
+     * @param y y-position of the highlight line intersection
+     * @param set the currently drawn dataset
+     */
+    private fun drawHighlightLines(
+        c: Canvas,
+        x: Float,
+        y: Float,
+        set: ILineScatterCandleRadarDataSet<*>
+    ) {
+
+        // set color and stroke-width
+        mHighlightPaint.color = set.highLightColor
+        mHighlightPaint.strokeWidth = set.highlightLineWidth
+
+        // draw highlighted lines (if enabled)
+        mHighlightPaint.pathEffect = set.dashPathEffectHighlight
+
+        // draw vertical highlight lines
+        if (set.isVerticalHighlightIndicatorEnabled) {
+
+            // create vertical path
+            mHighlightLinePath.reset()
+            mHighlightLinePath.moveTo(x, mViewPortHandler.contentTop())
+            mHighlightLinePath.lineTo(x, mViewPortHandler.contentBottom())
+            c.drawPath(mHighlightLinePath, mHighlightPaint)
+        }
+
+        // draw horizontal highlight lines
+        if (set.isHorizontalHighlightIndicatorEnabled) {
+
+            // create horizontal path
+            mHighlightLinePath.reset()
+            mHighlightLinePath.moveTo(mViewPortHandler.contentLeft(), y)
+            mHighlightLinePath.lineTo(mViewPortHandler.contentRight(), y)
+            c.drawPath(mHighlightLinePath, mHighlightPaint)
+        }
+    }
+
 
     fun releaseBitmap() {
         if (mBitmapCanvas != null) {
