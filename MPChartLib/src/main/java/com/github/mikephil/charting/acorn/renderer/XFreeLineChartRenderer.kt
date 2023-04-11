@@ -208,7 +208,7 @@ class XFreeLineChartRenderer(
         for (high in indices) {
             val set = lineData.getDataSetByIndex(high.dataSetIndex)
             if (set == null || !set.isHighlightEnabled) continue
-            val e = set.getEntryForXValue(high.x, high.y)
+            val e = set.getEntryForXValue(high.x, high.y) ?: continue
 //            if (!isInBoundsX(e, set)) continue
             val pix = mChart.getTransformer(set.axisDependency).getPixelForValues(
                 e.x, e.y * mAnimator.phaseY

@@ -9,13 +9,14 @@ import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.R
 import com.acorn.myframeapp.databinding.ActivityXFreeLineChartBinding
 import com.acorn.myframeapp.ui.chart.views.MyMarkerView
+import com.github.mikephil.charting.acorn.XFreeLineChart
 import com.github.mikephil.charting.acorn.dataset.XFreeLineDataSet
+import com.github.mikephil.charting.acorn.highlight.XFreeHighlighter
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
@@ -59,8 +60,9 @@ class XFreeLineChartActivity :
             addEntry(Entry(point.x, point.y))
         }
         binding.resetBtn.singleClick {
-            binding.xFreeLineChart.data.clearValues()
-            binding.xFreeLineChart.invalidate()
+//            binding.xFreeLineChart.data.clearValues()
+//            binding.xFreeLineChart.invalidate()
+            binding.xFreeLineChart.clear()
         }
         binding.startBtn.singleClick {
             if (binding.startBtn.text == "start") {
@@ -182,10 +184,10 @@ class XFreeLineChartActivity :
             setPinchZoom(false)
             setBackgroundColor(Color.LTGRAY)
 
-            val data = LineData()
-            data.setValueTextColor(Color.WHITE)
-            // add empty data
-            this.data = data
+//            val data = LineData()
+//            data.setValueTextColor(Color.WHITE)
+//            // add empty data
+//            this.data = data
 
             //点击point显示的MarkerView
             val markerView = MyMarkerView(this@XFreeLineChartActivity, R.layout.custom_marker_view)
@@ -217,13 +219,21 @@ class XFreeLineChartActivity :
 
             axisRight.isEnabled = false
 
-            isLogEnabled=true
+            highlighter = XFreeHighlighter(this)
+
+//            isLogEnabled = true
         }
     }
 
     private fun addEntry(entry: Entry, limitMaxAmount: Long = -1) {
-        //上面创建过了,直接获取.
-        val lineData = binding.xFreeLineChart.data
+        var lineData = binding.xFreeLineChart.data
+        if (lineData == null) {
+            val data = LineData()
+            data.setValueTextColor(Color.WHITE)
+            // add empty data
+            binding.xFreeLineChart.data = data
+            lineData = data
+        }
         //一个dataSet代表一条线
         var dataSet = lineData.getDataSetByIndex(0)
         if (dataSet == null) {
@@ -251,8 +261,8 @@ class XFreeLineChartActivity :
 //        lineChart.invalidate()
     }
 
-    private fun createSet(): XFreeLineDataSet {
-        val set = XFreeLineDataSet(null, "Test Data")
+    private fun createSet(): XFreeLineDataSet<XFreeLineChart> {
+        val set = XFreeLineDataSet(binding.xFreeLineChart,null, "Test Data")
         set.axisDependency = YAxis.AxisDependency.LEFT
         set.color = ColorTemplate.getHoloBlue()
         set.setCircleColor(Color.WHITE)

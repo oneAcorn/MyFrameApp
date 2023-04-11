@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import com.github.mikephil.charting.acorn.renderer.XFreeLineChartRenderer
 import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.highlight.IHighlighter
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
 import com.github.mikephil.charting.renderer.LineChartRenderer
 
@@ -30,6 +31,10 @@ class XFreeLineChart : BarLineChartBase<LineData>, LineDataProvider {
 
     override fun getLineData(): LineData {
         return mData
+    }
+
+    fun setHighlighter(highlighter: IHighlighter) {
+        this.mHighlighter = highlighter
     }
 
     override fun onDetachedFromWindow() {

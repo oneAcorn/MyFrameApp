@@ -4,6 +4,7 @@ package com.github.mikephil.charting.data;
 import android.graphics.Typeface;
 import android.util.Log;
 
+import com.acorn.basemodule.extendfun.LogExtendKt;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -338,6 +339,7 @@ public abstract class ChartData<T extends IDataSet<? extends Entry>> {
         if (highlight.getDataSetIndex() >= mDataSets.size())
             return null;
         else {
+            LogExtendKt.logI("getEntryForHighlight:" + highlight.getX() + "," + highlight.getY());
             return mDataSets.get(highlight.getDataSetIndex()).getEntryForXValue(highlight.getX(), highlight.getY());
         }
     }
