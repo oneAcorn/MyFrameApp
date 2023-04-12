@@ -22,7 +22,7 @@ class XFreeLineDataSet<T : LineDataProvider>(
 
 
     override fun getEntryForXValue(xValue: Float, closestToY: Float, rounding: Rounding): Entry? {
-        logI("XFreeLineDataSet $xValue,$closestToY,$rounding")
+//        logI("XFreeLineDataSet $xValue,$closestToY,$rounding")
         if (xValue.isNaN()) return null
         val index = getEntryIndex(xValue, closestToY, rounding)
         if (index > -1)

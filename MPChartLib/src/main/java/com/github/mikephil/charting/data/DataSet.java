@@ -301,7 +301,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
 
     @Override
     public T getEntryForXValue(float xValue, float closestToY, Rounding rounding) {
-        LogExtendKt.logI("getEntryForXValue:" + xValue + "," + closestToY);
+//        LogExtendKt.logI("getEntryForXValue:" + xValue + "," + closestToY);
         int index = getEntryIndex(xValue, closestToY, rounding);
         if (index > -1)
             return mEntries.get(index);
@@ -310,7 +310,7 @@ public abstract class DataSet<T extends Entry> extends BaseDataSet<T> {
 
     @Override
     public T getEntryForXValue(float xValue, float closestToY) {
-        LogExtendKt.logI("getEntryForXValue2:"+xValue+","+closestToY);
+//        LogExtendKt.logI("getEntryForXValue2:"+xValue+","+closestToY);
         return getEntryForXValue(xValue, closestToY, Rounding.CLOSEST);
     }
 

@@ -37,7 +37,7 @@ public class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider> 
 
         MPPointD pos = getValsForTouch(x, y);
         float xVal = (float) pos.x;
-        LogExtendKt.logI("getHighlight:"+pos.x+","+pos.y);
+//        LogExtendKt.logI("getHighlight:"+pos.x+","+pos.y);
         MPPointD.recycleInstance(pos);
 
         Highlight high = getHighlightForX(xVal, x, y);

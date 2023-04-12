@@ -628,7 +628,7 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
             return false;
         }
 
-        LogExtendKt.logI("singleTap:" + e.getX() + "," + e.getY());
+//        LogExtendKt.logI("singleTap:" + e.getX() + "," + e.getY());
         Highlight h = mChart.getHighlightByTouchPoint(e.getX(), e.getY());
         performHighlight(h, e);
 

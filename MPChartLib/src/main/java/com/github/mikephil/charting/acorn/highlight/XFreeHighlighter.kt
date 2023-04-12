@@ -23,7 +23,7 @@ open class XFreeHighlighter<T : LineDataProvider>(private val mChart: T) : IHigh
         val pos = getValsForTouch(x, y)
         val xVal = pos.x.toFloat()
         val yVal = pos.y.toFloat()
-        logI("xFree getHighlight:" + pos.x + "," + pos.y)
+//        logI("xFree getHighlight:" + pos.x + "," + pos.y)
         MPPointD.recycleInstance(pos)
         return getHighlightFromPoint(xVal, yVal, x, y)
     }
@@ -152,7 +152,7 @@ open class XFreeHighlighter<T : LineDataProvider>(private val mChart: T) : IHigh
                 }
             }
         }
-        logI("getClosestHighlightByPixel:$minSelectionDistance,$closestValues")
+//        logI("getClosestHighlightByPixel:$minSelectionDistance,$closestValues")
         return closest
     }
 

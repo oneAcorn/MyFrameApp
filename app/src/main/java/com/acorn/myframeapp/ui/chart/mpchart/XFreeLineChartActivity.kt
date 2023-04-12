@@ -262,10 +262,11 @@ class XFreeLineChartActivity :
     }
 
     private fun createSet(): XFreeLineDataSet<XFreeLineChart> {
-        val set = XFreeLineDataSet(binding.xFreeLineChart,null, "Test Data")
+        val set = XFreeLineDataSet(binding.xFreeLineChart, null, "Test Data")
         set.axisDependency = YAxis.AxisDependency.LEFT
         set.color = ColorTemplate.getHoloBlue()
         set.setCircleColor(Color.WHITE)
+        set.setDrawCircles(false)
         set.lineWidth = 2f
         set.circleRadius = 4f
         set.fillAlpha = 65
