@@ -130,6 +130,10 @@ class HomeFragment : BaseDemoFragment() {
                         description = "Use Google Paging with RemoteMediator",
                         activity = LargeDataDynamicActivity::class.java
                     ),
+                    Demo(
+                        "AsyncListDiffer",
+                        activity = AsyncDifferActivity::class.java
+                    )
                 )
             ),
             Demo(

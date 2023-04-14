@@ -105,6 +105,7 @@
         <activity android:name=".ui.coroutines.normal.LifecycleScopeImplActivity" />
         <activity android:name=".ui.coroutines.flow.CancelableFlowActivity" />
         <activity android:name=".ui.chart.mpchart.XFreeLineChartActivity" />
+        <activity android:name=".ui.recyclerview.AsyncDifferActivity" />
 
         <!--configChanges加上这3个才能防止插入USB时,Activity重新创建-->
         <activity
