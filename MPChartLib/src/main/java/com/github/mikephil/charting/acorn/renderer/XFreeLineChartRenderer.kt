@@ -1,6 +1,7 @@
 package com.github.mikephil.charting.acorn.renderer
 
 import android.graphics.*
+import com.github.mikephil.charting.acorn.dataset.XFreeLineDataSet
 import com.github.mikephil.charting.acorn.extendfun.safeGetEntryForIndex
 import com.github.mikephil.charting.animation.ChartAnimator
 import com.github.mikephil.charting.highlight.Highlight
@@ -10,6 +11,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineScatterCandleRadarDataSet
 import com.github.mikephil.charting.renderer.DataRenderer
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.Transformer
 import com.github.mikephil.charting.utils.ViewPortHandler
 import java.lang.ref.WeakReference
 
@@ -172,34 +174,116 @@ class XFreeLineChartRenderer(
                 imageCache.fill(dataSet, drawCircleHole, drawTransparentCircleHole)
             }
 
-            val entryCount = dataSet.entryCount
-//            logI("renderer:$entryCount")
-            for (j in 0 until entryCount) {
-                val e = dataSet.safeGetEntryForIndex(j) ?: continue
-                mCirclesBuffer[0] = e.x
-                mCirclesBuffer[1] = e.y * phaseY
-                trans.pointValuesToPixel(mCirclesBuffer)
-                if (!mViewPortHandler.isInBoundsRight(mCirclesBuffer[0])) {
-                    continue
-                }
-
-                if (!mViewPortHandler.isInBoundsLeft(mCirclesBuffer[0]) ||
-                    !mViewPortHandler.isInBoundsY(mCirclesBuffer[1])
-                ) {
-                    continue
-                }
-                val circleBitmap = imageCache.getBitmap(j)
-
-                if (circleBitmap != null) {
-                    c.drawBitmap(
-                        circleBitmap,
-                        mCirclesBuffer[0] - circleRadius,
-                        mCirclesBuffer[1] - circleRadius,
-                        null
-                    )
-                }
+            val pointsLimitAmount = (dataSet as? XFreeLineDataSet<*>)?.mPointVisibleThreshold ?: -1
+            //是否限制显示点的数量
+            val isLimitPointAmount = pointsLimitAmount > 0
+            if (isLimitPointAmount) {
+                drawCirclesToCanvasByThreshold(
+                    pointsLimitAmount,
+                    c,
+                    dataSet,
+                    trans,
+                    phaseY,
+                    imageCache,
+                    circleRadius
+                )
+            } else {
+                drawCirclesToCanvas(c, dataSet, trans, phaseY, imageCache, circleRadius)
             }
         }
+    }
+
+    /**
+     * Draw circles to canvas
+     * 直接绘制所有点
+     * @param c
+     * @param dataSet
+     * @param trans
+     * @param phaseY
+     * @param imageCache
+     * @param circleRadius
+     */
+    private fun drawCirclesToCanvas(
+        c: Canvas,
+        dataSet: ILineDataSet,
+        trans: Transformer,
+        phaseY: Float,
+        imageCache: DataSetImageCache,
+        circleRadius: Float
+    ) {
+        val entryCount = dataSet.entryCount
+        //计算屏幕中需要绘制的点
+        for (j in 0 until entryCount) {
+            val e = dataSet.safeGetEntryForIndex(j) ?: continue
+            mCirclesBuffer[0] = e.x
+            mCirclesBuffer[1] = e.y * phaseY
+            trans.pointValuesToPixel(mCirclesBuffer)
+            if (!mViewPortHandler.isInBoundsRight(mCirclesBuffer[0])) {
+                continue
+            }
+
+            if (!mViewPortHandler.isInBoundsLeft(mCirclesBuffer[0]) ||
+                !mViewPortHandler.isInBoundsY(mCirclesBuffer[1])
+            ) {
+                continue
+            }
+            val circleBitmap = imageCache.getBitmap(j)
+
+            if (circleBitmap != null) {
+                c.drawBitmap(
+                    circleBitmap,
+                    mCirclesBuffer[0] - circleRadius,
+                    mCirclesBuffer[1] - circleRadius,
+                    null
+                )
+            }
+        }
+    }
+
+    /**
+     * Draw circles to canvas by threshold
+     * 根据pointsLimitAmount决定是否绘制点
+     *
+     * @param pointsLimitAmount
+     * @param c
+     * @param dataSet
+     * @param trans
+     * @param phaseY
+     * @param imageCache
+     * @param circleRadius
+     */
+    private fun drawCirclesToCanvasByThreshold(
+        pointsLimitAmount: Int,
+        c: Canvas,
+        dataSet: ILineDataSet,
+        trans: Transformer,
+        phaseY: Float,
+        imageCache: DataSetImageCache,
+        circleRadius: Float
+    ) {
+        val entryCount = dataSet.entryCount
+
+        //计算当前需要绘制的点的数量
+        var needDrawAmount = 0
+        for (j in 0 until entryCount) {
+            val e = dataSet.safeGetEntryForIndex(j) ?: continue
+            mCirclesBuffer[0] = e.x
+            mCirclesBuffer[1] = e.y * phaseY
+            trans.pointValuesToPixel(mCirclesBuffer)
+            if (!mViewPortHandler.isInBoundsRight(mCirclesBuffer[0])) {
+                continue
+            }
+
+            if (!mViewPortHandler.isInBoundsLeft(mCirclesBuffer[0]) ||
+                !mViewPortHandler.isInBoundsY(mCirclesBuffer[1])
+            ) {
+                continue
+            }
+            needDrawAmount++
+        }
+
+        if (needDrawAmount > pointsLimitAmount) return
+        drawCirclesToCanvas(c, dataSet, trans, phaseY, imageCache, circleRadius)
     }
 
     override fun drawHighlighted(c: Canvas, indices: Array<out Highlight>) {

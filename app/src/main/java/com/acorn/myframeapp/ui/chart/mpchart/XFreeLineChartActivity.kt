@@ -100,6 +100,9 @@ class XFreeLineChartActivity :
             binding.xFreeLineChart.notifyDataSetChanged()
             binding.xFreeLineChart.invalidate()
         }
+        binding.selectAreaBtn.singleClick {
+
+        }
     }
 
     private var scheduledExecutor: ScheduledThreadPoolExecutor? = null
@@ -266,7 +269,9 @@ class XFreeLineChartActivity :
         set.axisDependency = YAxis.AxisDependency.LEFT
         set.color = ColorTemplate.getHoloBlue()
         set.setCircleColor(Color.WHITE)
-        set.setDrawCircles(false)
+        //100个点及以下才显示
+        set.mPointVisibleThreshold = 100
+//        set.setDrawCircles(false)
         set.lineWidth = 2f
         set.circleRadius = 4f
         set.fillAlpha = 65

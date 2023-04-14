@@ -81,6 +81,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="remove first" />
+
+
+            <Button
+                android:id="@+id/selectAreaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="select area" />
         </LinearLayout>
     </HorizontalScrollView>
 

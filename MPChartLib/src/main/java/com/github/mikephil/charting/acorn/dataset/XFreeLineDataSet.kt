@@ -1,17 +1,13 @@
 package com.github.mikephil.charting.acorn.dataset
 
-import com.acorn.basemodule.extendfun.logI
 import com.github.mikephil.charting.acorn.extendfun.calculateDistanceOf2Points
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
 import com.github.mikephil.charting.utils.MPPointD
-import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.math.abs
 
 /**
- * 主要实现点击point显示对应点.
- * 因为LineDataSet假定是有序数组,而XFree不是有序数组
  * Created by acorn on 2023/4/10.
  */
 class XFreeLineDataSet<T : LineDataProvider>(
@@ -19,7 +15,10 @@ class XFreeLineDataSet<T : LineDataProvider>(
     yVals: MutableList<Entry>?,
     lable: String
 ) : LineDataSet(yVals, lable) {
-
+    /**
+     * The threshold for displaying points. When the number of points on the screen exceeds this value, the points will not show.
+     */
+    var mPointVisibleThreshold = -1
 
     override fun getEntryForXValue(xValue: Float, closestToY: Float, rounding: Rounding): Entry? {
 //        logI("XFreeLineDataSet $xValue,$closestToY,$rounding")
@@ -31,11 +30,11 @@ class XFreeLineDataSet<T : LineDataProvider>(
     }
 
     /**
-     * 返回最接近(xValue,closestToY)的点
+     * Return the closest point value of the touched point
      *
-     * @param xValue
-     * @param closestToY 点击位置最接近的y值
-     * @param rounding 当点击的位置在两个点之间时,决定选左边右边还是最靠近的
+     * @param xValue     x of touched point
+     * @param closestToY the closest y of the touched point
+     * @param rounding
      * @return
      */
     override fun getEntryIndex(xValue: Float, closestToY: Float, rounding: Rounding): Int {
@@ -81,7 +80,7 @@ class XFreeLineDataSet<T : LineDataProvider>(
     }
 
     /**
-     * 返回x轴等于xValue的点的Entries
+     * Return all entries that the x-Axis equals xValue
      *
      * @param xValue
      * @return
