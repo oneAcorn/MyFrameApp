@@ -34,7 +34,7 @@ public class LineChart extends BarLineChartBase<LineData> implements LineDataPro
         super.init();
 
         mRenderer = new LineChartRenderer(this, mAnimator, mViewPortHandler);
-        mSelectAreaHelper = new SelectAreaHelper(this, ViewConfiguration.get(getContext()).getScaledTouchSlop(), this);
+        mSelectAreaHelper = new SelectAreaHelper(this, ViewConfiguration.get(getContext()).getScaledTouchSlop(), true, this);
     }
 
     @Override

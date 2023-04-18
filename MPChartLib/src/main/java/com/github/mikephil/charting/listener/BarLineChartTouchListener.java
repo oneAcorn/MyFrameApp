@@ -652,6 +652,11 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
     public void stopDeceleration() {
         mDecelerationVelocity.x = 0;
         mDecelerationVelocity.y = 0;
+
+        OnChartGestureListener l = mChart.getOnChartGestureListener();
+        if (l != null) {
+            l.onChartTranslateEnd();
+        }
     }
 
     public void computeScroll() {

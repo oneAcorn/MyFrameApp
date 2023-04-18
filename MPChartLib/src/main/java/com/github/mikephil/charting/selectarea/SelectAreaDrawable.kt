@@ -6,9 +6,11 @@ import com.acorn.basemodule.extendfun.dp
 import kotlin.math.abs
 
 /**
+ * @param isSelectAllYAxis Whether the selected area height covers the full screen
  * Created by acorn on 2022/9/5.
  */
-class SelectAreaDrawable(private val minTouchSlop: Int) : Drawable() {
+class SelectAreaDrawable(private val minTouchSlop: Int, private val isSelectAllYAxis: Boolean) :
+    Drawable() {
     var mDrawRect: RectF? = null
         private set
     private var startX = 0f
@@ -28,9 +30,7 @@ class SelectAreaDrawable(private val minTouchSlop: Int) : Drawable() {
     fun setStartPoint(x: Float, y: Float) {
         reset()
         startX = x
-//        startY = y
-        //高度覆盖全屏
-        startY = 0f
+        startY = if (isSelectAllYAxis) 0f else y
     }
 
     override fun onBoundsChange(bounds: Rect) {
@@ -41,7 +41,8 @@ class SelectAreaDrawable(private val minTouchSlop: Int) : Drawable() {
     fun setMovedPoint(x: Float, y: Float) {
         if (isDragMode || abs(x - startX) > minTouchSlop) {
             isDragMode = true
-            mDrawRect = RectF(startX, startY, x, h)
+            val bottom = if (isSelectAllYAxis) h else y
+            mDrawRect = RectF(startX, startY, x, bottom)
         }
         invalidateSelf()
     }

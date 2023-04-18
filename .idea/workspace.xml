@@ -28,17 +28,22 @@
   <component name="ChangeListManager">
     <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/dataset/XFreeLineDataSet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/dataset/XFreeLineDataSet.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/renderer/XFreeLineChartRenderer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/renderer/XFreeLineChartRenderer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/BarLineChartTouchListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/BarLineChartTouchListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/OnChartGestureListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/OnChartGestureListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaDrawable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaDrawable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_x_free_line_chart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_x_free_line_chart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseModule/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/baseModule/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[23073240137007]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -107,35 +112,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DEBUGGABLE_DEVICE": "teclast-m40_pro_z3a1_-23073240137007",
-    "DEBUGGABLE_PROCESS": "com.acorn.myframeapp",
-    "DEBUGGER_ID": "Auto",
-    "PROJECT_TRUSTED_KEY": "true",
-    "ResourceManagerPrefKey.ResourceType": "DRAWABLE",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHOW_ALL_PROCESSES": "false",
-    "android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED": "View",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt_SELECTED": "XFreeLineChart",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarChart.java_SELECTED": "BarChart",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED": "BarLineChartBase",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED": "Chart",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED": "LineChart",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED": "Plot",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED": "XYPlot",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED": "MLFaceDetectOverlay",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED": "MyLineChart",
-    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED": "MLFaceDetectOverlay",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "F:/work/MyCode/MyFrameApp/app/src/main/res/drawable-xhdpi",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
-    "show.do.not.copy.http.proxy.settings.to.gradle": "false",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;teclast-m40_pro_z3a1_-23073240137007&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.acorn.myframeapp&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
+    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;DRAWABLE&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
+    &quot;android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt_SELECTED&quot;: &quot;XFreeLineChart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarChart.java_SELECTED&quot;: &quot;BarChart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED&quot;: &quot;BarLineChartBase&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED&quot;: &quot;Chart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/CombinedChart.java_SELECTED&quot;: &quot;CombinedChart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED&quot;: &quot;LineChart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED&quot;: &quot;Plot&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED&quot;: &quot;XYPlot&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED&quot;: &quot;MyLineChart&quot;,
+    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/work/MyCode/MyFrameApp/app/src/main/res/drawable-xhdpi&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;false&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
@@ -573,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681433820283</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="point visible threshold of data set">
+      <created>1681461201323</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1681461201323</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +631,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="paging3" />
     <MESSAGE value="MpChartLib" />
     <MESSAGE value="拟合" />
     <MESSAGE value="exoplayer" />
@@ -643,7 +655,8 @@
     <MESSAGE value="test MpAndroidChart" />
     <MESSAGE value="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart" />
     <MESSAGE value="AsyncListDiffer" />
-    <option name="LAST_COMMIT_MESSAGE" value="AsyncListDiffer" />
+    <MESSAGE value="point visible threshold of data set" />
+    <option name="LAST_COMMIT_MESSAGE" value="point visible threshold of data set" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -662,6 +675,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/recyclerview/adapter/AsyncDifferAdapter.kt</url>
           <line>57</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt</url>
+          <line>109</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.2.1/f0f93e67af3f7417bdd560d5142f6dec4fe629c3/recyclerview-1.2.1-sources.jar!/androidx/recyclerview/widget/AdapterListUpdateCallback.java</url>

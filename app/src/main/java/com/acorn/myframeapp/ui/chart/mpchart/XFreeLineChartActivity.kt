@@ -2,7 +2,9 @@ package com.acorn.myframeapp.ui.chart.mpchart
 
 import android.graphics.Color
 import android.graphics.PointF
+import android.view.MotionEvent
 import com.acorn.basemodule.base.BaseBindingActivity
+import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.extendfun.showToast
 import com.acorn.basemodule.extendfun.singleClick
 import com.acorn.basemodule.network.BaseNetViewModel
@@ -18,12 +20,15 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.ChartTouchListener
+import com.github.mikephil.charting.listener.OnChartGestureListener
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
 import okhttp3.internal.Util
 import java.util.*
 import java.util.concurrent.ScheduledThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import kotlin.ConcurrentModificationException
 
 /**
  * Created by acorn on 2023/4/7.
@@ -101,7 +106,11 @@ class XFreeLineChartActivity :
             binding.xFreeLineChart.invalidate()
         }
         binding.selectAreaBtn.singleClick {
-
+            binding.xFreeLineChart.enterSelectAreaMode { selectedSets ->
+                for (set in selectedSets) {
+                    logI("selectArea:${set.set.label},${set.entrys}")
+                }
+            }
         }
     }
 
@@ -224,7 +233,72 @@ class XFreeLineChartActivity :
 
             highlighter = XFreeHighlighter(this)
 
+            onChartGestureListener = object : OnChartGestureListener {
+                override fun onChartGestureStart(
+                    me: MotionEvent?,
+                    lastPerformedGesture: ChartTouchListener.ChartGesture?
+                ) {
+                }
+
+                override fun onChartGestureEnd(
+                    me: MotionEvent?,
+                    lastPerformedGesture: ChartTouchListener.ChartGesture?
+                ) {
+//                    logI("onChartGestureEnd")
+                    setHighlightAndMarkerEnable(true)
+                }
+
+                override fun onChartLongPressed(me: MotionEvent?) {
+                }
+
+                override fun onChartDoubleTapped(me: MotionEvent?) {
+                }
+
+                override fun onChartSingleTapped(me: MotionEvent?) {
+                }
+
+                override fun onChartFling(
+                    me1: MotionEvent?,
+                    me2: MotionEvent?,
+                    velocityX: Float,
+                    velocityY: Float
+                ) {
+                }
+
+                override fun onChartScale(me: MotionEvent?, scaleX: Float, scaleY: Float) {
+//                    logI("onChartScale")
+                    setHighlightAndMarkerEnable(false)
+                }
+
+                override fun onChartTranslate(me: MotionEvent?, dX: Float, dY: Float) {
+//                    logI("onChartTranslate")
+                    setHighlightAndMarkerEnable(false)
+                }
+
+                override fun onChartTranslateEnd() {
+//                    logI("onChartTranslateEnd")
+                    setHighlightAndMarkerEnable(true)
+                }
+            }
+
 //            isLogEnabled = true
+        }
+    }
+
+    /**
+     * Set highlight enable
+     * For performance optimization
+     * @param isEnable
+     */
+    private fun setHighlightAndMarkerEnable(isEnable: Boolean) {
+        binding.xFreeLineChart.setDrawMarkers(isEnable)
+        val lineData = binding.xFreeLineChart.data ?: return
+        try {
+            for (set in lineData.dataSets) {
+                set.isHighlightEnabled = isEnable
+            }
+        } catch (e: ConcurrentModificationException) {
+            e.printStackTrace()
         }
     }
 

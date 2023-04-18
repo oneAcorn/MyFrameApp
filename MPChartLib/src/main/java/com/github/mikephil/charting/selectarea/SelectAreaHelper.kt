@@ -6,6 +6,7 @@ import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import android.view.View
+import com.acorn.basemodule.extendfun.logI
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
@@ -16,12 +17,13 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 class SelectAreaHelper(
     callback: Drawable.Callback,
     minTouchSlop: Int,
+    isSelectAllYAxis: Boolean,
     private val mChart: LineDataProvider
 ) :
     View.OnTouchListener {
     var isSelectAreaMode = false
         private set
-    private val mDrawable = SelectAreaDrawable(minTouchSlop).apply {
+    private val mDrawable = SelectAreaDrawable(minTouchSlop, isSelectAllYAxis).apply {
         this.callback = callback
     }
     private var callback: ((List<SelectedSet>) -> Unit)? = null
@@ -81,7 +83,6 @@ class SelectAreaHelper(
 
     private fun startDragging(event: MotionEvent) {
         mDrawable.setStartPoint(event.x, event.y)
-
     }
 
     private fun onDragging(event: MotionEvent) {

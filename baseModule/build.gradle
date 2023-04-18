@@ -86,4 +86,7 @@ dependencies {
 
     //for LifeCycleService
     api "android.arch.lifecycle:extensions:1.1.1"
+
+    //今日头条适配
+    api 'me.jessyan:autosize:1.2.1'
 }

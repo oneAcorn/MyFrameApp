@@ -2,12 +2,13 @@ package com.github.mikephil.charting.acorn
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewConfiguration
 import com.github.mikephil.charting.acorn.renderer.XFreeLineChartRenderer
 import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.highlight.IHighlighter
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
-import com.github.mikephil.charting.renderer.LineChartRenderer
+import com.github.mikephil.charting.selectarea.SelectAreaHelper
 
 /**
  * x轴不必递增的LineChart
@@ -27,6 +28,8 @@ class XFreeLineChart : BarLineChartBase<LineData>, LineDataProvider {
     override fun init() {
         super.init()
         mRenderer = XFreeLineChartRenderer(this, mAnimator, mViewPortHandler)
+        mSelectAreaHelper =
+            SelectAreaHelper(this, ViewConfiguration.get(context).scaledTouchSlop, false, this)
     }
 
     override fun getLineData(): LineData {
