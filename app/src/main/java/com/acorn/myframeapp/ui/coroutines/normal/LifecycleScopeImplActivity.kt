@@ -1,6 +1,7 @@
 package com.acorn.myframeapp.ui.coroutines.normal
 
 import com.acorn.basemodule.base.BaseBindingActivity
+import com.acorn.basemodule.extendfun.logI
 import com.acorn.basemodule.network.BaseNetViewModel
 import com.acorn.myframeapp.databinding.ActivityLifecycleScopeImplBinding
 import kotlinx.coroutines.*
@@ -57,6 +58,7 @@ class LifecycleScopeImplActivity :
     //关键词 suspend
     private suspend fun fetchData(): String {
         delay(5000)
+        logI("fetchData:${Thread.currentThread()}")
         return "数据内容"
     }
 

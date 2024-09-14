@@ -82,6 +82,11 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
         mAdapter?.removeFooterView(0)
     }
 
+    private fun testNotify() {
+        mAdapter?.data?.set(2, "what")
+        mAdapter?.notifyItemChanged(3)
+    }
+
     private fun getHeaderView(): View {
         val view = layoutInflater.inflate(R.layout.view_header, rv, false)
         view.setOnClickListener {
@@ -109,21 +114,31 @@ class HeaderFooterRecyclerViewActivity : BaseActivity<BaseNetViewModel>() {
             R.id.action_add_data -> {
                 randomData()
             }
+
             R.id.action_add_header -> {
                 addHeader()
             }
+
             R.id.action_clear_data -> {
                 clearData()
             }
+
             R.id.action_add_footer -> {
                 addFooter()
             }
+
             R.id.action_remove_header -> {
                 removeHeader()
             }
+
             R.id.action_remove_footer -> {
                 removeFooter()
             }
+
+            R.id.action_test_notify -> {
+                testNotify()
+            }
+
             else -> {
                 isConsume = false
             }

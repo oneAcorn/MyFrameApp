@@ -13,10 +13,20 @@
   </component>
   <component name="AndroidLayouts">
     <shared>
-      <config>
-        <option name="nonWearDeviceLastStateName" value="Landscape" />
-      </config>
+      <config />
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_matrix1.xml">
+        <config>
+          <theme>@style/Theme.MyFrameApp</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_matrix2.xml">
+        <config>
+          <theme>@style/Theme.MyFrameApp</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
@@ -26,24 +36,37 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="">
+    <list default="true" id="bbeb9768-cbcc-4c52-b118-e6869516fad3" name="Changes" comment="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/extendfun/ByteArrayExtend.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/matrix/Matrix2Activity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/matrix/matrixtestview/MatrixTouchListener.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/matrix/matrixtestview/ViewPortHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/matrix/matrixtestview/ZoomableImageView.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/test/PCM16Swapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/test/Test.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/test/TestEndian.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/utils/Test2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/utils/Test333.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_matrix2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/BarLineChartTouchListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/BarLineChartTouchListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/OnChartGestureListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/listener/OnChartGestureListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaDrawable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaDrawable.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/MPChartLib/src/main/java/com/github/mikephil/charting/selectarea/SelectAreaHelper.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseModule/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/baseModule/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/LineChartActivity2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/LineChartActivity2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/viewmodels/NewsApiImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/flow/viewmodels/NewsApiImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/normal/LifecycleScopeImplActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/coroutines/normal/LifecycleScopeImplActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/home/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/recyclerview/HeaderFooterRecyclerViewActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/recyclerview/HeaderFooterRecyclerViewActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_header_footer_recyclerview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_header_footer_recyclerview.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=33191496029904)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -70,13 +93,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Object" />
-        <option value="Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin File" />
         <option value="Kotlin Data Class" />
-        <option value="Kotlin Class" />
-        <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Class" />
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -104,6 +127,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2BslA5qVinaQCHOs2VREGPxAvjy" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -112,48 +138,64 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DEBUGGABLE_DEVICE&quot;: &quot;teclast-m40_pro_z3a1_-23073240137007&quot;,
-    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.acorn.myframeapp&quot;,
-    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
-    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;DRAWABLE&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
-    &quot;android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt_SELECTED&quot;: &quot;XFreeLineChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarChart.java_SELECTED&quot;: &quot;BarChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED&quot;: &quot;BarLineChartBase&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED&quot;: &quot;Chart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/CombinedChart.java_SELECTED&quot;: &quot;CombinedChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED&quot;: &quot;LineChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED&quot;: &quot;Plot&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED&quot;: &quot;XYPlot&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED&quot;: &quot;MyLineChart&quot;,
-    &quot;android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED&quot;: &quot;MLFaceDetectOverlay&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/work/MyCode/MyFrameApp/app/src/main/res/drawable-xhdpi&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
-    &quot;show.do.not.copy.http.proxy.settings.to.gradle&quot;: &quot;false&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "Application.DFdsaf.executor": "Run",
+    "DEBUGGABLE_DEVICE": "teclast-m40_pro_z3a2_-33191496029904",
+    "DEBUGGABLE_PROCESS": "com.acorn.myframeapp",
+    "DEBUGGER_ID": "Auto",
+    "Gradle.MyFrameApp:app [:app:DFdsaf.main()].executor": "Run",
+    "Kotlin.DFdsaf.executor": "Run",
+    "Kotlin.TestEndian.executor": "Debug",
+    "PROJECT_TRUSTED_KEY": "true",
+    "ResourceManagerPrefKey.ResourceType": "DRAWABLE",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHOW_ALL_PROCESSES": "false",
+    "android-custom-viewC:/Users/YanFaB08/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.2.1/f0f93e67af3f7417bdd560d5142f6dec4fe629c3/recyclerview-1.2.1-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED": "RecyclerView",
+    "android-custom-viewC:/Users/YanFaB08/.gradle/caches/modules-2/files-2.1/me.majiajie/pager-bottom-tab-strip/2.4.0/325dd1b4d938b8d552e28bd1cfe8a5dab1589986/pager-bottom-tab-strip-2.4.0-sources.jar!/me/majiajie/pagerbottomtabstrip/PageNavigationView.java_SELECTED": "PageNavigationView",
+    "android-custom-viewE:/Androidtoo/sdk2/sources/android-33/android/view/View.java_SELECTED": "View",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/acorn/XFreeLineChart.kt_SELECTED": "XFreeLineChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarChart.java_SELECTED": "BarChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/BarLineChartBase.java_SELECTED": "BarLineChartBase",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/Chart.java_SELECTED": "Chart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/CombinedChart.java_SELECTED": "CombinedChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/MPChartLib/src/main/java/com/github/mikephil/charting/charts/LineChart.java_SELECTED": "LineChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/Plot.java_SELECTED": "Plot",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/androidplot-core/src/main/java/com/androidplot/xy/XYPlot.java_SELECTED": "XYPlot",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/camera/widget/MLFaceDetectOverlay.kt_SELECTED": "MLFaceDetectOverlay",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/MyLineChart.kt_SELECTED": "MyLineChart",
+    "android-custom-viewF:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/widget/PreviewRectView.kt_SELECTED": "MLFaceDetectOverlay",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "F:/work/MyCode/MyFrameApp/app/src/main/java/com/acorn/myframeapp/extendfun",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "show.do.not.copy.http.proxy.settings.to.gradle": "false",
+    "show.migrate.to.gradle.popup": "false"
+  },
+  "keyToStringList": {
+    "kotlin-gradle-user-dirs": [
+      "C:\\Users\\YanFaB08\\.gradle"
+    ]
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\java\com\acorn\myframeapp\extendfun" />
       <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\drawable-xhdpi" />
       <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\layout" />
       <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\drawable" />
       <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\color" />
-      <recent name="F:\work\MyCode\MyFrameApp\app\src\main\res\xml" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.acorn.myframeapp.ui.matrix.view" />
       <recent name="com.acorn.myframeapp.ui.camera.widget" />
       <recent name="com.acorn.myframeapp.ui.test" />
       <recent name="com.acorn.myframeapp.ui.coroutine.flow.bean" />
@@ -167,6 +209,7 @@
       <recent name="com.acorn.basemodule.utils" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.acorn.myframeapp.utils" />
       <recent name="com.acorn.myframeapp.ui.chart.views" />
       <recent name="com.acorn.myframeapp.ui.usb.kits" />
       <recent name="com.acorn.basemodule.utils" />
@@ -188,7 +231,6 @@
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -199,6 +241,8 @@
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Auto>
       <Hybrid>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -206,14 +250,21 @@
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Hybrid>
-      <Java />
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
       <Native>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
         <option name="SHOW_STATIC_VARS" value="true" />
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
@@ -231,15 +282,37 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LinearRegressionDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.mpchart.fitting.LinearRegressionDemo" />
+    <configuration name="Test2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.utils.Test2" />
       <module name="MyFrameApp.app.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.acorn.myframeapp.ui.mpchart.fitting.*" />
+          <option name="PATTERN" value="com.acorn.myframeapp.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestEndian" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.test.TestEndian" />
+      <module name="MyFrameApp.app.main" />
+      <shortenClasspath name="MANIFEST" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.acorn.myframeapp.ui.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <shortenClasspath name="MANIFEST" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -252,16 +325,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LinearFitTestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.mpchart.fitting.LinearFitTestKt" />
+    <configuration name="Test333Kt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.utils.Test333Kt" />
       <module name="MyFrameApp.app.main" />
+      <shortenClasspath name="MANIFEST" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SamplingTestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.sampling.SamplingTestKt" />
+    <configuration name="TestEndian" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.test.TestEndian" />
       <module name="MyFrameApp.app.main" />
+      <shortenClasspath name="MANIFEST" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.acorn.myframeapp.ui.test.TestKt" />
+      <module name="MyFrameApp.app.main" />
+      <shortenClasspath name="MANIFEST" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="MyFrameApp" />
       <shortenClasspath name="MANIFEST" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -269,17 +360,20 @@
     </configuration>
     <list>
       <item itemvalue="Android App.app" />
-      <item itemvalue="Application.LinearRegressionDemo" />
-      <item itemvalue="Kotlin.SamplingTestKt" />
+      <item itemvalue="Application.TestEndian" />
+      <item itemvalue="Application.Test2" />
+      <item itemvalue="Kotlin.TestEndian" />
+      <item itemvalue="Kotlin.Test333Kt" />
+      <item itemvalue="Kotlin.TestKt" />
       <item itemvalue="Kotlin.CoroutinesTestKt" />
-      <item itemvalue="Kotlin.LinearFitTestKt" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.TestEndian" />
+        <item itemvalue="Kotlin.TestKt" />
+        <item itemvalue="Kotlin.Test333Kt" />
+        <item itemvalue="Application.Test2" />
         <item itemvalue="Kotlin.CoroutinesTestKt" />
-        <item itemvalue="Kotlin.SamplingTestKt" />
-        <item itemvalue="Kotlin.LinearFitTestKt" />
-        <item itemvalue="Application.LinearRegressionDemo" />
       </list>
     </recent_temporary>
   </component>
@@ -586,10 +680,22 @@
       <option name="project" value="LOCAL" />
       <updated>1681461201323</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart">
+      <created>1681778696326</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1681778696326</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="c8c011ec-36e1-4c9f-b270-5e12f0df9776" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -600,7 +706,6 @@
         <entry key="c8c011ec-36e1-4c9f-b270-5e12f0df9776">
           <value>
             <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -619,14 +724,10 @@
                   </entry>
                 </map>
               </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
           </value>
         </entry>
-      </map>
-    </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="c8c011ec-36e1-4c9f-b270-5e12f0df9776" value="TOOL_WINDOW" />
       </map>
     </option>
   </component>
@@ -653,10 +754,10 @@
     <MESSAGE value="coroutines flow" />
     <MESSAGE value="sampling" />
     <MESSAGE value="test MpAndroidChart" />
-    <MESSAGE value="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart" />
     <MESSAGE value="AsyncListDiffer" />
     <MESSAGE value="point visible threshold of data set" />
-    <option name="LAST_COMMIT_MESSAGE" value="point visible threshold of data set" />
+    <MESSAGE value="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增MpAndroidChart x轴不受必须递增的限制的XFreeLineChart" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -677,9 +778,24 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/chart/mpchart/XFreeLineChartActivity.kt</url>
-          <line>109</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/test/Test.kt</url>
+          <line>29</line>
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/test/TestEndian.kt</url>
+          <line>23</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/test/TestEndian.kt</url>
+          <line>39</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/acorn/myframeapp/ui/matrix/Matrix2Activity.kt</url>
+          <line>20</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.2.1/f0f93e67af3f7417bdd560d5142f6dec4fe629c3/recyclerview-1.2.1-sources.jar!/androidx/recyclerview/widget/AdapterListUpdateCallback.java</url>

@@ -18,6 +18,7 @@ import com.acorn.myframeapp.ui.coroutines.flow.CancelableFlowActivity
 import com.acorn.myframeapp.ui.coroutines.flow.CoroutineFlowActivity
 import com.acorn.myframeapp.ui.coroutines.normal.LifecycleScopeImplActivity
 import com.acorn.myframeapp.ui.matrix.Matrix1Activity
+import com.acorn.myframeapp.ui.matrix.Matrix2Activity
 import com.acorn.myframeapp.ui.nestedscroll.RecyclerviewViewPagerNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.TwoRecyclerViewNestedActivity
 import com.acorn.myframeapp.ui.nestedscroll.WebviewRecyclerNestedActivity
@@ -232,7 +233,8 @@ class HomeFragment : BaseDemoFragment() {
             Demo(
                 "Matrix",
                 subItems = arrayListOf(
-                    Demo("Matrix1", activity = Matrix1Activity::class.java)
+                    Demo("Matrix1", activity = Matrix1Activity::class.java),
+                    Demo("Matrix2", activity = Matrix2Activity::class.java)
                 )
             ),
             Demo("Usb Communication", activity = UsbCommunicateActivity::class.java)
@@ -249,6 +251,7 @@ class HomeFragment : BaseDemoFragment() {
                     false
                 )
             }
+
             else -> {}
         }
     }

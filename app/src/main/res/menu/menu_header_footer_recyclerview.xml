@@ -27,4 +27,8 @@
         android:id="@+id/action_remove_footer"
         android:title="Remove footer"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_test_notify"
+        android:title="Test notify"
+        app:showAsAction="never" />
 </menu>

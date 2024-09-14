@@ -100,13 +100,13 @@ class LineChartActivity2 : BaseNoViewModelActivity(), OnChartValueSelectedListen
             isLogEnabled = true
         }
         addBugBtn.singleClick {
-//            val point = queue.poll() ?: return@singleClick
-//            addEntry(Entry(point.x, point.y))
-            val multiplyX = if (mCurIndex % 2 == 0) 1 else -1
-            val entry = Entry(mCurIndex.toFloat(), (mCurIndex * multiplyX).toFloat())
-            addEntry(entry)
-            logI("addEntry($mCurIndex):$entry")
-            mCurIndex++
+            val point = queue.poll() ?: return@singleClick
+            addEntry(Entry(point.x, point.y))
+//            val multiplyX = if (mCurIndex % 2 == 0) 1 else -1
+//            val entry = Entry(mCurIndex.toFloat(), (mCurIndex * multiplyX).toFloat())
+//            addEntry(entry)
+//            logI("addEntry($mCurIndex):$entry")
+//            mCurIndex++
         }
         addDataBtn.singleClick {
             val point = queue2.poll() ?: return@singleClick
